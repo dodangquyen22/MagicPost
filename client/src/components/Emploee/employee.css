@@ -1,0 +1,47 @@
+.employee-list {
+    display: flex;
+    padding: 20px;
+    flex-basis: 45%;
+    margin-bottom: 20px;
+}
+
+.employee-container {
+  display: flex;
+  flex-direction: column;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #ddd;
+  }
+  
+  .btn {
+    text-align: right;
+  }
+
+  td:last-child {
+    text-align: center;
+    width: 100px;
+  }
+
+  
