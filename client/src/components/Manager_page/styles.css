@@ -191,26 +191,3 @@ body {
   }
 }
 
-.map-container {
-  margin-top: 20px;
-}
-
-.map-container .leaflet-container {
-  height: 100%;
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.map-container-wrapper {
-  width: 100%;
-  max-width: 600px; /* Đặt giới hạn kích thước tối đa của bản đồ */
-  margin: 20px auto; /* Đặt kích thước trung tâm và tạo khoảng cách xung quanh */
-}
-
-.map-container {
-  height: 300px; /* Đặt chiều cao của bản đồ, bạn có thể điều chỉnh tùy ý */
-  border-radius: 8px;
-  overflow: hidden; /* Ngăn chặn bản đồ tràn ra khỏi phần bao bọc */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}

@@ -1,0 +1,60 @@
+.google-map {
+  height: 60vh;
+  width: 100%;
+}
+
+.pin {
+  position: relative;
+  cursor: pointer;
+}
+
+.pin-icon {
+  font-size: 24px;
+  color: #ff4116; /* Adjust the color as needed */
+}
+
+.pin-text {
+  display: none;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  width: 150px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  max-width: 648px;
+  max-height: 258px;
+  min-width: 0px;
+}
+
+.pin-text p {
+  margin: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #333;
+}
+
+.pin-text a {
+  color: #1A73E8;
+  margin: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.pin:hover .pin-text {
+  display: block;
+}
+
+.info-window {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100px;
+}
