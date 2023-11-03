@@ -29,7 +29,13 @@ const Profile = () => {
         <div className="sidebar">
           <ul>
             <li>
+              if (user.position === 'Quản Lý') {
               <Link to="/dashboard">Dashboard</Link>
+              } else if (user.position === 'Giao Dịch Viên') {
+              <Link to="/tellermain">Transaction Page</Link>
+              } else {
+                
+              }
             </li>
             <li>
               <Link to="/employee">Quản Lý Nhân Viên</Link>

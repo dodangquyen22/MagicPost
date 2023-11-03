@@ -1,0 +1,27 @@
+.tabs {
+    display: flex;
+    /* justify-content: space-around; */
+    /* background-color: #f2f2f2; */
+    padding: 10px;
+    height: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  .button {
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #ddd;
+  }
+  
+  .active {
+    background-color: #3498DB;
+    color: white;
+  }
+  

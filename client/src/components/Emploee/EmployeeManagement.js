@@ -73,7 +73,6 @@ const EmployeeManagement = () => {
             <li>
               <Link to="/employee">Quản Lý Nhân Viên</Link>
             </li>
-            <li><Link to="/profile">Profile</Link></li>
             <li><Link to="/">Log Out</Link></li>
           </ul>
         </div>

@@ -19,7 +19,7 @@ const Navbar = () => {
         <div className="account-dropdown">
           <span className="account-name">Your Username</span>
           <div className="dropdown-content">
-            <a href="#profile">Profile</a>
+            <Link to="/profile">Profile</Link>
             <Link to="/">Log Out</Link>
           </div>
         </div>

@@ -22,6 +22,9 @@ const Login = () => {
     if (username === "admin" && password === "admin") {
       // Đăng nhập thành công, chuyển hướng sang Dashboard
       navigate('/dashboard');
+    } else if (username === "admin1" && password === "admin1") {
+      // Đăng nhập thành công, chuyển hướng sang Dashboard
+      navigate('/tellermain');
     } else {
       // Đăng nhập thất bại, hiển thị thông báo lỗi
       setError("Invalid username or password");
@@ -29,7 +32,7 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="login" onSubmit={handleSubmit}>
       <h3>Sign In</h3>
 
       <div className="mb-3">

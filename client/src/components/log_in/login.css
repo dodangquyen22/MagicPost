@@ -1,6 +1,6 @@
 /* src/components/login.css */
 
-form {
+.login {
   max-width: 400px;
   margin: auto;
   padding: 20px;

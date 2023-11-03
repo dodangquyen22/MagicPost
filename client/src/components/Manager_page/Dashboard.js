@@ -60,7 +60,6 @@ export const Dashboard = () => {
                         <li>
                             <Link to="/employee">Quản Lý Nhân Viên</Link>
                         </li>
-                        <li><Link to="/profile">Profile</Link></li>
                         <li><Link to="/">Log Out</Link></li>
                         {/* <li onClick={() => handleMenuClick('login')}>Đăng Xuất</li> */}
                         {/* Thêm các mục menu khác tùy ý */}
