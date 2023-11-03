@@ -1,10 +1,10 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
-import Navbar from './bar/Navbar';
+import Navbar from '../bar/Navbar';
 import { Outlet, Link } from "react-router-dom";
 import './styles.css'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import SimpleMap from './bar/map';
+// import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import SimpleMap from '../bar/map';
 
 export const Dashboard = () => {
     // Dữ liệu mẫu
@@ -60,7 +60,7 @@ export const Dashboard = () => {
                         <li>
                             <Link to="/employee">Quản Lý Nhân Viên</Link>
                         </li>
-                        <li>Profile</li>
+                        <li><Link to="/profile">Profile</Link></li>
                         <li><Link to="/">Log Out</Link></li>
                         {/* <li onClick={() => handleMenuClick('login')}>Đăng Xuất</li> */}
                         {/* Thêm các mục menu khác tùy ý */}
@@ -106,18 +106,8 @@ export const Dashboard = () => {
                     </div>
                     <div className="map-container-wrapper">
                         <h3>Bản Đồ Điểm Giao Dịch</h3>
-                        <div className="map-container">
-                            <MapContainer center={[10.776889, 106.700867]} zoom={13} style={{ height: '100%' }}>
-                                <TileLayer
-                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                />
-                                {data.deliveryPoints.map((point) => (
-                                    <Marker key={point.id} position={[point.lat, point.lng]}>
-                                        <Popup>{point.name}</Popup>
-                                    </Marker>
-                                ))}
-                            </MapContainer>
-                        </div>
+                        <SimpleMap />
+
                     </div>
                 </div>
             </div>

@@ -8,16 +8,16 @@ import { Outlet, Link } from "react-router-dom";
 
 const EmployeeManagement = () => {
   const [employees, setEmployees] = useState([
-    { id: 1, name: 'Nguyen Van A', position: 'Giao Dịch Viên' },
-    { id: 2, name: 'Tran Thi B', position: 'Nhân Viên Giao Hàng' },
+    { id: 1, name: 'Nguyen Van A', position: 'Giao Dịch Viên', gender: 'Nam'},
+    { id: 2, name: 'Tran Thi B', position: 'Nhân Viên Giao Hàng', gender: 'Nữ' },
     // Thêm nhân viên khác tùy ý
   ]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingEmployee, setEditingEmployee] = useState({ id: null, name: '', position: '' });
+  const [editingEmployee, setEditingEmployee] = useState({ id: null, name: '', position: '', gender: '' });
 
   const openModal = (employee) => {
-    setEditingEmployee(employee ? { ...employee } : { id: null, name: '', position: '' });
+    setEditingEmployee(employee ? { ...employee } : { id: null, name: '', position: '', gender: '' });
     setIsModalOpen(true);
   };
 
@@ -39,6 +39,7 @@ const EmployeeManagement = () => {
       id: employees.length + 1,
       name: editingEmployee.name,
       position: editingEmployee.position,
+      gender: editingEmployee.gender,
     };
 
     setEmployees([...employees, newEmployee]);
@@ -72,7 +73,7 @@ const EmployeeManagement = () => {
             <li>
               <Link to="/employee">Quản Lý Nhân Viên</Link>
             </li>
-            <li>Profile</li>
+            <li><Link to="/profile">Profile</Link></li>
             <li><Link to="/">Log Out</Link></li>
           </ul>
         </div>
@@ -90,6 +91,7 @@ const EmployeeManagement = () => {
                   <th>ID</th>
                   <th>Tên Nhân Viên</th>
                   <th>Chức Vụ</th>
+                  <th>Giới Tính</th>
                   <th></th>
                 </tr>
               </thead>
@@ -97,8 +99,9 @@ const EmployeeManagement = () => {
                 {employees.map((employee) => (
                   <tr key={employee.id}>
                     <td>{employee.id}</td>
-                    <td>{employee.name}</td>
+                    <td><Link to={`/profile/${employee.id}`}>{employee.name}</Link></td>
                     <td>{employee.position}</td>
+                    <td>{employee.gender}</td>
                     <td>
                       <button onClick={() => openModal(employee)}>
                         Sửa
@@ -132,6 +135,14 @@ const EmployeeManagement = () => {
           value={editingEmployee.position}
           onChange={(e) => setEditingEmployee({ ...editingEmployee, position: e.target.value })}
         />
+        <label>Giới Tính:</label>
+        <select
+          value={editingEmployee.gender}
+          onChange={(e) => setEditingEmployee({ ...editingEmployee, gender: e.target.value })}
+        >
+          <option value="Nam">Nam</option>
+          <option value="Nữ">Nữ</option>
+        </select>
         <button onClick={editingEmployee.id ? handleEditEmployee : handleAddEmployee}>
           {editingEmployee.id ? 'Lưu' : 'Thêm'}
         </button>
