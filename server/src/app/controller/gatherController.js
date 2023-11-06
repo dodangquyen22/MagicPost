@@ -12,7 +12,7 @@ class gatherController{
 
     }
     //xac nhan don hang tu diem tap ket khac
-    confirmDeliveryGather(req, res, nexe){
+    confirmDeliveryGather(req, res, next){
 
     }
 }
