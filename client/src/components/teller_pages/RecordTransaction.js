@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faMapMarker, faPhone, faClipboard, faBox, faFileAlt, faList, faWeight, faDollarSign, faComment, faTag, faMoneyBill, faMoneyCheck, faTimes, faCalendarTimes } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faMapMarker, faPhone, faClipboard, faBox, faFileAlt, faList, faWeight, faDollarSign, faComment, faTag, faMoneyBill, faMoneyCheck, faTimes, faCalendarTimes, faTruck, faTruckFast } from '@fortawesome/free-solid-svg-icons';
 import './styles/recordtransaction.css';
 import ReactToPrint from 'react-to-print';
 
@@ -27,6 +27,8 @@ const RecordTransaction = () => {
     const [payer, setPayer] = useState('sender'); // 'sender' or 'recipient'
 
     const [requestPickup, setRequestPickup] = useState({ address: 'Đến lấy hàng tại nhà' });
+
+    const [transportation, setTransportation] = useState({ type: 'save' });
 
     const [termsAccepted, setTermsAccepted] = useState(false);
 
@@ -293,7 +295,10 @@ const RecordTransaction = () => {
                                         placeholder='Giá trị (VND)'
                                         className="form-control"
                                         value={packageDetails.price}
-                                        onChange={(e) => setPackageDetails({ ...packageDetails, price: e.target.value })}
+                                        onChange={(e) => {
+                                            const formattedAmount = parseFloat(e.target.value.replace(/\D/g, '')).toLocaleString('vi-VN');
+                                            setPackageDetails({ ...packageDetails, price: formattedAmount })
+                                        }}
                                     />
                                     {/* <div className="invalid-feedback">{packageDetailsErrors.price}</div> */}
                                 </div>
@@ -305,7 +310,7 @@ const RecordTransaction = () => {
                                         required
                                         placeholder='Dài (cm)'
                                         className="form-control"
-                                        value={packageDetails.lenth}
+                                        value={packageDetails.length}
                                         onChange={(e) => setPackageDetails({ ...packageDetails, length: e.target.value })}
                                     />
                                     {/* <div className="invalid-feedback">{packageDetailsErrors.quantity}</div> */}
@@ -445,20 +450,25 @@ const RecordTransaction = () => {
                                         <input
                                             type='checkbox'
                                             checked={collectionFee.cod}
-                                            onChange={() => setCollectionFee(!collectionFee.cod)}
+                                            onChange={() => setCollectionFee({ ...collectionFee, cod: !collectionFee.cod })}
                                         />
                                         Thu hộ bằng tiền hàng
+                                    </label>
+                                    {collectionFee.cod && (
                                         <input
                                             type='text'
-                                            required
                                             placeholder='Số tiền thu hộ (VND)'
                                             className="form-control"
                                             value={collectionFee.amount}
-                                            onChange={(e) => setPackageDetails({ ...collectionFee, amount: e.target.value })}
+                                            onChange={(e) => {
+                                                const formattedAmount = parseFloat(e.target.value.replace(/\D/g, '')).toLocaleString('vi-VN');
+                                                setCollectionFee({ ...collectionFee, amount: formattedAmount });
+                                            }}
                                         />
-                                    </label>
+                                    )}
 
                                 </div>
+                                <br />
 
                                 <label><FontAwesomeIcon icon={faMoneyBill} /> Người trả cước</label>
                                 <div className='payer'>
@@ -484,7 +494,7 @@ const RecordTransaction = () => {
                                     </label>
                                 </div>
 
-                                <label><FontAwesomeIcon icon={faBox} /> Yêu cầu lấy hàng</label>
+                                <label><FontAwesomeIcon icon={faFileAlt} /> Yêu cầu lấy hàng</label>
                                 <div className='request-pickup'>
                                     <label>
                                         <input
@@ -508,23 +518,47 @@ const RecordTransaction = () => {
                                         Gửi tại bưu cục
                                     </label>
                                 </div>
+
+                                <label><FontAwesomeIcon icon={faTruckFast} /> Hình thức giao hàng</label>
+                                <div className='transportation'>
+                                    <label>
+                                        <input
+                                            type='radio'
+                                            value='save'
+                                            className='save'
+                                            checked={transportation.type === 'save'}
+                                            onChange={(e) => setTransportation({ ...transportation, type: e.target.value })}
+                                        />
+                                        Tiết kiệm
+                                    </label>
+                                    <label>
+                                        <input
+                                            type='radio'
+                                            value='fast'
+                                            className='fast'
+                                            checked={transportation.type === 'fast'}
+                                            onChange={(e) => setTransportation({ ...transportation, type: e.target.value })}
+                                        />
+                                        Nhanh
+                                    </label>
+                                </div>
                             </div>
 
 
                             <div className="mb-3 box2">
                                 <label><FontAwesomeIcon icon={faCalendarTimes} /> Thời gian phát hành mong muốn</label>
                                 <div>
-                                    <select className="form-control">
-                                        <option selected>Chọn thời gian phát hành mong muốn</option>
-                                        <option value="1">Cả ngày</option>
-                                        <option value="2">Sáng (7h30 - 12h00)</option>
-                                        <option value="3">Chiều (13h30 - 18h00)</option>
-                                        <option value="4">Tối (18h30 - 21h00)</option>
-                                        <option value="5">Giờ hành chính (7h30 - 11h30, 13h30 - 17h30)</option>
-                                        <option value="6">Chủ nhật</option>
-                                        <option value="7">Ngày nghỉ lễ</option>
+                                    <select className="form-control" defaultValue="Cả ngày">
+                                        <option value="Cả ngày">Cả ngày</option>
+                                        <option value="1">Sáng (7h30 - 12h00)</option>
+                                        <option value="2">Chiều (13h30 - 18h00)</option>
+                                        <option value="3">Tối (18h30 - 21h00)</option>
+                                        <option value="4">Giờ hành chính (7h30 - 11h30, 13h30 - 17h30)</option>
+                                        <option value="5">Chủ nhật</option>
+                                        <option value="6">Ngày nghỉ lễ</option>
                                     </select>
                                 </div>
+
 
                                 <label><FontAwesomeIcon icon={faComment} /> Ghi chú:</label>
                                 <div>
@@ -551,10 +585,12 @@ const RecordTransaction = () => {
                 <div className='footer2'>
                     <label>Tiền thu hộ</label>
                     <br />
-                    <strong>0&nbsp;₫</strong>
+                    <div>{collectionFee.amount === '' ? 0 : collectionFee.amount}&nbsp;₫</div>
                 </div>
                 <div className='footer3'>
-                    <label>Thời gian dự kiến</label>
+                    <label>Thời gian giao dự kiến</label>
+                    <br />
+                    <div>{packageDetails.type === 'Tài liệu' ? 1 : 2} ngày</div>
                 </div>
                 <div className='footer4'>
                     <div className="checkbox-container">

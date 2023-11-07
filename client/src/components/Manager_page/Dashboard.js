@@ -13,6 +13,7 @@ export const Dashboard = () => {
         totalCenters: 50,
         totalDeliveryPoints: 100,
         revenueThisMonth: 1000000000,
+        // const formattedAmount = parseFloat(e.target.value.replace(/\D/g, '')).toLocaleString('vi-VN');
         revenueLastMonth: 900000000,
         growth: 10,
         chartData: {
