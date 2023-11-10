@@ -153,6 +153,23 @@ label {
     margin-bottom: 10px;
 }
 
+.transportation {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.save {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.fast {
+    margin-left: 107px;
+    margin-bottom: 10px;
+
+}
+
 .transaction-info .form-transaction {
     width: 1000px;
     display: flex;
@@ -190,8 +207,10 @@ textarea {
     display: flex;
     flex-direction: row;
     flex-wrap: row wrap;
-    margin-top: 50px;
+    margin-top: 100px;
     border: 2px solid #ddd;
+    border-radius: 10px;
+    height: 120px;
     margin-bottom: 20px;
     position: fixed;
     width: 1274.4px;
