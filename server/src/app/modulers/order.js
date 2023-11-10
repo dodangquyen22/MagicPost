@@ -1,9 +1,30 @@
+const { Timestamp } = require('mongodb')
 const mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
     id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    name_sent: {
+        type: String,
+        require: true
+    },
+    name_receive: {
+        type: String,
+        require: true
+    },
+    phone_sent:{
+        type: Number,
+        require: true
+    },
+    phone_receive:{
+        type: Number,
+        require: true
+    },
+    code:{
+        type: Number,
+        require: true
     },
     address_sent: {
         type: String,
@@ -12,6 +33,9 @@ const userSchema = new mongoose.Schema({
     address_receive: {
         type: String,
         required: true
+    },
+    time_sent: {
+        type: Timestamp
     },
     point_transaction: {
         type: mongoose.Schema.Types.ObjectId,
@@ -26,5 +50,5 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-const User = mongoose.model('User', userSchema)
-module.exports = User
+const order = mongoose.model('order', orderSchema)
+module.exports = order
