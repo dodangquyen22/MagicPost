@@ -5,14 +5,8 @@ const point_leaderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    idArea: {
-        type: String,
-        required: true
-    },
-    type: {
-        type: String,
-        enum: ['transaction', 'collection'],
-        require:true
+    pointID: {
+        
     }
 })
 

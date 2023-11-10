@@ -1,9 +1,16 @@
 const mongoose = require('mongoose')
-
+// Lưu thông tin các đơn vận chuyển 
 const userSchema = new mongoose.Schema({
     id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    packageID: {
+
+    },
+    type: {
+        type: String,
+        enum: ['to customer', 'not to customer']
     },
     address_sent: {
         type: String,
@@ -13,13 +20,19 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    point_transaction: {
+    receive_point_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'point_transaction'
+        ref: 'point'
     },
-    point_gather:{
+    send_point_id:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'point_gather'
+        ref: 'point'
+    },
+    sendDate: {
+
+    },
+    receiveDate: {
+
     },
     status: {
         type: String
