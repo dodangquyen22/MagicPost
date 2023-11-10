@@ -7,3 +7,5 @@ class trackingController {
         
     }
 }
+
+module.exports = new trackingController();

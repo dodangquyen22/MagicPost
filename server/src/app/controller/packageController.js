@@ -24,3 +24,5 @@ class packageController {
         // Add your code here to perform the statistics
     }
 }
+
+module.exports = new packageController();

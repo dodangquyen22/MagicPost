@@ -25,3 +25,5 @@ class accoutController {
         
     }
 }
+
+module.export = new accoutController();

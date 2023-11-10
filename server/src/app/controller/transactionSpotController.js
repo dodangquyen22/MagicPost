@@ -7,3 +7,5 @@ class transactionSpotController {
         
     }    
 }
+
+module.exports = new transactionSpotController()

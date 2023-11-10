@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+// Lưu thông tin cả điểm tập kết và điểm giao dịch
 const point_Schema = new mongoose.Schema({
     id: {
         type: mongoose.Schema.Types.ObjectId

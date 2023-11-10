@@ -8,3 +8,5 @@ class warehouseController {
         
     }    
 }
+
+module.exports = new warehouseController;

@@ -21,9 +21,15 @@ class orderController {
     createOrderToCustomer(req, res, next) {
         
     }
+    // Lấy danh sách đơn hàng
+    getOrderList(req, res, next) {
+        // Add your code here to retrieve the list of orders
+    }
 
     //xac nhan don hang
     confirmOrder(req, res, next) {
 
     }
 }
+
+module.exports = new orderController();
