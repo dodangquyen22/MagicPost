@@ -5,13 +5,9 @@ const employeeSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    idArea: {
+    pointId: {
         type: String,
         required: true
-    },
-    type: {
-        type: String,
-        enum: ['transaction', 'gather']
     }
 })
 
