@@ -8,6 +8,8 @@ import Login from './components/log_in/Login';
 import Profile from './components/general_pages/Profile';
 import EmployeeProfile from './components/Emploee/EmployeeProfile';
 import TransactionPage from './components/teller_pages/TellerMain';
+import UserMain from './components/userDisplay/UserMain';
+import ProductList from './components/teller_pages/OrderList';
 
 function App() {
   // const [activePage, setActivePage] = useState('dashboard');
@@ -22,9 +24,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user" element={<UserMain />} />
           <Route path="/employee" exact element={<EmployeeManagement />} />
           <Route path="/employee/:id" element={<EmployeeProfile />} />
           <Route path="/tellermain" element={<TransactionPage />} />
+          <Route path="/orderlist" element={<ProductList />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>

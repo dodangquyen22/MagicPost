@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faMapMarker, faPhone, faClipboard, faBox, faFileAlt, faList, faWeight, faDollarSign, faComment, faTag, faMoneyBill, faMoneyCheck, faTimes, faCalendarTimes, faTruck, faTruckFast } from '@fortawesome/free-solid-svg-icons';
 import './styles/recordtransaction.css';
+import { toast } from 'react-toastify';
 import ReactToPrint from 'react-to-print';
 
 
@@ -50,28 +51,28 @@ const RecordTransaction = () => {
 
 
         if (!termsAccepted) {
-            alert('Vui lòng chấp nhận điều khoản trước khi ghi nhận đơn hàng.');
+            toast('Vui lòng chấp nhận điều khoản trước khi ghi nhận đơn hàng.');
             return;
         }
 
         if (sender.name === '' || sender.address === '' || sender.phone === '') {
-            alert('Vui lòng nhập đầy đủ thông tin người gửi.');
+            toast('Vui lòng nhập đầy đủ thông tin người gửi.');
             return;
         }
 
         if (recipient.name === '' || recipient.address === '' || recipient.phone === '') {
-            alert('Vui lòng nhập đầy đủ thông tin người nhận.');
+            toast('Vui lòng nhập đầy đủ thông tin người nhận.');
             return;
         }
 
         if (packageDetails.code === '' || packageDetails.name === '' || packageDetails.quantity === '' || packageDetails.weight === '' || packageDetails.price === '' || packageDetails.length === '' || packageDetails.width === '' || packageDetails.height === '') {
-            alert('Vui lòng nhập đầy đủ thông tin hàng hoá.');
+            toast('Vui lòng nhập đầy đủ thông tin hàng hoá.');
             return;
         }
 
 
         if (!validatePhoneNumber(sender.phone) || !validatePhoneNumber(recipient.phone)) {
-            alert('Vui lòng nhập đúng định dạng số điện thoại.');
+            toast('Vui lòng nhập đúng định dạng số điện thoại.');
             return;
         }
 
@@ -87,6 +88,7 @@ const RecordTransaction = () => {
             payer,
             requestPickup,
         });
+        toast('Đã ghi nhận đơn hàng.');
         // Thực hiện các bước cần thiết
 
         // Reset form sau khi ghi nhận
