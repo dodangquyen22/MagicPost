@@ -1,12 +1,15 @@
+const { Timestamp, Int32 } = require('mongodb')
 const mongoose = require('mongoose')
+
 // Lưu thông tin các đơn vận chuyển 
-const userSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
     id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        unique: true
     },
     packageID: {
-
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'package'
     },
     type: {
         type: String,
@@ -21,12 +24,8 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     receive_point_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'point'
     },
     send_point_id:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'point'
     },
     sendDate: {
 
@@ -39,5 +38,5 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-const User = mongoose.model('User', userSchema)
-module.exports = User
+const order = mongoose.model('order', orderSchema);
+module.exports = order

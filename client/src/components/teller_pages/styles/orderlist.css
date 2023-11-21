@@ -1,0 +1,113 @@
+/* Add these styles to your CSS file */
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+h2 {
+  color: #333;
+}
+
+.tab-container {
+  margin-bottom: 20px;
+}
+
+button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 4px;
+}
+
+button.active {
+  background-color: #2980b9;
+}
+
+.order-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #3498db;
+  color: #fff;
+}
+
+tr {
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+
+tr:hover {
+  background-color: #e3f0f0;
+}
+
+td input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Highlight selected rows */
+tr.selected {
+  background-color: #f2f2f2;
+}
+
+/* th:first-child {
+    display: flex;
+    gap: 20px;
+  } */
+
+/* .actions-menu button {
+    display: inline-block;
+    background-color: beige;
+    color: black;
+    width: 100px;
+  } */
+
+.actions-menu:hover {
+  cursor: pointer;
+}
+
+.actions-select {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #333;
+  list-style-type: none;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.actions-select div {
+  cursor: pointer;
+  padding: 8px;
+  transition: background-color 0.3s;
+}
+
+.actions-select div:hover {
+  background-color: #f2f2f2;
+}
+
+.tab-container {
+  display: flex;
+  /* justify-content: space-around; */
+  /* background-color: #f2f2f2; */
+  padding: 10px;
+  height: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #ccc;
+}

@@ -3,6 +3,7 @@ import Navbar from '../bar/Navbar';
 import { Link } from 'react-router-dom';
 import RecordTransaction from './RecordTransaction';
 import './styles/tellermain.css';
+import ConfirmReturn from './ConfirmReturn';
 
 const TransactionPage = () => {
   const [selectedTab, setSelectedTab] = useState('record'); // Tab mặc định
@@ -21,7 +22,7 @@ const TransactionPage = () => {
               <Link to="/tellermain">Trang Giao Dịch</Link>
             </li>
             <li>
-            Đơn Hàng
+              <Link to="/orderlist">Thống Kê Đơn Hàng</Link>
             </li>
             <li>
               <Link to="/">Log Out</Link>
@@ -69,7 +70,7 @@ const TransactionPage = () => {
             {selectedTab === 'confirmReturn' && (
               // Giao diện cho chức năng Xác Nhận Hàng Trả Về
               <div>
-                {/* ... */}
+                <ConfirmReturn />
               </div>
             )}
             {/* Thêm các phần giao diện cho các chức năng khác */}

@@ -8,6 +8,9 @@ h2 {
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 150px;
 }
 
 .form-transaction {
@@ -16,7 +19,7 @@ h2 {
     margin: 0;
     margin-left: 10px;
     /* max-width: 600px; */
-    width: 85vh;
+    width: 500px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -50,7 +53,6 @@ h2 {
 }
 
 .checkbox-container {
-    margin-top: 25px;
     display: flex;
     justify-content: center;
 }
@@ -110,7 +112,7 @@ h2 {
 } */
 
 label {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .document {
@@ -132,4 +134,121 @@ label {
     margin-left: 5px;
     color: #1f93ff!important;
     text-decoration: none;
+    font-weight: bold;
+}
+
+.payer {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.sender {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.recipient {
+    margin-left: 100px;
+    margin-bottom: 10px;
+}
+
+.transportation {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.save {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.fast {
+    margin-left: 107px;
+    margin-bottom: 10px;
+
+}
+
+.transaction-info .form-transaction {
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.box1 {
+    width: 50%;
+}
+
+.box2 {
+    width: 50%;
+    overflow: hidden;
+}
+
+.request-pickup {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.atPostOffice {
+    margin-left: 25px;
+}
+
+textarea {
+    height: 100px;
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: row wrap;
+    margin-top: 100px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    height: 120px;
+    margin-bottom: 20px;
+    position: fixed;
+    width: 1274.4px;
+    bottom: 10px;
+    z-index: 1000;
+}
+
+.footer .footer1 {
+    background-color: #f1f1f1;
+    padding-left: 10px;
+    padding-top: 25px;
+    border-right: 2px solid #ddd;
+    flex: 2;
+}
+
+.footer .footer2 {
+    background-color: #f1f1f1;
+    padding-left: 10px;
+    padding-top: 25px;
+    border-right: 2px solid #ddd;
+    flex: 2;
+}
+
+.footer .footer3 {
+    background-color: #f1f1f1;
+    padding-left: 10px;
+    padding-top: 25px;
+    border-right: 2px solid #ddd;
+    flex: 2;
+}
+
+.footer .footer4 {
+    padding-top: 25px;
+    background-color: #f1f1f1;
+    flex: 4;
+    padding-bottom: 25px;
+}
+
+.footer label {
+    font-weight: bold;
 }
