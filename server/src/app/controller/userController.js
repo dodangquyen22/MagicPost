@@ -29,9 +29,9 @@ class userController{
     async login(req, res, next) {
         try {
             const user = await User.findOne({ username: req.body.username });
-    
+            const role = req.body.role;
             if (!user) {
-                res.redirect('/');
+                // res.redirect('/');
                 return;
             }
     
@@ -40,11 +40,12 @@ class userController{
             if (validPassword) {
                 res.cookie("uid", user.id);
                 console.log(user.id)
-                res.redirect('/');
+                // res.redirect('/');
+                res.json(role);
                 return;
             }
-    
-            res.redirect('/');
+            console.log("ssssss")
+            // res.redirect('/');
         } catch (error) {
             next(error);
         }
