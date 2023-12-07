@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, "public")));
 data.connect()
 route(app)
 app.listen(port, () => {
-  console.log(`post ${port}`);
+  console.log(`port ${port}`);
 });
 
 module.exports = app;
