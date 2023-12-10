@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import TrackShipment from "./TrackShipment";
 import "./styles/usermain.css";
 import SearchPostOffice from "./SearchPostOffice";
+import Slider from "./Slider";
 
 const UserMain = () => {
     const [selectedTab, setSelectedTab] = useState("track"); // Tab mặc định
@@ -16,7 +17,8 @@ const UserMain = () => {
         <div className="user-container">
             <Navbar />
             <div className="content-container">
-                <div className="sidebar">
+                
+                {/* <div className="sidebar">
                     <ul>
                         <li>
                             <Link to="/user">Trang tra cứu</Link>
@@ -28,8 +30,9 @@ const UserMain = () => {
                             <Link to="/">Log Out</Link>
                         </li>
                     </ul>
-                </div>
-                <div className="content">
+                </div> */}
+                <div className="user-content">
+                    {/* <Slider /> */}
                     <h1>Trang khách hàng</h1>
                     <div className="tabs">
                         <button
@@ -42,7 +45,7 @@ const UserMain = () => {
                             className={selectedTab === "expense" ? "active" : ""}
                             onClick={() => handleTabChange("expense")}
                         >
-                            Ước tính cước phí
+                            Đơn hàng của bạn
                         </button>
                         <button
                             className={selectedTab === "localPost" ? "active" : ""}

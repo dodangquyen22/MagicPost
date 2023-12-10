@@ -59,17 +59,6 @@ const Login = () => {
         />
       </div>
 
-      <div>
-        <select className="form-control role" defaultValue="Lãnh đạo công ty">
-          <option value="Lãnh đạo công ty">Lãnh đạo công ty</option>
-          <option value="1">Trưởng điểm tại điểm giao dịch</option>
-          <option value="2">Giao dịch viên</option>
-          <option value="3">Trưởng điểm tại điểm tập kết</option>
-          <option value="4">Nhân viên tại điểm tập kết</option>
-          <option value="5">Khách hàng</option>
-        </select>
-      </div>
-
       <div className="mb-3">
         <div className="custom-control custom-checkbox">
           <input

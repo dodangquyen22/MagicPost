@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faMapMarker, faPhone, faClipboard, faBox, faFileAlt, faList, faWeight, faDollarSign, faComment, faTag, faMoneyBill, faMoneyCheck, faTimes, faCalendarTimes, faTruck, faTruckFast } from '@fortawesome/free-solid-svg-icons';
 import './styles/recordtransaction.css';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 
 
@@ -611,7 +612,11 @@ const RecordTransaction = () => {
                         <button type="button" className="btn btn-secondary" onClick={handleResetForm}>
                             Làm Mới
                         </button>
-                        <PrintButton componentRef={componentRef} />
+                        {/* <PrintButton componentRef={componentRef} /> */}
+                        <button type="button" className="btn btn-secondary">
+                
+                            <Link to="/transferreceipt">In đơn hàng</Link>
+                        </button>
                     </div>
                 </div>
 
