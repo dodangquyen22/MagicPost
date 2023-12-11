@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.print-container {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    justify-content: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000;
+    margin-bottom: 20px;
+}
+
+.print {
+    border: 1px solid #000;
+    padding: 8px;
+    width: 50%;
+    text-align: left;
+}
+
+p {
+    margin: 5px 0;
+}
+
+strong {
+    font-weight: bold;
+}
+
+/* Additional styles for specific elements */
+/* Adjust as needed */
+
+/* Style for the first column with numbers */
+
+/* Style for the second and third columns with form fields */
+td:nth-child(2),
+td:nth-child(3) {
+    width: 30%;
+}
+
+/* Style for the last column with special instructions */
+td:nth-last-child(1) {
+    width: 20%;
+}
+
+
+  
