@@ -28,7 +28,7 @@ const orderSchema = new mongoose.Schema({
     send_point_id:{
     },
     sendDate: {
-
+        
     },
     receiveDate: {
 
