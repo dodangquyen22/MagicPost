@@ -25,9 +25,6 @@ const Login = () => {
     } else if (username === "admin1" && password === "admin1") {
       // Đăng nhập thành công, chuyển hướng sang Dashboard
       navigate('/tellermain');
-    } else if (username === "user" && password === "user") {
-      // Đăng nhập thành công, chuyển hướng sang Dashboard
-      navigate('/user');
     } else {
       // Đăng nhập thất bại, hiển thị thông báo lỗi
       setError("Invalid username or password");
