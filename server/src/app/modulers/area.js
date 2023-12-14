@@ -4,11 +4,20 @@ const areaSchema = new mongoose.Schema({
     id: {
         type: mongoose.Schema.Types.ObjectId
     },
+    name: {
+        type: String,
+    },
     transactionPointID: {
 
     },
     warehouseID: {
 
+    },
+    province: {
+        type: String
+    },
+    district: {
+        type: String
     }
 })
 

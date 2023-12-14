@@ -10,6 +10,7 @@ import EmployeeProfile from './components/Emploee/EmployeeProfile';
 import TransactionPage from './components/teller_pages/TellerMain';
 import UserMain from './components/userDisplay/UserMain';
 import ProductList from './components/teller_pages/OrderList';
+import TransferReceipt from './components/teller_pages/TransferReceipt';
 
 function App() {
   // const [activePage, setActivePage] = useState('dashboard');
@@ -29,6 +30,7 @@ function App() {
           <Route path="/employee/:id" element={<EmployeeProfile />} />
           <Route path="/tellermain" element={<TransactionPage />} />
           <Route path="/orderlist" element={<ProductList />} />
+          <Route path="/transferreceipt" element={<TransferReceipt />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>

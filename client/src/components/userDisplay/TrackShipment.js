@@ -104,12 +104,12 @@ const TrackShipment = () => {
                     </div>
 
 
-                    {shipmentLocation && (
+                    {/* {shipmentLocation && (
                         <div className="mt-4">
                             <h3>Vị Trí Đơn Hàng Hiện Tại</h3>
                             <MapShipment lat={shipmentLocation.lat} lng={shipmentLocation.lng} />
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
         </div>

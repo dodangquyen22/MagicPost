@@ -1,3 +1,14 @@
+.user-content {
+  flex-grow: 1;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 60px;
+}
+
 .tabs {
     display: flex;
     /* justify-content: space-around; */

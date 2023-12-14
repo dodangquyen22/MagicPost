@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faMapMarker, faPhone, faClipboard, faBox, faFileAlt, faList, faWeight, faDollarSign, faComment, faTag, faMoneyBill, faMoneyCheck, faTimes, faCalendarTimes, faTruck, faTruckFast } from '@fortawesome/free-solid-svg-icons';
 import './styles/recordtransaction.css';
 import { toast } from 'react-toastify';
-import ReactToPrint from 'react-to-print';
+import { Button, Modal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 
 
 const RecordTransaction = () => {
@@ -35,16 +37,19 @@ const RecordTransaction = () => {
 
     const componentRef = useRef();
 
-    const PrintButton = ({ componentRef }) => (
-        <ReactToPrint
-            trigger={() => (
-                <button type="button" className="btn btn-secondary">
-                    In Đơn Hàng
-                </button>
-            )}
-            content={() => componentRef.current}
-        />
-    );
+    const [show, setShowModal] = useState(false);
+
+    const handlePrintOrder = () => {
+        setShowModal(true);
+    };
+
+    const handleClose = () => {
+        setShowModal(false);
+    };
+
+    const handleShow = () => {
+        setShowModal(true);
+    };
 
 
     const handleRecordTransaction = () => {
@@ -145,6 +150,7 @@ const RecordTransaction = () => {
 
 
     return (
+
         <div className='container'>
 
             <div className="record-transaction-container" ref={componentRef}>
@@ -580,6 +586,7 @@ const RecordTransaction = () => {
 
 
             </div>
+
             <div className='footer'>
                 <div className='footer1'>
                     <label>Tổng cước</label>
@@ -611,8 +618,14 @@ const RecordTransaction = () => {
                         <button type="button" className="btn btn-secondary" onClick={handleResetForm}>
                             Làm Mới
                         </button>
-                        <PrintButton componentRef={componentRef} />
+                        {/* <PrintButton componentRef={componentRef} /> */}
+                        <button type="button" className="btn btn-secondary">
+                            <Link to='/transferreceipt'>In Phiếu Gửi</Link>
+
+                        </button>
                     </div>
+
+
                 </div>
 
             </div>

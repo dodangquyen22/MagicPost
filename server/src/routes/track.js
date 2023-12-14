@@ -1,6 +1,7 @@
 const express = require('express');
-const route = express.Router();
+const router = express.Router();
+const trackingController = require("../app/controller/trackingController");
 
-import tracking from '../app/controller/trackController';
+router.post('/', trackingController.trackPackage);
 
-route.get('/:packageID', tracking.trackPackage);
+module.exports = router;

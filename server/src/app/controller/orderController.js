@@ -7,9 +7,16 @@ const onDeliveryStatusStr = "on delivery";
 const deliveredStatusStr = "delivered";
 
 const typeMap = {
-    receive_point_id: 'number', // specify the type for each parameter
+    packageID: 'string',
+    type: 'string',
+    address_send : 'string',
+    address_receive : 'string',
     status: 'string',
-    send_point_id: 'number'
+    receive_point_id: 'number', // specify the type for each parameter
+    send_point_id: 'number',
+    sendDate: 'date',
+    receiveDate: 'date',
+    status: 'string',
     // add more parameters as needed
   };
 class orderController {
@@ -32,22 +39,21 @@ class orderController {
     async createOrderToTransactionSpot(req, res, next) {
         // Your code here
         try {
-            var properties = {};
-            for (var key in req.query) {
-                if (typeMap[key] === 'number') {
-                    properties[key] = Number(req.query[key]);
-                } else if (typemap[key] === 'string') {
-                    properties[key] = req.query[key];
-                } else {
-                    res.send("Invalid properties");
-                }
-            }
-            const newID = new ObjectId();
-            console.log("created ID: ", newID);
-            
-            properties["id"] = newID;
-            await order.insertMany(properties);
-            res.send("Order created successfully");
+            const {packageID, type, address_send, address_receive, status, receive_point_id, send_point_id, sendDate, receiveDate} = req.body;
+            const newOrder = await new order({
+                id: Math.floor(Math.random() * 100000),
+                packageID: packageID,
+                type: type,
+                address_send: address_send,
+                address_receive: address_receive,
+                status: status,
+                receive_point_id: receive_point_id,
+                send_point_id: send_point_id,
+                sendDate: sendDate,
+                receiveDate: receiveDate
+            })
+            await newOrder.save();
+            console.log("Order created successfully");
         } catch (error) {
             console.log("Order creation failed: ", error);
         }
@@ -58,18 +64,16 @@ class orderController {
     // Lấy danh sách đơn hàng
     async getOrderList(req, res, next) {
         try {
+            const {point_id} = req.body;
             var queries = {};
-            for (var key in req.query) {
-                if (typeMap[key] === 'number') {
-                    queries[key] = Number(req.query[key]);
-                } else {
-                    queries[key] = req.query[key];
-                }
+            if (point_id) {
+                queries = {
+                    $or: [{receive_point_id: Number(point_id)}, {send_point_id: Number(point_id)}],
+                };
             }
-            var orders = order.find(queries);
-            res.send(await orders.exec());
+            res.json(await order.find(queries).exec());
         } catch (error) {
-            res.send('lỗi rùi');
+            res.send('Error when collecting order list');
             console.log(error);
         }
     }
@@ -77,9 +81,10 @@ class orderController {
     //xac nhan don hang
     async confirmOrder(req, res, next) {
         try {
-            await order.updateOne({id: req.params.orderID}, {status: confirmedStatusString});
+            const {orderID} = req.body;
+            await order.updateOne({id: orderID}, {status: confirmedStatusString});
         } catch (error) {
-            console.log('Update failed', error);
+            console.log('Confirm failed', error);
         }
     }
 }

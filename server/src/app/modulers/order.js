@@ -4,37 +4,41 @@ const mongoose = require('mongoose')
 // Lưu thông tin các đơn vận chuyển 
 const orderSchema = new mongoose.Schema({
     id: {
-        type: mongoose.Schema.Types.ObjectId,
-        unique: true
+        type: String,
+        unique: true,
     },
     packageID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'package'
+        type: String,
+        // ref: 'package',
+        required: true
     },
     type: {
         type: String,
-        enum: ['to customer', 'not to customer']
+        enum: ['customer', 'spot'] // To customer or to another spot
+        // required: true
+
     },
-    address_sent: {
+    address_send: {
         type: String,
-        required: true
     },
     address_receive: {
         type: String,
-        required: true
     },
     receive_point_id: {
     },
     send_point_id:{
     },
     sendDate: {
-        
+                type: Date,
+        // required: true
     },
     receiveDate: {
-
+        type: Date,
+        // required: true
     },
     status: {
-        type: String
+        type: String,
+        // required: true
     }
 })
 

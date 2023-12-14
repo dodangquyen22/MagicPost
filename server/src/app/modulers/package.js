@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const packageSchema = new mongoose.Schema({
-    id: {
-        type: mongoose.Schema.Types.ObjectId
+    ID: {
+        type: "String"
     },
     // điểm giao dịch nhận hàng gửi
     receivePointID: {

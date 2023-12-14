@@ -106,8 +106,7 @@ export const Dashboard = () => {
                     </div>
                     <div className="map-container-wrapper">
                         <h3>Bản Đồ Điểm Giao Dịch</h3>
-                        <SimpleMap />
-
+                        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1uf1wNufrV1rqpJX-VyUMqWjwqKOivNs&ehbc=2E312F&noprof=1" width="100%" height={480}></iframe>
                     </div>
                 </div>
             </div>
