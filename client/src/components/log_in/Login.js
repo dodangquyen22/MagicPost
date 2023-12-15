@@ -5,30 +5,47 @@ import { useNavigate } from "react-router-dom";
 import './login.css';
 
 const Login = () => {
-  const [credentials, setCredentials] = useState({ username: "", password: "" });
-  const [error, setError] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setCredentials({ ...credentials, [name]: value });
-  };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    const { username, password } = credentials;
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers:
+        {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      })
+      const data = await response.json();
+      console.log(data)
+      if (response.ok) {
+        if (data.role === "manager") {
+          navigate('/dashboard');
+        }
+      } else {
+        setError(data.error);
+      }
+    } catch (error) {
+      setError('An error occurred. Please try again.');
+    }
 
     // Kiểm tra thông tin đăng nhập
-    if (username === "admin" && password === "admin") {
-      // Đăng nhập thành công, chuyển hướng sang Dashboard
-      navigate('/dashboard');
-    } else if (username === "admin1" && password === "admin1") {
-      // Đăng nhập thành công, chuyển hướng sang Dashboard
-      navigate('/tellermain');
-    } else {
-      // Đăng nhập thất bại, hiển thị thông báo lỗi
-      setError("Invalid username or password");
-    }
+    // if (username === "admin" && password === "admin") {
+    //   // Đăng nhập thành công, chuyển hướng sang Dashboard
+    //   navigate('/dashboard');
+    // } else if (username === "admin1" && password === "admin1") {
+    //   // Đăng nhập thành công, chuyển hướng sang Dashboard
+    //   navigate('/tellermain');
+    // } else {
+    //   // Đăng nhập thất bại, hiển thị thông báo lỗi
+    //   setError("Invalid username or password");
+    // }
   };
 
   return (
@@ -42,7 +59,8 @@ const Login = () => {
           name="username"
           className="form-control"
           placeholder="Enter username"
-          onChange={handleInputChange}
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -52,7 +70,8 @@ const Login = () => {
           name="password"
           className="form-control"
           placeholder="Enter password"
-          onChange={handleInputChange}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
         />
       </div>
 
@@ -70,6 +89,7 @@ const Login = () => {
       <div className="d-grid">
         <button type="submit" className="btn btn-primary">Submit</button>
       </div>
+      {error ? <p style={{color: 'red'}}>{error}</p> : null}
       <p className="forgot-password text-right">
         Forgot <a href="#">password?</a>
       </p>
