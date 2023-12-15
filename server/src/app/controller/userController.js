@@ -40,11 +40,13 @@ class userController{
                 res.cookie("uid", user.id);
                 console.log(user.id)
                 // res.redirect('/');
-                res.json(role);
+                res.status(200).json({
+                    message:"Đăng nhập thành công",
+                    role: user.role
+                });
                 return;
             }
-            console.log("ssssss")
-            // res.redirect('/');
+            return res.status(400).json({error: 'Thông tin đăng nhập không đúng'})
         } catch (error) {
             next(error);
         }
