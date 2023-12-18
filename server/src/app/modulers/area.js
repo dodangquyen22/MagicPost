@@ -6,7 +6,7 @@ const areaSchema = new mongoose.Schema({
     },
     name: {
         type: String,
-    },
+    },  
     transactionPointID: {
 
     },

@@ -1,14 +1,17 @@
 const User = require('../modulers/user')
 const bcrypt = require("bcrypt")
+const removeVietnameseTones = require("../../utils/convertVietNam")
 
 class userController{
+
+
     home(req, res, next) {
         res.send('sdsadsada');
     }
     // [POST] tao tai khoan
     async register(req, res, next) {
         try{
-            const { username, password, email, phone, address, role } = req.body;
+            const { username, password, email, phone,province, district, role } = req.body;
             const salt = await bcrypt.genSalt(10);
             console.log(salt)
             const hashedPassword = await bcrypt.hash(password, salt);
@@ -16,8 +19,10 @@ class userController{
             if (existingUser) {
                 return res.status(400).json({ error: 'Người dùng đã tồn tại' });
               }
-          
-            const user = new User({ username, password: hashedPassword, email, phone, address, role });
+            const id = removeVietnameseTones.removeVietnameseTones(district)
+
+            const user = new User({ username, password: hashedPassword, email, phone, province, district,idArea: id, role });
+
             await user.save();
             res.status(200).json({message: 'Tạo tài khoản thành công'})
         }
