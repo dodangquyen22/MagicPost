@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 
+const successDeliveryStatus = "success";
+const failDeliveryStatus = "fail";
+
 const packageSchema = new mongoose.Schema({
     ID: {
         type: "String"
@@ -20,15 +23,20 @@ const packageSchema = new mongoose.Schema({
     senderDetails: {
 
     },
+    cost: {
+
+    },
     // thông tin gói hàng
     details: {
         type: String
     },
     status: {
         type: String
-    }
+    },
 })
 
 const package = mongoose.model('package', packageSchema);
 
 module.exports = package;
+module.exports.successDeliveryStatus = successDeliveryStatus;
+module.exports.failDeliveryStatus = failDeliveryStatus;
