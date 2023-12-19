@@ -1,7 +1,11 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
-const homepage = require("../app/controller/homepageController");
+const userController = require('../app/controller/userController');
+const { authenticateUser, checkRole } = require('../middleware/authentication');
 
-router.get('/', homepage.home)
 
-module.exports = router
+router.get('/', userController.home);
+router.post('/register', userController.register);
+router.post('/admin', userController.login);
+
+module.exports = router;

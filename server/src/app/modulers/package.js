@@ -4,17 +4,19 @@ const packageSchema = new mongoose.Schema({
     ID: {
         type: "String"
     },
-    // điểm nhận hàng gửi
+    // điểm giao dịch nhận hàng gửi
     receivePointID: {
 
     },
-    // điểm cuối gửi hàng cho khách
+    // điểm giao dịch cuối gửi hàng cho khách
     sendPointID: {
 
     },
+    //Thông tin người nhận
     receiverDetails:{
 
     },
+    // Thông tin người gửi
     senderDetails: {
 
     },
