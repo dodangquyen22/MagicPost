@@ -1,21 +1,30 @@
 const packageModel = require('../modulers/package');
-const { failDeliveryStatus, successDeliveryStatus } = require('../modulers/package');
+const area = require('../modulers/area');
+const { warehouseTypeString, transactionTypeString } = require('../modulers/package');
+const {successDeliveryStatus, failDeliveryStatus, shippingStatus, confirmedStatus} = require("../modulers/package");
 class packageController {
     // Thêm dữ liệu hàng gửi
     async addPackage(req, res, next) {
         try {
-            const {packageID, receivePointID, sendPointID, receiverDetails, senderDetails, details, status} = req.body;
+            console.log("Body: ", req.body);
+            const {sender, recipient, details} = req.body;
+            const sendArea = await area.findOne({province: sender.province, district: sender.district});
+            const recipientArea = await area.findOne({province: recipient.province, district: recipient.district});
+            console.log(sendArea, recipientArea);
+            const senderDetails = "Name: " + sender.name + ", Phone: " + sender.phone + ", Address: " + sender.address;
+            const receiverDetails = "Name: " + recipient.name + ", Phone: " + recipient.phone + ", Address: " + recipient.address;
             const newPackage = new packageModel({
-                ID: packageID,
-                receivePointID: receivePointID,
-                sendPointID: sendPointID,
+                ID: Math.floor(Math.random() * 1000000000),
+                receiveAreaID: recipientArea.id,
+                sendAreaID: sendArea.id,
                 receiverDetails: receiverDetails,
                 senderDetails: senderDetails,
                 details: details,
-                status: status
+                status: shippingStatus
             })
             await newPackage.save();
             console.log("Package created successfully");
+            res.json(newPackage);
         } catch (error) {
             console.log("Package creation failed: ", error);
         }

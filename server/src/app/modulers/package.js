@@ -2,17 +2,19 @@ const mongoose = require('mongoose')
 
 const successDeliveryStatus = "success";
 const failDeliveryStatus = "fail";
+const shippingStatus = "shipping";
+const confirmedStatus = "confirmed";
 
 const packageSchema = new mongoose.Schema({
     ID: {
         type: "String"
     },
-    // điểm giao dịch nhận hàng gửi
-    receivePointID: {
+    // khu vực nhận hàng gửi
+    receiveAreaID: {
 
     },
-    // điểm giao dịch cuối gửi hàng cho khách
-    sendPointID: {
+    // khu vực khách nhận hàng
+    sendAreaID: {
 
     },
     //Thông tin người nhận
@@ -40,3 +42,5 @@ const package = mongoose.model('package', packageSchema);
 module.exports = package;
 module.exports.successDeliveryStatus = successDeliveryStatus;
 module.exports.failDeliveryStatus = failDeliveryStatus;
+module.exports.shippingStatus = shippingStatus;
+module.exports.confirmedStatus = confirmedStatus;
