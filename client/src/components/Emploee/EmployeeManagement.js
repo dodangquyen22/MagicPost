@@ -10,8 +10,8 @@ import axios from 'axios';
 const EmployeeManagement = () => {
   const { role } = useContext(AuthContext);
   const [employees, setEmployees] = useState([
-    { id: 1, name: 'Nguyen Van A', account:'A123', password:'A123', position: 'Giao Dịch Viên', gender: 'Nam' },
-    { id: 2, name: 'Tran Thi B', position: 'Nhân Viên Giao Hàng', account:'B123', password:'B123', gender: 'Nữ' },
+    { id: 1, name: 'Nguyen Van A', account: 'A123', password: 'A123', position: 'Giao Dịch Viên', gender: 'Nam' },
+    { id: 2, name: 'Tran Thi B', position: 'Nhân Viên Giao Hàng', account: 'B123', password: 'B123', gender: 'Nữ' },
     // Thêm nhân viên khác tùy ý
   ]);
 
@@ -105,11 +105,25 @@ const EmployeeManagement = () => {
           </div>
         )
         }
-        {role !== 'manager' && (
+        {role === 'point leader' && (
           <div className="sidebar">
             <ul>
               <li>
                 <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
+              </li>
+              <li>
+                <Link to="/employee">Quản Lý Nhân Viên</Link>
+              </li>
+              <li><Link to="/">Log Out</Link></li>
+            </ul>
+          </div>
+        )
+        }
+        {role === 'warehouse leader' && (
+          <div className="sidebar">
+            <ul>
+              <li>
+                <Link to="/warehouse">Thống Kê Đơn Hàng</Link>
               </li>
               <li>
                 <Link to="/employee">Quản Lý Nhân Viên</Link>

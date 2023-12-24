@@ -41,7 +41,7 @@ function App() {
           <Route path="/transferreceipt" element={<TransferReceipt />} />
           {/* trưởng điểm giao dịch */}
           <Route path="/transactionpoint" element={<TransactionPoint />} />
-          
+          {/* trưởng điểm tập kết */}
           <Route path='/warehouse' element={<WareHouse />}></Route>
           {/* <Route path="/profile" element={<Profile />} /> */}
           {/* quản lí điểm giao dịch admin */}
