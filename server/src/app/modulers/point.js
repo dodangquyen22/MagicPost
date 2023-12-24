@@ -21,6 +21,6 @@ const point_Schema = new mongoose.Schema({
     }
 })
 
-const point_gather = mongoose.model('point', point_Schema);
+const Point = mongoose.model('point', point_Schema);
 
-module.exports = point;
+module.exports = Point;

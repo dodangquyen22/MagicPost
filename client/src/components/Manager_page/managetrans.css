@@ -1,0 +1,114 @@
+.trans-content {
+    flex-grow: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-left: 200px;
+    margin-top: 60px;
+  }
+
+.transpoint {
+    display: flex;
+    gap: 10px;
+
+}
+
+.list-transpoint {
+    width: 48%;
+    height: fit-content;
+}
+
+.table-trans button {
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.table-trans tr :hover {
+    cursor: pointer;
+}
+
+.info {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    /* width: 60%; */
+    opacity: 0; /* Start with opacity 0 to make it invisible initially */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.info.show {
+    opacity: 1; /* Make it visible when the "show" class is added */
+  }
+
+.list-transpoint {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.vertical-line {
+    border-left: 1px solid #ccc;
+    height: 100%;
+    margin-left: 10px; /* Adjust the margin as needed */
+}
+
+.pagination button {
+    padding: 5px 10px;
+    background-color: white;
+    color: black;
+    margin-right: 5px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+/* Add these styles to your existing CSS file or create a new one */
+
+/* Modal Styles */
+.react-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .react-modal-content {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px; /* Adjust the width as needed */
+  }
+  
+  /* Close button styles */
+  .react-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  /* Add your own styles for form elements inside the modal */
+  .react-modal-form {
+    /* Your form styles go here */
+  }
+  
+  /* Button styles */
+  .react-modal-button {
+    margin-right: 10px;
+  }
+  

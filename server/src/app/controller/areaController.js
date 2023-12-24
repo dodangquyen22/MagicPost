@@ -1,8 +1,14 @@
-const areaModule = require("../modulers/area");
+const area = require("../modulers/area");
+const User = require("../modulers/user");
+const area = require("../modulers/area");
+const bcrypt = require("bcrypt");
+const removeVietnameseTones = require("../../utils/convertVietNam");
+const Point = require("../modulers/point");
 
 class areaController {
+
     async getProvinceList(req, res, next) {
-        res.json(await areaModule.aggregate([
+        res.json(await area.aggregate([
             {$group: {_id: "$province", province: {$first: "$province"}}},
             {$sort: {"province": 1}}
         ]));
@@ -13,14 +19,60 @@ class areaController {
             console.log("Missing province");
         } else {
             const {province} = req.query;
-            // res.json(await areaModule.distinct("district", {province: province}).exec());
-            res.json(await areaModule.aggregate([
+            // res.json(await area.distinct("district", {province: province}).exec());
+            res.json(await area.aggregate([
                 {$match: {province: province}},
                 {$group: {_id: "$district", district: {$first: "$district"}}},
                 {$sort: {"district": 1}}
             ]));
         }
     }
+
+
+    async createTransaction(req, res, next) {
+        const {province, district, address} = req.body;
+        const id = removeVietnameseTones.removeVietnameseTones(district);
+        const salt = await bcrypt.genSalt(10);
+        const password = id;
+        const username = id + "_point";
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const existingUser = await User.findOne({ username });
+        const role = "point leader";
+        if (existingUser) {
+            return res.status(400).json({ error: 'Điểm giao dịch này đã tồn tại' });
+          }
+        const user = new User({ username, password: hashedPassword,idArea: id, role });
+        const area = new area({transactionPointID: id, province: province, district: district});
+        const Point = new Point({address: address, idArea: id, type: "transaction"});
+        await user.save();
+        await area.save();
+        await Point.save();
+        res.status(200).json({message: 'Tạo điểm giao dịch thành công'})
+    }
+
+
+    async createWarehouse(req, res, next) {
+        const {province, district, address} = req.body;
+        const id = removeVietnameseTones.removeVietnameseTones(district);
+        const salt = await bcrypt.genSalt(10);
+        const password = id;
+        const username = id + "_warehouse";
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const existingUser = await User.findOne({ username });
+        const role = "warehouse leader";
+        if (existingUser) {
+            return res.status(400).json({ error: 'Điểm giao dịch này đã tồn tại' });
+          }
+        const user = new User({ username, password: hashedPassword,idArea: id, role });
+        const area = new area({warehouseID: id, province: province, district: district});
+        const Point = new Point({address: address, idArea: id, type: "warehouse"});
+        await user.save();
+        await area.save();
+        await Point.save();
+        res.status(200).json({message: 'Tạo điểm tập kết thành công'})
+    }
+
+
 }
 
 module.exports = new areaController()
