@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Chart from 'react-apexcharts';
 import Navbar from '../bar/Navbar';
 import { Outlet, Link } from "react-router-dom";
 import './styles.css'
+import AuthContext from '../variable/AuthContext';
 // import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import SimpleMap from '../bar/map';
 
 export const Dashboard = () => {
+    const { role } = useContext(AuthContext);
     // Dữ liệu mẫu
     const data = {
         totalTransactions: 1500,
@@ -56,10 +58,19 @@ export const Dashboard = () => {
                 <div className="sidebar">
                     <ul>
                         <li>
-                            <Link to="/dashboard">Dashboard</Link>
+                            <Link to="/dashboard">Tổng Quát</Link>
                         </li>
                         <li>
                             <Link to="/employee">Quản Lý Nhân Viên</Link>
+                        </li>
+                        <li>
+                            <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
+                        </li>
+                        <li>
+                            <Link to="/managetranspoints">Quản Lý Điểm Giao Dịch</Link>
+                        </li>
+                        <li>
+                            <Link to="/managewarehouse">Quản Lý Điểm Tập Kết</Link>
                         </li>
                         <li><Link to="/">Log Out</Link></li>
                         {/* <li onClick={() => handleMenuClick('login')}>Đăng Xuất</li> */}

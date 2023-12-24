@@ -8,7 +8,7 @@ const areaSchema = new mongoose.Schema({
         type: String,
     },  
     transactionPointID: {
-
+        
     },
     warehouseID: {
 
