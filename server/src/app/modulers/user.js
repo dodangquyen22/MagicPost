@@ -21,7 +21,15 @@ const userSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
-    address: {
+    city: {
+        type: String,
+        require: true
+    },
+    province :{
+        type: String,
+        require: true
+    },
+    idArea: {
         type: String,
         require: true
     },
