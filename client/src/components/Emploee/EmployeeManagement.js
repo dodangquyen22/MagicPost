@@ -8,6 +8,26 @@ import { Outlet, Link } from "react-router-dom";
 import axios from 'axios';
 
 const EmployeeManagement = () => {
+  const [username, setUsername] = useState([]);
+  useEffect(() => {
+    const token =  localStorage.getItem('token');
+    console.log(token);
+    axios.get('http://localhost:3000/manager/listAcount', {
+        headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        body: JSON.stringify({role: "manager"}),
+        })
+        .then((response) => {
+            const users = response.data;
+            setUsername(users);
+        })
+        .catch((error) => {
+            
+        })
+}, [])
+  
+
   const { role } = useContext(AuthContext);
   const [employees, setEmployees] = useState([
     { id: 1, name: 'Nguyen Van A', account: 'A123', password: 'A123', position: 'Giao Dịch Viên', gender: 'Nam' },
@@ -15,18 +35,6 @@ const EmployeeManagement = () => {
     // Thêm nhân viên khác tùy ý
   ]);
 
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/employee'); // Update the URL with your actual API endpoint
-        setEmployees(response.data);
-      } catch (error) {
-        console.error('Error fetching employees:', error);
-      }
-    };
-
-    fetchEmployees();
-  }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState({ id: null, name: '', account: '', password: '', position: '', gender: '' });
@@ -148,16 +156,20 @@ const EmployeeManagement = () => {
                   <th>Tên Nhân Viên</th>
                   <th>Chức Vụ</th>
                   <th>Giới Tính</th>
+                  <th>Tỉnh/Thành phố</th>
+                  <th>Quận/Huyện</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                {employees.map((employee) => (
+                {username.map((employee) => (
                   <tr key={employee.id}>
                     <td>{employee.id}</td>
                     <td><Link to={`/profile/${employee.id}`}>{employee.name}</Link></td>
-                    <td>{employee.position}</td>
+                    <td>{employee.role}</td>
                     <td>{employee.gender}</td>
+                    <td>{employee.province}</td>
+                    <td>{employee.district}</td>
                     <td>
                       <button onClick={() => openModal(employee)}>
                         Sửa

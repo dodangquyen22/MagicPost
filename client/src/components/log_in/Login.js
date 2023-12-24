@@ -4,6 +4,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import './login.css';
 import AuthContext from '../variable/AuthContext';
+import Cookies from 'js-cookie';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -20,15 +21,32 @@ const Login = () => {
         headers:
         {
           'Content-Type': 'application/json',
-        },
+        },  
         body: JSON.stringify({ username, password }),
       })
       const data = await response.json();
-      console.log(data)
+      // const uid = data.uid;
+      // Cookies.set('uid', uid, { expires: 1, path: '/' });
+      // console.log(Cookies.get('uid'));
+      localStorage.setItem('token', data.token);
+      // const uidCookie = response.headers.get('set-cookie');
+      // console.log(uidCookie);
+      // console.log(data)
       if (response.ok) {
         setRole(data.role);
+        // const uid = data.uid;
         if (data.role === "manager") {
           navigate('/dashboard');
+        } else if (data.role === "warehouse leader") {
+          navigate('/warehouse');
+        } else if (data.role === "point leader") {
+          navigate('/transactionpoint');
+        } else if (data.role === "point staff") {
+          navigate('/tellermain');
+        } else if(data.role === "warehouse staff") {
+          navigate('/admin');
+        } else {
+          navigate('/user');
         }
       } else {
         setError(data.error);
