@@ -1,16 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faMapMarker, faPhone, faClipboard, faBox, faFileAlt, faList, faWeight, faDollarSign, faComment, faTag, faMoneyBill, faMoneyCheck, faTimes, faCalendarTimes, faTruck, faTruckFast } from '@fortawesome/free-solid-svg-icons';
 import './styles/recordtransaction.css';
 import { toast } from 'react-toastify';
-import { Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 
 const RecordTransaction = () => {
-    const [sender, setSender] = useState({ name: '', address: '', phone: '' });
-    const [recipient, setRecipient] = useState({ name: '', address: '', phone: '' });
+    const [sender, setSender] = useState({ name: '', province: '', district: '', address: '', phone: '' });
+    const [recipient, setRecipient] = useState({ name: '', province: '', district: '', address: '', phone: '' });
     const [packageDetails, setPackageDetails] = useState({
         code: '',
         type: 'Bưu kiện',
@@ -23,6 +23,11 @@ const RecordTransaction = () => {
         height: '',
         specialFeatures: [],
     });
+
+    const [provinces, setProvinces] = useState([]);
+    const [senderDistricts, setSenderDistricts] = useState([]);
+    const [recipientDistricts, setRecipientDistricts] = useState([]);
+
     const [request, setRequest] = useState('');
 
     const [collectionFee, setCollectionFee] = useState({ cod: false, amount: '' });
@@ -51,6 +56,51 @@ const RecordTransaction = () => {
         setShowModal(true);
     };
 
+    useEffect(() => {
+        // Fetch provinces
+        axios.get('http://localhost:3000/province')
+            .then(response => setProvinces(response.data))
+            .catch(error => console.error('Error fetching provinces:', error));
+    }, []);
+
+    const handleSenderProvinceChange = async (e) => {
+        const selectedProvince = e.target.value;
+
+        // Fetch districts based on selected province for sender
+        try {
+            const response = await axios.get(`http://localhost:3000/district?province=${selectedProvince}`);
+            setSenderDistricts(response.data);
+        } catch (error) {
+            console.error('Error fetching sender districts:', error);
+        }
+
+        setSender({ ...sender, province: selectedProvince });
+    };
+
+    const handleRecipientProvinceChange = async (e) => {
+        const selectedProvince = e.target.value;
+
+        // Fetch districts based on selected province for recipient
+        try {
+            const response = await axios.get(`http://localhost:3000/district?province=${selectedProvince}`);
+            setRecipientDistricts(response.data);
+        } catch (error) {
+            console.error('Error fetching recipient districts:', error);
+        }
+
+        setRecipient({ ...recipient, province: selectedProvince });
+    };
+
+    const handleSenderDistrictChange = (e) => {
+        const selectedDistrict = e.target.value;
+        setSender({ ...sender, district: selectedDistrict });
+    };
+
+    const handleRecipientDistrictChange = (e) => {
+        const selectedDistrict = e.target.value;
+        setRecipient({ ...recipient, district: selectedDistrict });
+    };
+
 
     const handleRecordTransaction = () => {
 
@@ -60,12 +110,13 @@ const RecordTransaction = () => {
             return;
         }
 
-        if (sender.name === '' || sender.address === '' || sender.phone === '') {
+        if (sender.name === '' || sender.province === '' || sender.district === '' || sender.address === '' || sender.phone === '') {
             toast('Vui lòng nhập đầy đủ thông tin người gửi.');
             return;
         }
 
-        if (recipient.name === '' || recipient.address === '' || recipient.phone === '') {
+
+        if (recipient.name === '' || recipient.province === '' || recipient.district === '' || recipient.address === '' || recipient.phone === '') {
             toast('Vui lòng nhập đầy đủ thông tin người nhận.');
             return;
         }
@@ -94,11 +145,11 @@ const RecordTransaction = () => {
             requestPickup,
         });
         toast('Đã ghi nhận đơn hàng.');
-        // Thực hiện các bước cần thiết
+        // Thực hiện các bước cần thiết để ghi nhận đơn hàng
 
         // Reset form sau khi ghi nhận
-        setSender({ name: '', address: '', phone: '' });
-        setRecipient({ name: '', address: '', phone: '' });
+        setSender({ name: '', province: '', district: '', address: '', phone: '' });
+        setRecipient({ name: '', province: '', district: '', address: '', phone: '' });
         setPackageDetails({
             code: '',
             type: 'Bưu kiện',
@@ -120,8 +171,8 @@ const RecordTransaction = () => {
     };
 
     const handleResetForm = () => {
-        setSender({ name: '', address: '', phone: '' });
-        setRecipient({ name: '', address: '', phone: '' });
+        setSender({ name: '', province: '', district: '', address: '', phone: '' });
+        setRecipient({ name: '', province: '', district: '', address: '', phone: '' });
         setPackageDetails({
             code: '',
             type: 'Bưu kiện',
@@ -174,8 +225,29 @@ const RecordTransaction = () => {
                                 {/* <div className="invalid-feedback">{senderErrors.name}</div> */}
 
                                 <label><FontAwesomeIcon icon={faMapMarker} /> Địa Chỉ:</label>
+                                <select
+                className="form-control"
+                value={sender.province}
+                onChange={handleSenderProvinceChange}
+            >
+                <option value="Chọn Tỉnh/Thành Phố">Chọn Tỉnh/Thành Phố</option>
+                {provinces.map(item => (
+                    <option key={item._id} value={item.province}>{item.province}</option>
+                ))}
+            </select>
+            <select
+                className="form-control"
+                value={sender.district}
+                onChange={handleSenderDistrictChange}
+            >
+                <option value="Chọn Quận/Huyện">Chọn Quận/Huyện</option>
+                {senderDistricts.map(item => (
+                    <option key={item._id} value={item.district}>{item.district}</option>
+                ))}
+            </select>
                                 <input
                                     type="text"
+                                    placeholder='Số nhà, tên đường, phường/xã'
                                     required
                                     className="form-control"
                                     value={sender.address}
@@ -208,8 +280,29 @@ const RecordTransaction = () => {
                                 />
                                 {/* <div className="invalid-feedback">{recipientErrors.name}</div> */}
                                 <label><FontAwesomeIcon icon={faMapMarker} /> Địa Chỉ:</label>
+                                <select
+                className="form-control"
+                value={recipient.province}
+                onChange={handleRecipientProvinceChange}
+            >
+                <option value="Chọn Tỉnh/Thành Phố">Chọn Tỉnh/Thành Phố</option>
+                {provinces.map(item => (
+                    <option key={item._id} value={item.province}>{item.province}</option>
+                ))}
+            </select>
+            <select
+                className="form-control"
+                value={recipient.district}
+                onChange={handleRecipientDistrictChange}
+            >
+                <option value="Chọn Quận/Huyện">Chọn Quận/Huyện</option>
+                {recipientDistricts.map(item => (
+                    <option key={item._id} value={item.district}>{item.district}</option>
+                ))}
+            </select>
                                 <input
                                     type="text"
+                                    placeholder='Số nhà, tên đường, phường/xã'
                                     required
                                     className="form-control"
                                     value={recipient.address}

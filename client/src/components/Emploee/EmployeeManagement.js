@@ -15,19 +15,6 @@ const EmployeeManagement = () => {
     // Thêm nhân viên khác tùy ý
   ]);
 
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/employee'); // Update the URL with your actual API endpoint
-        setEmployees(response.data);
-      } catch (error) {
-        console.error('Error fetching employees:', error);
-      }
-    };
-
-    fetchEmployees();
-  }, []);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState({ id: null, name: '', account: '', password: '', position: '', gender: '' });
 
