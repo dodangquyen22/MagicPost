@@ -26,16 +26,24 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {/* trang chủ admin */}
+          <Route path="/dashboard" element={<Dashboard />} /> 
+          {/* trang người dùng */}
           <Route path="/user" element={<UserMain />} />
           <Route path="/employee" exact element={<EmployeeManagement />} />
-          <Route path="/employee/:id" element={<EmployeeProfile />} />
+          {/* <Route path="/employee/:id" element={<EmployeeProfile />} /> */}
+          {/* trang giao dịch viên */}
           <Route path="/tellermain" element={<TransactionPage />} />
+          {/* thống kê đơn hàng giao dịch viên */}
           <Route path="/tellermain/orderlist" element={<ProductList />} />
+          {/* in đơn hàng */}
           <Route path="/transferreceipt" element={<TransferReceipt />} />
+          {/* trưởng điểm giao dịch */}
           <Route path="/transactionpoint" element={<TransactionPoint />} />
-          <Route path="/profile" element={<Profile />} />
+          {/* <Route path="/profile" element={<Profile />} /> */}
+          {/* quản lí điểm giao dịch admin */}
           <Route path="/managetranspoints" element={<ManageTransactionPoints />} />
+          {/* quản lí điểm tập kết admin */}
           <Route path="/managewarehouse" element={<ManageWarehouse />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
