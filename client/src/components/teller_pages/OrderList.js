@@ -171,7 +171,7 @@ const ProductList = () => {
                   <th>Ngày Lập</th>
                   <th>Thu Hộ</th>
                   <th>Tổng Cước</th>
-                  <th>In/Chưa In</th>
+                  <th>Xác Nhận Thành Công</th>
                 </tr>
               </thead>
               <tbody>
@@ -193,7 +193,9 @@ const ProductList = () => {
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>{order.printed ? "In" : "Chưa In"}</td>
+                    <td>
+                      <button>Xác Nhận</button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

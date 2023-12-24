@@ -1,6 +1,5 @@
 const area = require("../modulers/area");
 const User = require("../modulers/user");
-const area = require("../modulers/area");
 const bcrypt = require("bcrypt");
 const removeVietnameseTones = require("../../utils/convertVietNam");
 const Point = require("../modulers/point");
@@ -25,6 +24,30 @@ class areaController {
                 {$group: {_id: "$district", district: {$first: "$district"}}},
                 {$sort: {"district": 1}}
             ]));
+        }
+    }
+
+    async getPointTransaction(req, res, next) {
+        try {
+            const points = await Point.find({ type: "transaction" });
+            const pointIds = points.map(point => point.idArea);
+            const areas = await area.find({ transactionPointID: { $in: pointIds } });
+    
+            res.json({ areas, points });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async getPointWarehouse(req, res, next) {
+        try {
+            const points = await Point.find({ type: "transaction" });
+            const pointIds = points.map(point => point.idArea);
+            const areas = await area.find({ warehouseID: { $in: pointIds } });
+    
+            res.json({ areas, points });
+        } catch (error) {
+            next(error);
         }
     }
 

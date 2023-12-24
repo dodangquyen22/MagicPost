@@ -10,23 +10,10 @@ import axios from 'axios';
 const EmployeeManagement = () => {
   const { role } = useContext(AuthContext);
   const [employees, setEmployees] = useState([
-    { id: 1, name: 'Nguyen Van A', account:'A123', password:'A123', position: 'Giao Dịch Viên', gender: 'Nam' },
-    { id: 2, name: 'Tran Thi B', position: 'Nhân Viên Giao Hàng', account:'B123', password:'B123', gender: 'Nữ' },
+    { id: 1, name: 'Nguyen Van A', account: 'A123', password: 'A123', position: 'Giao Dịch Viên', gender: 'Nam' },
+    { id: 2, name: 'Tran Thi B', position: 'Nhân Viên Giao Hàng', account: 'B123', password: 'B123', gender: 'Nữ' },
     // Thêm nhân viên khác tùy ý
   ]);
-
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/employee'); // Update the URL with your actual API endpoint
-        setEmployees(response.data);
-      } catch (error) {
-        console.error('Error fetching employees:', error);
-      }
-    };
-
-    fetchEmployees();
-  }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState({ id: null, name: '', account: '', password: '', position: '', gender: '' });
@@ -99,6 +86,34 @@ const EmployeeManagement = () => {
               </li>
               <li>
                 <Link to="/managewarehouse">Quản Lý Điểm Tập Kết</Link>
+              </li>
+              <li><Link to="/">Log Out</Link></li>
+            </ul>
+          </div>
+        )
+        }
+        {role === 'point leader' && (
+          <div className="sidebar">
+            <ul>
+              <li>
+                <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
+              </li>
+              <li>
+                <Link to="/employee">Quản Lý Nhân Viên</Link>
+              </li>
+              <li><Link to="/">Log Out</Link></li>
+            </ul>
+          </div>
+        )
+        }
+        {role === 'warehouse leader' && (
+          <div className="sidebar">
+            <ul>
+              <li>
+                <Link to="/warehouse">Thống Kê Đơn Hàng</Link>
+              </li>
+              <li>
+                <Link to="/employee">Quản Lý Nhân Viên</Link>
               </li>
               <li><Link to="/">Log Out</Link></li>
             </ul>

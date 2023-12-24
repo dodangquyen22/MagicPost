@@ -7,7 +7,7 @@ const authenticateUser = (requiredRole) => {
     let uid = req.cookies.uid;
     console.log(uid)
     if (!uid) {
-        res.redirect("/");
+        res.status(401).json({error: "Không được phép truy cập"});
         return;
     }
     try {
@@ -23,7 +23,7 @@ const authenticateUser = (requiredRole) => {
         next();
         console.log("Pass author")
     } catch (error) {
-        res.redirect("/");
+        res.status(401).json({error: "Vui long dang nhap de xem du lieu"});
         return;
     }
 }

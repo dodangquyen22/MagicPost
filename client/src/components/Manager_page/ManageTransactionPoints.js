@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../bar/Navbar';
 import { Link } from 'react-router-dom';
 import './managetrans.css';
 import Chart from 'react-apexcharts';
 import Modal from 'react-modal';
+import axios from 'axios';
 
 
 
@@ -26,6 +27,19 @@ const ManageTransactionPoints = () => {
 
         // Add more transaction points as needed
     ]);
+
+    // useEffect(() => {
+    //     const fetchTransactionPoints = async () => {
+    //         try {
+    //             const response = await axios.get('http://localhost:3000/pointTransaction'); // Update the URL with your actual API endpoint
+    //             setTransactionPoints(response.data.points);
+    //         } catch (error) {
+    //             console.error('Error fetching transaction points:', error);
+    //         }
+    //     };
+
+    //     fetchTransactionPoints();
+    // }, []);
 
 
 
