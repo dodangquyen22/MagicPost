@@ -28,6 +28,30 @@ class areaController {
         }
     }
 
+    async getPointTransaction(req, res, next) {
+        try {
+            const points = await Point.find({ type: "transaction" });
+            const pointIds = points.map(point => point.idArea);
+            const areas = await area.find({ transactionPointID: { $in: pointIds } });
+    
+            res.json({ areas, points });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async getPointWarehouse(req, res, next) {
+        try {
+            const points = await Point.find({ type: "transaction" });
+            const pointIds = points.map(point => point.idArea);
+            const areas = await area.find({ warehouseID: { $in: pointIds } });
+    
+            res.json({ areas, points });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 
     async createTransaction(req, res, next) {
         const {province, district, address} = req.body;
