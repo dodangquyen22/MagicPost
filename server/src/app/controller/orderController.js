@@ -1,10 +1,7 @@
 const order = require('../modulers/order');
-const packageM = require('../modulers/package');
+const packageModule = require('../modulers/package');
 const { ObjectId } = require('mongodb');
-
-const confirmedStatusString = "confirmed";
-const onDeliveryStatusStr = "on delivery";
-const deliveredStatusStr = "delivered";
+const { failDeliveryStatus, successDeliveryStatus, shippingStatus, confirmedStatus } = require('../modulers/order');
 
 const typeMap = {
     packageID: 'string',
@@ -39,18 +36,17 @@ class orderController {
     async createOrderToTransactionSpot(req, res, next) {
         // Your code here
         try {
-            const {packageID, type, address_send, address_receive, status, receive_point_id, send_point_id, sendDate, receiveDate} = req.body;
+            const {packageID, type, address_send, address_receive, receive_point_id, send_point_id, sendDate} = req.body;
             const newOrder = await new order({
                 id: Math.floor(Math.random() * 100000),
                 packageID: packageID,
                 type: type,
                 address_send: address_send,
                 address_receive: address_receive,
-                status: status,
+                status: shippingStatus,
                 receive_point_id: receive_point_id,
                 send_point_id: send_point_id,
-                sendDate: sendDate,
-                receiveDate: receiveDate
+                sendDate: sendDate
             })
             await newOrder.save();
             console.log("Order created successfully");
@@ -64,11 +60,11 @@ class orderController {
     // Lấy danh sách đơn hàng
     async getOrderList(req, res, next) {
         try {
-            const {point_id} = req.body;
+            const point_id = req.query.spotID;
             var queries = {};
             if (point_id) {
                 queries = {
-                    $or: [{receive_point_id: Number(point_id)}, {send_point_id: Number(point_id)}],
+                    $or: [{receive_point_id: point_id}, {send_point_id: point_id}],
                 };
             }
             res.json(await order.find(queries).exec());
@@ -81,11 +77,52 @@ class orderController {
     //xac nhan don hang
     async confirmOrder(req, res, next) {
         try {
-            const {orderID} = req.body;
-            await order.updateOne({id: orderID}, {status: confirmedStatusString});
+            const orderID = req.params.orderID;
+            console.log(orderID);
+            order.updateOne({id: orderID}, {$set : {status: confirmedStatus}}).then((obj) => {
+                console.log(obj);
+            });
+            res.send('Success order confirming');
+            // res.json(await order.find({id: orderID}).exec());
         } catch (error) {
-            console.log('Confirm failed', error);
+            res.send('Error when confirming order');
+            console.log(error);
         }
+    }
+
+    async statistics(req, res, next) {
+        const spotID = req.query.spotID;
+        console.log(req.query);
+        var result = {};
+        if (spotID) {
+            // Số lượng hàng gửi đi khu vực khác
+            result.totalSent = await order.find({receivePointID: spotID}).count().exec();
+            // Số lượng hàng nhận từ khu vực khác
+            result.totalSuccess = await order.find({sendPointID: spotID, status: successDeliveryStatus}).count().exec();
+            result.totalFail = await order.find({sendPointID: spotID, status: failDeliveryStatus}).count().exec();
+            var income = await order.aggregate([
+                { $match: { receivePointID: spotID } },
+                { $group: {
+                    _id: null,
+                    totalIncome: { $sum: "$cost" }
+                }},
+                { $project: { _id: 0 } }
+            ]).exec();
+            result.totalIncome = income.length > 0 ? income[0].totalIncome : 0;
+            
+        } else {
+            result = (await order.aggregate([
+                { $group: {
+                    _id: null,
+                    totalPackage : { $sum: 1 },
+                    totalIncome: { $sum: "$cost" },
+                    totalFail: { $sum: { $cond: [ { $eq: [ "$status", failDeliveryStatus ] }, 1, 0 ] } },
+                    totalSuccess: { $sum: { $cond: [ { $eq: [ "$status", successDeliveryStatus ] }, 1, 0 ] } }
+                }},
+                { $project: { _id: 0 } }
+            ]).exec())[0]   ;
+        }
+        res.json(result);
     }
 }
 

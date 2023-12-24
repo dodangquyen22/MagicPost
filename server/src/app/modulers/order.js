@@ -1,6 +1,11 @@
 const { Timestamp, Int32 } = require('mongodb')
 const mongoose = require('mongoose')
 
+const successDeliveryStatus = "success";
+const failDeliveryStatus = "fail";
+const shippingStatus = "shipping";
+const confirmedStatus = "confirmed";
+
 // Lưu thông tin các đơn vận chuyển 
 const orderSchema = new mongoose.Schema({
     id: {
@@ -44,3 +49,7 @@ const orderSchema = new mongoose.Schema({
 
 const order = mongoose.model('order', orderSchema);
 module.exports = order
+module.exports.successDeliveryStatus = successDeliveryStatus;
+module.exports.failDeliveryStatus = failDeliveryStatus;
+module.exports.shippingStatus = shippingStatus;
+module.exports.confirmedStatus = confirmedStatus
