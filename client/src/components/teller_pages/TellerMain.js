@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import RecordTransaction from './RecordTransaction';
 import './styles/tellermain.css';
 import ConfirmReturn from './ConfirmReturn';
+import ConfirmOrder from './ConfirmOrder';
 
 const TransactionPage = () => {
   const [selectedTab, setSelectedTab] = useState('record'); // Tab mặc định
@@ -64,7 +65,7 @@ const TransactionPage = () => {
             {selectedTab === 'createOrder' && (
               // Giao diện cho chức năng Tạo Đơn Chuyển Hàng
               <div>
-                {/* ... */}
+                <ConfirmOrder />
               </div>
             )}
             {selectedTab === 'confirmReturn' && (
