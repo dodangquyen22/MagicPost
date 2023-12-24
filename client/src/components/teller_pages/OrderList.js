@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from '../bar/Navbar';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -10,15 +11,32 @@ const ProductList = () => {
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const [showActionsMenu, setShowActionsMenu] = useState(false);
+  const [orders, setOrders] = useState([]);
 
+  // Temporaly fixed id
+  var pointID = 25;
 
   // Giả sử bạn có một danh sách các đơn hàng
-  const orders = [
-    { id: 1, status: "Successful", printed: true },
-    { id: 2, status: "Unsuccessful", printed: false },
-    { id: 3, status: "Cancelled", printed: false },
-    // Thêm các đơn hàng khác tùy ý
-  ];
+  // const orders = [
+  //   { id: 1, status: "Successful", printed: true },
+  //   { id: 2, status: "Unsuccessful", printed: false },
+  //   { id: 3, status: "Cancelled", printed: false },
+  //   // Thêm các đơn hàng khác tùy ý
+  // ];
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:3000/order/?pointID=' + pointID); 
+        console.log(response.data);
+        setOrders(response.data); // Assuming the response contains the array of orders
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
+  
+    fetchOrders();
+  }, []);
 
   // Lọc đơn hàng dựa trên trạng thái
   const filteredOrders = orders.filter(order => {

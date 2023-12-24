@@ -60,7 +60,7 @@ class orderController {
     // Lấy danh sách đơn hàng
     async getOrderList(req, res, next) {
         try {
-            const point_id = req.query.spotID;
+            const point_id = req.query.pointID;
             var queries = {};
             if (point_id) {
                 queries = {
