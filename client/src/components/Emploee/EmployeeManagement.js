@@ -105,6 +105,20 @@ const EmployeeManagement = () => {
           </div>
         )
         }
+        {role !== 'manager' && (
+          <div className="sidebar">
+            <ul>
+              <li>
+                <Link to="/employee">Quản Lý Nhân Viên</Link>
+              </li>
+              <li>
+                <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
+              </li>
+              <li><Link to="/">Log Out</Link></li>
+            </ul>
+          </div>
+        )
+        }
         <div className="content">
           <h1>Quản lý nhân viên</h1>
 

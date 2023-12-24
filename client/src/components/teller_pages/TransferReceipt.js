@@ -9,6 +9,13 @@ function TransferReceipt() {
     return (
         <div className='print-container'>
             <div className='print-content'>
+                <div className='logo-QR'>
+                    <img src="./images/logo.png" className='logo' alt="logo" />
+                    <div className='QRcode'>
+                        <div className='QR'>QR</div>
+                        <div className='ID'>Mã đơn hàng: </div>
+                    </div>
+                </div>
 
                 <table>
                     <tbody>
