@@ -47,5 +47,25 @@ td:nth-last-child(1) {
     width: 20%;
 }
 
+.logo-QR {
+    display: flex;
+}
+
+.logo {
+    margin-left: 50px;
+    margin-top: 20px;
+    width: 150px;
+    height: 150px;
+}
+
+.QRcode {
+    margin: 50px 150px 0 auto;
+    display: block;
+}
+.QR {
+    width: 300px;
+    height: 100px;
+    border: 1px solid #000;
+}
 
   

@@ -93,6 +93,20 @@ const TransactionPoint = () => {
           </div>
         )
         }
+      {role !== 'manager' && (
+          <div className="sidebar">
+            <ul>
+              <li>
+                <Link to="/employee">Quản Lý Nhân Viên</Link>
+              </li>
+              <li>
+                <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
+              </li>
+              <li><Link to="/">Log Out</Link></li>
+            </ul>
+          </div>
+        )
+        }
         <div className="content">
           <h1>Thống Kê Đơn Hàng</h1>
           <div className="tab-container">
@@ -163,7 +177,7 @@ const TransactionPoint = () => {
                   <th>Ngày Lập</th>
                   <th>Thu Hộ</th>
                   <th>Tổng Cước</th>
-                  <th>In/Chưa In</th>
+                  <th>Xác Nhận</th>
                 </tr>
               </thead>
               <tbody>
