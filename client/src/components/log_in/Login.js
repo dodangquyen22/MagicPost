@@ -1,14 +1,16 @@
 // src/components/Login.js
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import './login.css';
+import AuthContext from '../variable/AuthContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { setRole } = useContext(AuthContext);
 
 
   const handleSubmit = async(event) => {
@@ -25,6 +27,7 @@ const Login = () => {
       const data = await response.json();
       console.log(data)
       if (response.ok) {
+        setRole(data.role);
         if (data.role === "manager") {
           navigate('/dashboard');
         }
@@ -89,7 +92,6 @@ const Login = () => {
       <div className="d-grid">
         <button type="submit" className="btn btn-primary">Submit</button>
       </div>
-      {error ? <p style={{color: 'red'}}>{error}</p> : null}
       <p className="forgot-password text-right">
         Forgot <a href="#">password?</a>
       </p>

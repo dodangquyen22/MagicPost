@@ -22,12 +22,11 @@ const TransactionPage = () => {
               <Link to="/tellermain">Trang Giao Dịch</Link>
             </li>
             <li>
-              <Link to="/orderlist">Thống Kê Đơn Hàng</Link>
+              <Link to="/tellermain/orderlist">Thống Kê Đơn Hàng</Link>
             </li>
             <li>
               <Link to="/">Log Out</Link>
             </li>
-            <li><Link to="/transferreceipt">In đơn hàng</Link></li>
           </ul>
         </div>
         <div className="content">
