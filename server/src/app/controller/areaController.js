@@ -32,7 +32,6 @@ class areaController {
             const points = await Point.find({ type: "transaction" });
             const pointIds = points.map(point => point.idArea);
             const areas = await area.find({ transactionPointID: { $in: pointIds } });
-    
             res.json({ areas, points });
         } catch (error) {
             next(error);

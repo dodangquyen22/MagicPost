@@ -1,6 +1,8 @@
-const User = require('../modulers/user')
-const bcrypt = require("bcrypt")
-const removeVietnameseTones = require("../../utils/convertVietNam")
+const User = require('../modulers/user');
+const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
+const removeVietnameseTones = require("../../utils/convertVietNam");
+const dotenv = require('dotenv').config();
 
 class userController{
 
@@ -31,9 +33,10 @@ class userController{
        }   
     }
     async login(req, res, next) {
+        const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
+        console.log(accessTokenSecret)
         try {
             const user = await User.findOne({ username: req.body.username });
-            const role = req.body.role;
             if (!user) {
                 // res.redirect('/');
                 return;
@@ -42,12 +45,12 @@ class userController{
             const validPassword = await bcrypt.compare(req.body.password, user.password);
     
             if (validPassword) {
-                res.cookie("uid", user.id);
-                console.log(user.id)
+                const token = jwt.sign({ username: user.username, role: user.role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
                 // res.redirect('/');
                 res.status(200).json({
                     message:"Đăng nhập thành công",
-                    role: user.role
+                    role: user.role,
+                    token: token,
                 });
                 return;
             }
@@ -70,13 +73,21 @@ class userController{
 
     }
     //Lấy danh sách tài khoản
+
+    constructor() {
+        this.getAccounts = this.getAccounts.bind(this);
+        this.leaderGetAccounts = this.leaderGetAccounts.bind(this);
+        this.warehouseLeaderGetAccounts = this.warehouseLeaderGetAccounts.bind(this);
+        this.pointLeaderGetAccounts = this.pointLeaderGetAccounts.bind(this);
+    }
     getAccounts(req, res, next) {
+        console.log(req.body.role)
         // Add your code here to get the account list
         if (req.body.role == "manager") {
             return this.leaderGetAccounts(req, res, next);
         }
         if(req.body.role == "warehouse leader") {
-            return warehouseLeaderGetAccounts(req, res, next)
+            return this.warehouseLeaderGetAccounts(req, res, next)
         }
         if(req.body.role == "point leader") {
             return this.pointLeaderGetAccounts(req, res, next);
@@ -86,7 +97,8 @@ class userController{
     async leaderGetAccounts(req, res, next) {
         try {
             const users = await User.find({ $or: [{ role: "warehouse leader" }, { role: "point leader" }] });
-            res.json(users); 
+            //console.log(users)
+            res.status(200).json(users); //res.json(users); 
         } catch (error) {
             next(error);
         }
