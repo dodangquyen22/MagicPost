@@ -1,6 +1,5 @@
 const area = require("../modulers/area");
 const User = require("../modulers/user");
-const area = require("../modulers/area");
 const bcrypt = require("bcrypt");
 const removeVietnameseTones = require("../../utils/convertVietNam");
 const Point = require("../modulers/point");
