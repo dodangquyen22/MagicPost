@@ -86,7 +86,7 @@ class userController{
     async leaderGetAccounts(req, res, next) {
         try {
             const users = await User.find({ $or: [{ role: "warehouse leader" }, { role: "point leader" }] });
-            res.json(users);
+            res.json(users); 
         } catch (error) {
             next(error);
         }
@@ -108,6 +108,19 @@ class userController{
         } catch (error) {
             next(error);
         }
+    }
+
+    // Cập nhật thông tin
+    async updateInfo(req, res, next) {
+        try {
+            const username = req.params.username;
+            const updates = req.body;
+            const user = await User.findByIdAndUpdate(username, updates, { new: true });
+            res.status(200).json(user);
+        } catch(error) {
+            res.status(500).json({ error: "Lỗi khi cập nhật thông tin" });
+        }
+        
     }
 }
 module.exports = new userController()

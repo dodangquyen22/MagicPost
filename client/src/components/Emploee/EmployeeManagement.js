@@ -1,10 +1,10 @@
 // src/components/EmployeeManagement.js
 import './employee.css';
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../bar/Navbar';
 import Modal from 'react-modal';
 import { Outlet, Link } from "react-router-dom";
+import axios from 'axios';
 
 const EmployeeManagement = () => {
   const [employees, setEmployees] = useState([
@@ -12,6 +12,19 @@ const EmployeeManagement = () => {
     { id: 2, name: 'Tran Thi B', position: 'Nhân Viên Giao Hàng', gender: 'Nữ' },
     // Thêm nhân viên khác tùy ý
   ]);
+
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/users'); // Update the URL with your actual API endpoint
+        setEmployees(response.data);
+      } catch (error) {
+        console.error('Error fetching employees:', error);
+      }
+    };
+
+    fetchEmployees();
+  }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState({ id: null, name: '', position: '', gender: '' });

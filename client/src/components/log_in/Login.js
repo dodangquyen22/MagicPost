@@ -10,7 +10,6 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-
   const handleSubmit = async(event) => {
     event.preventDefault();
     try {
@@ -34,18 +33,6 @@ const Login = () => {
     } catch (error) {
       setError('An error occurred. Please try again.');
     }
-
-    // Kiểm tra thông tin đăng nhập
-    // if (username === "admin" && password === "admin") {
-    //   // Đăng nhập thành công, chuyển hướng sang Dashboard
-    //   navigate('/dashboard');
-    // } else if (username === "admin1" && password === "admin1") {
-    //   // Đăng nhập thành công, chuyển hướng sang Dashboard
-    //   navigate('/tellermain');
-    // } else {
-    //   // Đăng nhập thất bại, hiển thị thông báo lỗi
-    //   setError("Invalid username or password");
-    // }
   };
 
   return (
