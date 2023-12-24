@@ -4,6 +4,7 @@ const router = express.Router();
 const userController = require("../app/controller/userController")
 const { authenticateUser } = require('../middleware/authentication');
 const areaController = require('../app/controller/areaController');
+const { route } = require('./area');
 
 
 //Hệ thống các điểm giao dịch và điểm tập kết
@@ -13,11 +14,14 @@ router.get('/province', areaController.getProvinceList);
 router.get("/district", areaController.getDistrictList);
 
 
-//Danh sách các tài khoản trưởng điểm tập kết và dao dịch
-router.get('/listAcount', authenticateUser('manager'), userController.getAccounts)
-//Sửa thông tin của trưởng điểm tập kết và giao dịch [Viết sau]
+router.get("/pointTransaction",authenticateUser('manager'), areaController.getPointTransaction);
+router.get("/pointWarehouse",authenticateUser('manager'), areaController.getPointWarehouse);
 
-//Cấp tài khoản cho nhân viên
+
+//Danh sách các tài khoản trưởng điểm tập kết và dao dịch
+router.get('/listAcount', authenticateUser('manager'), userController.getAccounts);
+//Sửa thông tin của trưởng điểm tập kết và giao dịch [Viết sau]
+router.post("/updateInfo", authenticateUser('manager'),userController.updateInfo);
 
 //Thống kê[]
 
