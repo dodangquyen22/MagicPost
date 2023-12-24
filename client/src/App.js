@@ -17,6 +17,7 @@ import ManageTransactionPoints from './components/Manager_page/ManageTransaction
 import axios from 'axios';
 import ManageWarehouse from './components/Manager_page/ManageWarehouse';
 import WareHouse from './components/manager_warehouse/Warehouse';
+import WarehouseStaff from './components/warehouse_staff/WarehouseStaff';
 
 function App() {
 
@@ -43,6 +44,8 @@ function App() {
           <Route path="/transactionpoint" element={<TransactionPoint />} />
           {/* trưởng điểm tập kết */}
           <Route path='/warehouse' element={<WareHouse />}></Route>
+          {/* nhân viên điểm tập kết */}
+          <Route path='/warehousestaff' element={<WarehouseStaff  />}></Route>  
           {/* <Route path="/profile" element={<Profile />} /> */}
           {/* quản lí điểm giao dịch admin */}
           <Route path="/managetranspoints" element={<ManageTransactionPoints />} />

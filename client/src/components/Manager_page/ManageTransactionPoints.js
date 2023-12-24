@@ -47,6 +47,19 @@ const ManageTransactionPoints = () => {
         // Add more transaction points as needed
     ]);
 
+    // useEffect(() => {
+    //     const fetchTransactionPoints = async () => {
+    //         try {
+    //             const response = await axios.get('http://localhost:3000/pointTransaction'); // Update the URL with your actual API endpoint
+    //             setTransactionPoints(response.data.points);
+    //         } catch (error) {
+    //             console.error('Error fetching transaction points:', error);
+    //         }
+    //     };
+
+    //     fetchTransactionPoints();
+    // }, []);
+
 
 
     const itemsPerPage = 5;
