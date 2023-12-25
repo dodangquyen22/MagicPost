@@ -1,12 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../bar/Navbar';
-import { Link } from 'react-router-dom';
-import AuthContext from '../variable/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import Sidebar from '../bar/Sidebar';
 
 const TransactionPoint = () => {
-  const { role } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState("all");
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -70,43 +68,7 @@ const TransactionPoint = () => {
     <div className="transaction-container">
       <Navbar />
       <div className="content-container">
-      {role === 'manager' && (
-          <div className="sidebar">
-            <ul>
-              <li>
-                <Link to="/dashboard">Tổng Quát</Link>
-              </li>
-              <li>
-                <Link to="/employee">Quản Lý Nhân Viên</Link>
-              </li>
-              <li>
-                <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
-              </li>
-              <li>
-                <Link to="/managetranspoints">Quản Lý Điểm Giao Dịch</Link>
-              </li>
-              <li>
-                <Link to="/managewarehouse">Quản Lý Điểm Tập Kết</Link>
-              </li>
-              <li><Link to="/">Log Out</Link></li>
-            </ul>
-          </div>
-        )
-        }
-      {role !== 'manager' && (
-          <div className="sidebar">
-            <ul>
-              <li>
-                <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
-              </li>
-              <li>
-                <Link to="/employee">Quản Lý Nhân Viên</Link>
-              </li>
-              <li><Link to="/">Log Out</Link></li>
-            </ul>
-          </div>
-        )
-        }
+        <Sidebar />
         <div className="content">
           <h1>Thống Kê Đơn Hàng</h1>
           <div className="tab-container">

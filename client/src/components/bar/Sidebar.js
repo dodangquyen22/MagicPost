@@ -28,7 +28,7 @@ const Sidebar = () => {
                         <li>
                             <Link to="/managewarehouse">Quản Lý Điểm Tập Kết</Link>
                         </li>
-                        <li><Link to="/">Log Out</Link></li>
+                        
                     </ul>
                 </div>
             )
@@ -42,7 +42,7 @@ const Sidebar = () => {
                         <li>
                             <Link to="/employee">Quản Lý Nhân Viên</Link>
                         </li>
-                        <li><Link to="/">Log Out</Link></li>
+                        
                     </ul>
                 </div>
             )
@@ -56,7 +56,7 @@ const Sidebar = () => {
                         <li>
                             <Link to="/employee">Quản Lý Nhân Viên</Link>
                         </li>
-                        <li><Link to="/">Log Out</Link></li>
+                        
                     </ul>
                 </div>
             )
