@@ -4,7 +4,10 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import './login.css';
 import AuthContext from '../variable/AuthContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'js-cookie';
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -12,8 +15,10 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { setRole } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = async(event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await fetch('http://localhost:3000/login', {
@@ -21,7 +26,7 @@ const Login = () => {
         headers:
         {
           'Content-Type': 'application/json',
-        },  
+        },
         body: JSON.stringify({ username, password }),
       })
       const data = await response.json();
@@ -43,7 +48,7 @@ const Login = () => {
           navigate('/transactionpoint');
         } else if (data.role === "point staff") {
           navigate('/tellermain');
-        } else if(data.role === "warehouse staff") {
+        } else if (data.role === "warehouse staff") {
           navigate('/admin');
         } else {
           navigate('/user');
@@ -55,6 +60,11 @@ const Login = () => {
       setError('An error occurred. Please try again.');
     }
   };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
 
   return (
     <form className="login" onSubmit={handleSubmit}>
@@ -73,15 +83,24 @@ const Login = () => {
       </div>
       <div className="mb-3">
         <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          className="form-control"
-          placeholder="Enter password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
+        <div className="password-input-container">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            name="password"
+            className="form-control"
+            placeholder="Enter password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <label
+            className="toggle-password-btn"
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
+          </label>
+        </div>
       </div>
+
 
       <div className="mb-3">
         <div className="custom-control custom-checkbox">
@@ -95,7 +114,7 @@ const Login = () => {
       </div>
       {error && <div className="alert alert-danger">{error}</div>}
       <div className="d-grid">
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary">Đăng Nhập</button>
       </div>
       <p className="forgot-password text-right">
         Forgot <a href="#">password?</a>

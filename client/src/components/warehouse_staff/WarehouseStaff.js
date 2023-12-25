@@ -15,25 +15,28 @@ const WarehouseStaff = () => {
 
     // Giả sử bạn có một danh sách các đơn hàng
     const [orders, setOrder] = useState([
-        { id: 1, status: "Successful", confirm: 'newOrder' },
-        { id: 2, status: "Unsuccessful", confirm: '' },
-        { id: 3, status: "Cancelled", confirm: '' },
+        { id: 1, status: "Chuyển Thành Công", confirm: '' },
+        { id: 2, status: "Chuyển Thất Bại", confirm: '' },
+        { id: 3, status: "Đã Huỷ Đơn", confirm: '' },
+        { id: 4, status: "Còn Trong Kho", confirm: 'newOrder' },
         // Thêm các đơn hàng khác tùy ý
     ]);
 
     // Lọc đơn hàng dựa trên trạng thái
-    // let filteredOrders = orders.filter(order => {
-    //     switch (activeTab) {
-    //         case "successful":
-    //             return order.status === "Successful";
-    //         case "unsuccessful":
-    //             return order.status === "Unsuccessful";
-    //         case "cancelled":
-    //             return order.status === "Cancelled";
-    //         default:
-    //             return true; // Hiển thị tất cả các đơn hàng nếu không có tab nào được chọn
-    //     }
-    // });
+    let filteredOrders = orders.filter(order => {
+        switch (activeTab) {
+            case "successful":
+                return order.status === "Chuyển Thành Công";
+            case "unsuccessful":
+                return order.status === "Chuyển Thất Bại";
+            case "cancelled":
+                return order.status === "Đã Huỷ Đơn";
+            case "inWarehouse":
+                return order.status === "Còn Trong Kho";
+            default:
+                return true; // Hiển thị tất cả các đơn hàng nếu không có tab nào được chọn
+        }
+    });
 
     const handleCheckboxChange = (orderId) => {
         const isSelected = selectedOrders.includes(orderId);
@@ -68,22 +71,51 @@ const WarehouseStaff = () => {
 
     const handlePrint = () => {
         console.log('print');
+        setSelectedOrders([]);
+        setShowActionsMenu(false);
+        setSelectAll(false);
     }
 
     const handleEdit = () => {
         console.log('edit');
+        setSelectedOrders([]);
+        setShowActionsMenu(false);
+        setSelectAll(false);
     }
 
     const handleCreateOrder = () => {
         console.log('createOrder');
+        setSelectedOrders([]);
+        setShowActionsMenu(false);
+        setSelectAll(false);
+    }
+
+    const handleCreateOrderNext = () => {
+        console.log('createOrderNext');
+        setSelectedOrders([]);
+        setShowActionsMenu(false);
+        setSelectAll(false);
+    }
+
+    const handleReturn = () => {
+        console.log('return');
+        setSelectedOrders([]);
+        setShowActionsMenu(false);
+        setSelectAll(false);
     }
 
     const handleCopy = () => {
         console.log('copy');
+        setSelectedOrders([]);
+        setShowActionsMenu(false);
+        setSelectAll(false);
     }
 
     const handleDelete = () => {
         console.log('delete');
+        setSelectedOrders([]);
+        setShowActionsMenu(false);
+        setSelectAll(false);
     }
 
 
@@ -129,6 +161,36 @@ const WarehouseStaff = () => {
                 <div className="content">
                     <h1>Thống Kê Đơn Hàng</h1>
                     <div className="tab-container">
+                        <button
+                            className={activeTab === "all" ? "active" : ""}
+                            onClick={() => setActiveTab("all")}
+                        >
+                            Tất Cả
+                        </button>
+                        <button
+                            className={activeTab === "inWarehouse" ? "active" : ""}
+                            onClick={() => setActiveTab("inWarehouse")}
+                        >
+                            Đơn Hàng Trong Kho
+                        </button>
+                        <button
+                            className={activeTab === "successful" ? "active" : ""}
+                            onClick={() => setActiveTab("successful")}
+                        >
+                            Vận Chuyển Thành Công
+                        </button>
+                        <button
+                            className={activeTab === "unsuccessful" ? "active" : ""}
+                            onClick={() => setActiveTab("unsuccessful")}
+                        >
+                            Vận Chuyển Không Thành Công
+                        </button>
+                        <button
+                            className={activeTab === "cancelled" ? "active" : ""}
+                            onClick={() => setActiveTab("cancelled")}
+                        >
+                            Đã Hủy
+                        </button>
                         {selectedOrders.length > 0 && (
                             <button>
                                 <div className="actions-container">
@@ -138,12 +200,14 @@ const WarehouseStaff = () => {
                                         </div>
                                         {showActionsMenu && (
                                             <div className="actions-select">
-                                                <div onClick={() => handleAction('print')}>In đơn</div>
-                                                <div onClick={() => handleAction('edit')}>Chỉnh Sửa Đơn</div>
+                                                <div onClick={() => handlePrint('print')}>In đơn</div>
+                                                <div onClick={() => handleEdit('edit')}>Chỉnh Sửa Đơn</div>
                                                 {/* <div onClick={() => handleAction('changeStatus')}>Thay Đổi Trạng Thái In</div> */}
-                                                <div onClick={() => handleAction('createOrder')}>Tạo Đơn Chuyển Hàng</div>
-                                                <div onClick={() => handleAction('copy')}>Copy Hoá Đơn </div>
-                                                <div onClick={() => handleAction('delete')}>Xoá Đơn</div>
+                                                <div onClick={() => handleCreateOrder('createOrder')}>Tạo Đơn Đến Điểm Giao Dịch</div>
+                                                <div onClick={() => handleCreateOrderNext('createOrderNext')}>Tạo Đơn Đến Điểm Tập Kết Tiếp </div>
+                                                <div onClick={() => handleReturn('return')}>Trả Hàng</div>
+                                                <div onClick={() => handleCopy('copy')}>Copy Hoá Đơn </div>
+                                                <div onClick={() => handleDelete('delete')}>Xoá Đơn</div>
                                             </div>
                                         )}
                                     </div>
@@ -174,11 +238,11 @@ const WarehouseStaff = () => {
                                     <th>Ngày Lập</th>
                                     <th>Thu Hộ</th>
                                     <th>Tổng Cước</th>
-                                    <th>Xác Nhận Đơn</th>
+                                    <th>Xác Nhận Nhập Đơn</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {orders.map(order => (
+                                {filteredOrders.map(order => (
                                     <tr key={order.id}>
                                         <td>
                                             <input
@@ -202,8 +266,8 @@ const WarehouseStaff = () => {
                                         <td>
                                             {order.confirm === 'newOrder' && (
                                                 <button className="confirm-btn">Xác Nhận</button>
-                                            )}    
-                                            
+                                            )}
+
                                         </td>
                                     </tr>
                                 ))}

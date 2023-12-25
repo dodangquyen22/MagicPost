@@ -14,22 +14,25 @@ const ProductList = () => {
 
 
   // Giả sử bạn có một danh sách các đơn hàng
-  const orders = [
-    { id: 1, status: "Successful", printed: true },
-    { id: 2, status: "Unsuccessful", printed: false },
-    { id: 3, status: "Cancelled", printed: false },
+  const [orders, setOrder] = useState([
+    { id: 1, status: "Chuyển Thành Công", confirm: '' },
+    { id: 2, status: "Chuyển Thất Bại", confirm: '' },
+    { id: 3, status: "Đã Huỷ Đơn", confirm: '' },
+    { id: 4, status: "Còn Trong Kho", confirm: 'newOrder' },
     // Thêm các đơn hàng khác tùy ý
-  ];
+  ]);
 
   // Lọc đơn hàng dựa trên trạng thái
-  const filteredOrders = orders.filter(order => {
+  let filteredOrders = orders.filter(order => {
     switch (activeTab) {
       case "successful":
-        return order.status === "Successful";
+        return order.status === "Chuyển Thành Công";
       case "unsuccessful":
-        return order.status === "Unsuccessful";
+        return order.status === "Chuyển Thất Bại";
       case "cancelled":
-        return order.status === "Cancelled";
+        return order.status === "Đã Huỷ Đơn";
+      case "inWarehouse":
+        return order.status === "Còn Trong Kho";
       default:
         return true; // Hiển thị tất cả các đơn hàng nếu không có tab nào được chọn
     }
@@ -66,6 +69,55 @@ const ProductList = () => {
     setSelectAll(false);
   };
 
+  const handlePrint = () => {
+    console.log('print');
+    setSelectedOrders([]);
+    setShowActionsMenu(false);
+    setSelectAll(false);
+  }
+
+  const handleEdit = () => {
+    console.log('edit');
+    setSelectedOrders([]);
+    setShowActionsMenu(false);
+    setSelectAll(false);
+  }
+
+  const handleCreateOrder = () => {
+    console.log('createOrder');
+    setSelectedOrders([]);
+    setShowActionsMenu(false);
+    setSelectAll(false);
+  }
+
+  const handleCreateOrderReceiver = () => {
+    console.log('createOrderReceiver');
+    setSelectedOrders([]);
+    setShowActionsMenu(false);
+    setSelectAll(false);
+  }
+
+  const handleReturn = () => {
+    console.log('return');
+    setSelectedOrders([]);
+    setShowActionsMenu(false);
+    setSelectAll(false);
+  }
+
+  const handleCopy = () => {
+    console.log('copy');
+    setSelectedOrders([]);
+    setShowActionsMenu(false);
+    setSelectAll(false);
+  }
+
+  const handleDelete = () => {
+    console.log('delete');
+    setSelectedOrders([]);
+    setShowActionsMenu(false);
+    setSelectAll(false);
+  }
+
 
   return (
     <div className="order-container">
@@ -80,6 +132,12 @@ const ProductList = () => {
               onClick={() => setActiveTab("all")}
             >
               Tất Cả
+            </button>
+            <button
+              className={activeTab === "inWarehouse" ? "active" : ""}
+              onClick={() => setActiveTab("inWarehouse")}
+            >
+              Đơn Hàng Trong Kho
             </button>
             <button
               className={activeTab === "successful" ? "active" : ""}
@@ -108,11 +166,14 @@ const ProductList = () => {
                     </div>
                     {showActionsMenu && (
                       <div className="actions-select">
-                        <div onClick={() => handleAction('print')}>In đơn</div>
-                        <div onClick={() => handleAction('edit')}>Chỉnh Sửa Đơn</div>
-                        <div onClick={() => handleAction('changeStatus')}>Thay Đổi Trạng Thái In</div>
-                        <div onClick={() => handleAction('copy')}>Copy Hoá Đơn </div>
-                        <div onClick={() => handleAction('delete')}>Xoá Đơn</div>
+                        <div onClick={() => handlePrint('print')}>In đơn</div>
+                        <div onClick={() => handleEdit('edit')}>Chỉnh Sửa Đơn</div>
+                        {/* <div onClick={() => handleAction('changeStatus')}>Thay Đổi Trạng Thái In</div> */}
+                        <div onClick={() => handleCreateOrder('createOrder')}>Tạo Đơn Đến Điểm Tập Kết</div>
+                        <div onClick={() => handleCreateOrderReceiver('createOrderReceiver')}>Tạo Đơn Đến Người Nhận</div>
+                        <div onClick={() => handleReturn('return')}>Trả Hàng</div>
+                        <div onClick={() => handleCopy('copy')}>Copy Hoá Đơn </div>
+                        <div onClick={() => handleDelete('delete')}>Xoá Đơn</div>
                       </div>
                     )}
                   </div>
@@ -142,7 +203,7 @@ const ProductList = () => {
                   <th>Ngày Lập</th>
                   <th>Thu Hộ</th>
                   <th>Tổng Cước</th>
-                  <th>Xác Nhận Thành Công</th>
+                  <th>Xác Nhận Giao Thành Công</th>
                 </tr>
               </thead>
               <tbody>
@@ -165,7 +226,10 @@ const ProductList = () => {
                     <td></td>
                     <td></td>
                     <td>
-                      <button>Xác Nhận</button>
+                      {order.confirm === 'newOrder' && (
+                        <button className="confirm-btn">Xác Nhận</button>
+                      )}
+
                     </td>
                   </tr>
                 ))}
