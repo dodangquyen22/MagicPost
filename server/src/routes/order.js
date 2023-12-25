@@ -6,7 +6,7 @@ router.get('/', orderController.getOrderList);
 
 router.post('/create', orderController.createOrder);
 
-router.get('/confirm/:orderID', orderController.confirmOrder);
+router.get('/confirm', orderController.confirmOrder);
 
 router.get('/statistics', orderController.statistics);
 

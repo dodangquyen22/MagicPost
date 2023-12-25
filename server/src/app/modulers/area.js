@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 
 const areaSchema = new mongoose.Schema({
     id: {
-        type: mongoose.Schema.Types.ObjectId
     },
     name: {
         type: String,

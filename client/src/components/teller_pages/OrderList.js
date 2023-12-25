@@ -38,6 +38,17 @@ const ProductList = () => {
     fetchOrders();
   }, []);
 
+  const handleConfirm = async (orderId) => {
+    try {
+      // Send the request here
+      const response = await axios.get('http://127.0.0.1:3000/order/confirm?orderID=' + orderId);
+      console.log('Confirm response:', response.data);
+      // Perform any necessary actions after the request is successful
+    } catch (error) {
+      console.error('Error confirming orders:', error);
+    }
+  };
+
   // Lọc đơn hàng dựa trên trạng thái
   const filteredOrders = orders.filter(order => {
     switch (activeTab) {
@@ -194,7 +205,7 @@ const ProductList = () => {
                     <td></td>
                     <td></td>
                     <td>
-                      <button>Xác Nhận</button>
+                    <button onClick={() => handleConfirm(order.id)}>Xác nhận</button>
                     </td>
                   </tr>
                 ))}

@@ -13,9 +13,11 @@ function route(app) {
   app.use("/manager",manager)
   app.use("/warehouseLeader",warehouseLeader)
   app.use("/pointLeader", pointLeader)
-  app.use("/order", orderRouter)
-  app.use("/track", trackRouter)
   app.use("/package", packageRouter)
+  app.use("/order", orderRouter)
+  // app.use("/warehouseStaff", )
+  // app.use("/transactionPointStaff", )
+  app.use("/track", trackRouter)
   app.use("/", areaRouter);
 }
 
