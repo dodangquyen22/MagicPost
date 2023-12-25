@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import './managetrans.css';
 import Chart from 'react-apexcharts';
 import Modal from 'react-modal';
+import Sidebar from '../bar/Sidebar';
+import axios from 'axios';
 
 
 

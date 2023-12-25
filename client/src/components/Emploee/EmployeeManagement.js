@@ -4,11 +4,28 @@ import React, { useState, useEffect, useContext } from 'react';
 import Navbar from '../bar/Navbar';
 import Modal from 'react-modal';
 import { Outlet, Link } from "react-router-dom";
-import axios from 'axios';
 import Sidebar from '../bar/Sidebar';
+import axios from 'axios';
 
 const EmployeeManagement = () => {
-  const { role } = useContext(AuthContext);
+  const [username, setUsername] = useState([]);
+  useEffect(() => {
+    const token =  localStorage.getItem('token');
+    console.log(token);
+    axios.get('http://localhost:3000/manager/listAcount', {
+        headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        body: JSON.stringify({role: "manager"}),
+        })
+        .then((response) => {
+            const users = response.data;
+            setUsername(users);
+        })
+        .catch((error) => {
+
+        })
+}, []);
   const [employees, setEmployees] = useState([
     { id: 1, name: 'Nguyen Van A', account: 'A123', password: 'A123', position: 'Giao Dịch Viên', gender: 'Nam' },
     { id: 2, name: 'Tran Thi B', position: 'Nhân Viên Giao Hàng', account: 'B123', password: 'B123', gender: 'Nữ' },
