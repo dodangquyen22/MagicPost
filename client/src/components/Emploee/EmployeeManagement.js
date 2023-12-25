@@ -142,9 +142,9 @@ const EmployeeManagement = () => {
         <div className="content">
           <h1>Quản lý nhân viên</h1>
 
-          <div>
+          {/* <div>
             <button onClick={() => openModal()}>Thêm Nhân Viên</button>
-          </div>
+          </div> */}
 
           <div className='employee-list'>
             <table>

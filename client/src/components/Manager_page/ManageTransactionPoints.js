@@ -10,6 +10,8 @@ import Sidebar from '../bar/Sidebar';
 
 const ManageTransactionPoints = () => {
 
+    const [areas, setAreas] = useState([]);
+    const [points, setPoints] = useState([]);
 
     useEffect(() => {
         const token =  localStorage.getItem('token');
@@ -20,9 +22,11 @@ const ManageTransactionPoints = () => {
               },
             })
             .then((response) => {
-                const areas = response.data.areas;
-                const points = response.data.points;
-                console.log(areas);
+                const areas = response.areas;
+                const points = response.points;
+                setAreas(areas);
+                setPoints(points);
+                //console.log(areas);
             })
             .catch((error) => {
                 
