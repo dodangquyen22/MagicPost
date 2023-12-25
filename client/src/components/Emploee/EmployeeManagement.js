@@ -8,11 +8,13 @@ import axios from 'axios';
 import Sidebar from '../bar/Sidebar';
 
 const EmployeeManagement = () => {
+  const { role } = useContext(AuthContext);
   const [employees, setEmployees] = useState([
     { id: 1, name: 'Nguyen Van A', account: 'A123', password: 'A123', position: 'Giao Dịch Viên', gender: 'Nam' },
     { id: 2, name: 'Tran Thi B', position: 'Nhân Viên Giao Hàng', account: 'B123', password: 'B123', gender: 'Nữ' },
     // Thêm nhân viên khác tùy ý
   ]);
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState({ id: null, name: '', account: '', password: '', position: '', gender: '' });
@@ -135,16 +137,20 @@ const EmployeeManagement = () => {
                   <th>Tên Nhân Viên</th>
                   <th>Chức Vụ</th>
                   <th>Giới Tính</th>
+                  <th>Tỉnh/Thành phố</th>
+                  <th>Quận/Huyện</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                {employees.map((employee) => (
+                {username.map((employee) => (
                   <tr key={employee.id}>
                     <td>{employee.id}</td>
                     <td><Link to={`/profile/${employee.id}`}>{employee.name}</Link></td>
-                    <td>{employee.position}</td>
+                    <td>{employee.role}</td>
                     <td>{employee.gender}</td>
+                    <td>{employee.province}</td>
+                    <td>{employee.district}</td>
                     <td>
                       <button onClick={() => openModal(employee)}>
                         Sửa

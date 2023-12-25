@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../bar/Navbar';
 import { Link } from 'react-router-dom';
 import './managetrans.css';
@@ -8,8 +8,27 @@ import axios from 'axios';
 import Sidebar from '../bar/Sidebar';
 
 
-
 const ManageTransactionPoints = () => {
+
+
+    useEffect(() => {
+        const token =  localStorage.getItem('token');
+        console.log(token);
+        axios.get('http://localhost:3000/manager/pointTransaction', {
+            headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+            .then((response) => {
+                const areas = response.data.areas;
+                const points = response.data.points;
+                console.log(areas);
+            })
+            .catch((error) => {
+                
+            })
+    }, [])
+
     // State to manage transaction point data
     const [transactionPoints, setTransactionPoints] = useState([
         { id: 1, name: 'Điểm T', location: '123 Street, City', status: 'Hoạt động', order: [10, 20, 5], data: [500, 800, 700, 900, 1000] },
