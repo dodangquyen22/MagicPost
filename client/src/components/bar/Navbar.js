@@ -8,10 +8,10 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="brand">MagicPost</div>
-      <div className="search-box">
+      {/* <div className="search-box">
         <input type="text" placeholder="Search..." />
         <button type="button">Search</button>
-      </div>
+      </div> */}
       <div className="account">
         <div className="account-icon">
           <i className="fas fa-user-circle"></i>

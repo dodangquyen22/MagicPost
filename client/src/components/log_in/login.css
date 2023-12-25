@@ -68,3 +68,15 @@ h3 {
 .forgot-password a:hover {
   text-decoration: underline;
 }
+
+.password-input-container {
+  position: relative;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
