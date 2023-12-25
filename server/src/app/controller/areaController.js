@@ -64,11 +64,11 @@ class areaController {
             return res.status(400).json({ error: 'Điểm giao dịch này đã tồn tại' });
           }
         const user = new User({ username, password: hashedPassword,idArea: id, role });
-        const area = new area({transactionPointID: id, province: province, district: district});
-        const Point = new Point({address: address, idArea: id, type: "transaction"});
+        const areaa = new area({transactionPointID: id, province: province, district: district});
+        const point = new Point({address: address, idArea: id, type: "transaction"});
         await user.save();
-        await area.save();
-        await Point.save();
+        await areaa.save();
+        await point.save();
         res.status(200).json({message: 'Tạo điểm giao dịch thành công'})
     }
 
@@ -86,11 +86,11 @@ class areaController {
             return res.status(400).json({ error: 'Điểm giao dịch này đã tồn tại' });
           }
         const user = new User({ username, password: hashedPassword,idArea: id, role });
-        const area = new area({warehouseID: id, province: province, district: district});
-        const Point = new Point({address: address, idArea: id, type: "warehouse"});
+        const areaa = new area({warehouseID: id, province: province, district: district});
+        const point = new Point({address: address, idArea: id, type: "warehouse"});
         await user.save();
-        await area.save();
-        await Point.save();
+        await areaa.save();
+        await point.save();
         res.status(200).json({message: 'Tạo điểm tập kết thành công'})
     }
 

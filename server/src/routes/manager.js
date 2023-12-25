@@ -16,6 +16,8 @@ router.get("/district", areaController.getDistrictList);
 
 router.get("/pointTransaction",authenticateUser('manager'), areaController.getPointTransaction);
 router.get("/pointWarehouse",authenticateUser('manager'), areaController.getPointWarehouse);
+router.post("/createTransaction", areaController.createTransaction);
+router.post("/createWarehouse", areaController.createWarehouse);
 
 
 //Danh sách các tài khoản trưởng điểm tập kết và dao dịch

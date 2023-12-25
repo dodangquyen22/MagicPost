@@ -13,7 +13,7 @@ const point_Schema = new mongoose.Schema({
         required: true
     },
     pointLeaderID: {
-
+        
     },
     type: {
         type: String,
