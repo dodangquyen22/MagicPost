@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import './styles/orderlist.css';
+import Sidebar from "../bar/Sidebar";
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState("all");
@@ -70,19 +71,7 @@ const ProductList = () => {
     <div className="order-container">
       <Navbar />
       <div className="content-container">
-        <div className="sidebar">
-          <ul>
-            <li>
-              <Link to="/tellermain">Trang Giao Dịch</Link>
-            </li>
-            <li>
-              <Link to="/orderlist">Thống Kê Đơn Hàng</Link>
-            </li>
-            <li>
-              <Link to="/">Log Out</Link>
-            </li>
-          </ul>
-        </div>
+        <Sidebar />
         <div className="content">
           <h2>Quản lý Đơn Hàng</h2>
           <div className="tab-container">

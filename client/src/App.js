@@ -46,7 +46,7 @@ function App() {
           <Route path='/warehouse' element={<WareHouse />}></Route>
           {/* nhân viên điểm tập kết */}
           <Route path='/warehousestaff' element={<WarehouseStaff  />}></Route>  
-          {/* <Route path="/profile" element={<Profile />} /> */}
+          <Route path="/profile" element={<Profile />} />
           {/* quản lí điểm giao dịch admin */}
           <Route path="/managetranspoints" element={<ManageTransactionPoints />} />
           {/* quản lí điểm tập kết admin */}

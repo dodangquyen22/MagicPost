@@ -5,6 +5,7 @@ import RecordTransaction from './RecordTransaction';
 import './styles/tellermain.css';
 import ConfirmReturn from './ConfirmReturn';
 import ConfirmOrder from './ConfirmOrder';
+import Sidebar from '../bar/Sidebar';
 
 const TransactionPage = () => {
   const [selectedTab, setSelectedTab] = useState('record'); // Tab mặc định
@@ -17,19 +18,7 @@ const TransactionPage = () => {
     <div className="transaction-container">
       <Navbar />
       <div className="content-container">
-        <div className="sidebar">
-          <ul>
-            <li>
-              <Link to="/tellermain">Trang Giao Dịch</Link>
-            </li>
-            <li>
-              <Link to="/tellermain/orderlist">Thống Kê Đơn Hàng</Link>
-            </li>
-            <li>
-              <Link to="/">Log Out</Link>
-            </li>
-          </ul>
-        </div>
+        <Sidebar />
         <div className="content">
           <h1>Giao Dịch Viên</h1>
 

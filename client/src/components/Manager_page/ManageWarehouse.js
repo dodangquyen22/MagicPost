@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './managetrans.css';
 import Chart from 'react-apexcharts';
 import Modal from 'react-modal';
+import Sidebar from '../bar/Sidebar';
 
 
 
@@ -74,28 +75,7 @@ const ManageWarehouse = () => {
         <div className='container'>
             <Navbar />
             <div className='content-container'>
-                <div className="sidebar">
-                    <ul>
-                        <li>
-                            <Link to="/dashboard">Tổng Quát</Link>
-                        </li>
-                        <li>
-                            <Link to="/employee">Quản Lý Nhân Viên</Link>
-                        </li>
-                        <li>
-                            <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
-                        </li>
-                        <li>
-                            <Link to="/managetranspoints">Quản Lý Điểm Giao Dịch</Link>
-                        </li>
-                        <li>
-                            <Link to="/managewarehouse">Quản Lý Điểm Tập Kết</Link>
-                        </li>
-                        <li><Link to="/">Log Out</Link></li>
-                        {/* <li onClick={() => handleMenuClick('login')}>Đăng Xuất</li> */}
-                        {/* Thêm các mục menu khác tùy ý */}
-                    </ul>
-                </div>
+                <Sidebar />
                 <div className="trans-content">
                     <h1>Quản Lý Điểm tập kết</h1>
                     <div className='transpoint'>

@@ -4,6 +4,7 @@ import React from 'react';
 import Navbar from '../bar/Navbar';
 import { Outlet, Link } from "react-router-dom";
 import './Profile.css';
+import Sidebar from '../bar/Sidebar';
 
 const Profile = () => {
   // Thông tin người dùng
@@ -26,24 +27,7 @@ const Profile = () => {
     <div className="profile-container">
       <Navbar />
       <div className="content-container">
-        <div className="sidebar">
-          <ul>
-            <li>
-              if (user.position === 'Quản Lý') {
-              <Link to="/dashboard">Dashboard</Link>
-              } else if (user.position === 'Giao Dịch Viên') {
-              <Link to="/tellermain">Transaction Page</Link>
-              } else {
-                
-              }
-            </li>
-            <li>
-              <Link to="/employee">Quản Lý Nhân Viên</Link>
-            </li>
-            <li>Profile</li>
-            <li><Link to="/">Log Out</Link></li>
-          </ul>
-        </div>
+        <Sidebar />
         <div className="content">
           <h1>Thông Tin Cá Nhân</h1>
 

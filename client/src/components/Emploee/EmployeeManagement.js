@@ -1,14 +1,13 @@
 // src/components/EmployeeManagement.js
 import './employee.css';
-import AuthContext from '../variable/AuthContext';
 import React, { useState, useEffect, useContext } from 'react';
 import Navbar from '../bar/Navbar';
 import Modal from 'react-modal';
 import { Outlet, Link } from "react-router-dom";
 import axios from 'axios';
+import Sidebar from '../bar/Sidebar';
 
 const EmployeeManagement = () => {
-  const { role } = useContext(AuthContext);
   const [employees, setEmployees] = useState([
     { id: 1, name: 'Nguyen Van A', account: 'A123', password: 'A123', position: 'Giao Dịch Viên', gender: 'Nam' },
     { id: 2, name: 'Tran Thi B', position: 'Nhân Viên Giao Hàng', account: 'B123', password: 'B123', gender: 'Nữ' },
@@ -69,7 +68,8 @@ const EmployeeManagement = () => {
     <div className="employee-container">
       <Navbar />
       <div className="content-container">
-        {role === 'manager' && (
+        <Sidebar />
+        {/* {role === 'manager' && (
           <div className="sidebar">
             <ul>
               <li>
@@ -119,7 +119,7 @@ const EmployeeManagement = () => {
             </ul>
           </div>
         )
-        }
+        } */}
         <div className="content">
           <h1>Quản lý nhân viên</h1>
 
