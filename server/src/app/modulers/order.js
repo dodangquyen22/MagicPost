@@ -1,6 +1,16 @@
 const { Timestamp, Int32 } = require('mongodb')
 const mongoose = require('mongoose')
 
+const successDeliveryStatus = "success";
+const failDeliveryStatus = "fail";
+const shippingStatus = "shipping";
+const confirmedStatus = "confirmed";
+
+const toWarehouseType = "to warehouse";
+const toCustomerType = "to customer";
+const toTransactionSpotType = "to transaction spot";
+const toOtherAreaType = "to other area";
+
 // Lưu thông tin các đơn vận chuyển 
 const orderSchema = new mongoose.Schema({
     id: {
@@ -14,9 +24,8 @@ const orderSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['customer', 'spot'] // To customer or to another spot
+        enum: [toWarehouseType, toCustomerType, toTransactionSpotType, toOtherAreaType] // To customer or to another spot
         // required: true
-
     },
     address_send: {
         type: String,
@@ -44,3 +53,11 @@ const orderSchema = new mongoose.Schema({
 
 const order = mongoose.model('order', orderSchema);
 module.exports = order
+module.exports.successDeliveryStatus = successDeliveryStatus;
+module.exports.failDeliveryStatus = failDeliveryStatus;
+module.exports.shippingStatus = shippingStatus;
+module.exports.confirmedStatus = confirmedStatus;
+module.exports.toWarehouseType = toWarehouseType;
+module.exports.toCustomerType = toCustomerType;
+module.exports.toTransactionSpotType = toTransactionSpotType;
+module.exports.toOtherAreaType = toOtherAreaType;

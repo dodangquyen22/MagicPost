@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from '../bar/Navbar';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -11,16 +12,43 @@ const ProductList = () => {
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const [showActionsMenu, setShowActionsMenu] = useState(false);
+  const [orders, setOrders] = useState([]);
 
+  // Temporaly fixed id
+  var pointID = 25;
 
   // Giả sử bạn có một danh sách các đơn hàng
-  const [orders, setOrder] = useState([
-    { id: 1, status: "Chuyển Thành Công", confirm: '' },
-    { id: 2, status: "Chuyển Thất Bại", confirm: '' },
-    { id: 3, status: "Đã Huỷ Đơn", confirm: '' },
-    { id: 4, status: "Còn Trong Kho", confirm: 'newOrder' },
-    // Thêm các đơn hàng khác tùy ý
-  ]);
+  // const orders = [
+  //   { id: 1, status: "Successful", printed: true },
+  //   { id: 2, status: "Unsuccessful", printed: false },
+  //   { id: 3, status: "Cancelled", printed: false },
+  //   // Thêm các đơn hàng khác tùy ý
+  // ];
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:3000/order/?pointID=' + pointID); 
+        console.log(response.data);
+        setOrders(response.data); // Assuming the response contains the array of orders
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
+  
+    fetchOrders();
+  }, []);
+
+  const handleConfirm = async (orderId) => {
+    try {
+      // Send the request here
+      const response = await axios.get('http://127.0.0.1:3000/order/confirm?orderID=' + orderId);
+      console.log('Confirm response:', response.data);
+      // Perform any necessary actions after the request is successful
+    } catch (error) {
+      console.error('Error confirming orders:', error);
+    }
+  };
 
   // Lọc đơn hàng dựa trên trạng thái
   let filteredOrders = orders.filter(order => {
@@ -226,10 +254,7 @@ const ProductList = () => {
                     <td></td>
                     <td></td>
                     <td>
-                      {order.confirm === 'newOrder' && (
-                        <button className="confirm-btn">Xác Nhận</button>
-                      )}
-
+                    <button onClick={() => handleConfirm(order.id)}>Xác nhận</button>
                     </td>
                   </tr>
                 ))}

@@ -135,7 +135,16 @@ const RecordTransaction = () => {
 
 
         // Xử lý ghi nhận đơn hàng, có thể gửi dữ liệu lên server tại đây
-        console.log('Đã ghi nhận đơn hàng:', {
+        // console.log('Đã ghi nhận đơn hàng:', {
+        //     sender,
+        //     recipient,
+        //     packageDetails,
+        //     request,
+        //     collectionFee,
+        //     payer,
+        //     requestPickup,
+        // });
+        const data = {
             sender,
             recipient,
             packageDetails,
@@ -143,30 +152,49 @@ const RecordTransaction = () => {
             collectionFee,
             payer,
             requestPickup,
-        });
-        toast('Đã ghi nhận đơn hàng.');
+        };
+    
+        fetch('http://localhost:3000/package/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((responseData) => {
+                // Process the response as needed
+                console.log('Recorded transaction:', responseData);
+                toast('Đã ghi nhận đơn hàng.');
+                // Reset the form after recording
+                // ... Reset form code ...
+            })
+            .catch((error) => {
+                console.error(error);
+                toast('Có lỗi xảy ra khi ghi nhận đơn hàng.');
+            });
         // Thực hiện các bước cần thiết để ghi nhận đơn hàng
 
         // Reset form sau khi ghi nhận
-        setSender({ name: '', province: '', district: '', address: '', phone: '' });
-        setRecipient({ name: '', province: '', district: '', address: '', phone: '' });
-        setPackageDetails({
-            code: '',
-            type: 'Bưu kiện',
-            name: '',
-            quantity: '',
-            weight: '',
-            price: '',
-            length: '',
-            width: '',
-            height: '',
-            specialFeatures: [],
-        });
-        setRequest('');
-        setTermsAccepted(false);
-        setCollectionFee({ cod: false, amount: '' })
-        setPayer('sender');
-        setRequestPickup({ address: 'Đến lấy hàng tại nhà' });
+        // setSender({ name: '', province: '', district: '', address: '', phone: '' });
+        // setRecipient({ name: '', province: '', district: '', address: '', phone: '' });
+        // setPackageDetails({
+        //     code: '',
+        //     type: 'Bưu kiện',
+        //     name: '',
+        //     quantity: '',
+        //     weight: '',
+        //     price: '',
+        //     length: '',
+        //     width: '',
+        //     height: '',
+        //     specialFeatures: [],
+        // });
+        // setRequest('');
+        // setTermsAccepted(false);
+        // setCollectionFee({ cod: false, amount: '' })
+        // setPayer('sender');
+        // setRequestPickup({ address: 'Đến lấy hàng tại nhà' });
 
     };
 
