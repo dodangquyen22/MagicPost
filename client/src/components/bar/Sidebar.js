@@ -33,7 +33,7 @@ const Sidebar = () => {
                 </div>
             )
             }
-            {role === 'point leader' && (
+            {role === 'transaction leader' && (
                 <div className="sidebar">
                     <ul>
                         <li>

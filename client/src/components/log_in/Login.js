@@ -44,7 +44,7 @@ const Login = () => {
           navigate('/dashboard');
         } else if (data.role === "warehouse leader") {
           navigate('/warehouse');
-        } else if (data.role === "point leader") {
+        } else if (data.role === "transaction leader") {
           navigate('/transactionpoint');
         } else if (data.role === "point staff") {
           navigate('/tellermain');
