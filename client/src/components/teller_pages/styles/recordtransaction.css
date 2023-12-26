@@ -252,3 +252,21 @@ textarea {
 .footer label {
     font-weight: bold;
 }
+
+.react-modal-print {
+    max-height: 65vh;
+    overflow-y: auto;
+    width: 1200px;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+.modal-overlay {
+    margin-top: -100px;
+}
+
+.modal-button {
+    margin-top: -50px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
