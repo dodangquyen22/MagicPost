@@ -165,7 +165,7 @@ const EmployeeManagement = () => {
                 {username.map((employee) => (
                   <tr key={employee.id}>
                     <td>{employee.id}</td>
-                    <td><Link to={`/profile/${employee.id}`}>{employee.name}</Link></td>
+                    <td>{employee.name}</td>
                     <td>{employee.role}</td>
                     <td>{employee.gender}</td>
                     <td>{employee.province}</td>

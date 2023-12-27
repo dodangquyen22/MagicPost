@@ -52,6 +52,7 @@ function App() {
           {/* quản lí điểm tập kết admin */}
           <Route path="/managewarehouse" element={<ManageWarehouse />} />
           <Route path="*" element={<h1>Not Found</h1>} />
+
         </Routes>
       </BrowserRouter>
     </div>

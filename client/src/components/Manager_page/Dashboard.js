@@ -5,7 +5,6 @@ import { Outlet, Link } from "react-router-dom";
 import './styles.css'
 import AuthContext from '../variable/AuthContext';
 // import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import SimpleMap from '../bar/map';
 import Sidebar from '../bar/Sidebar';
 
 export const Dashboard = () => {

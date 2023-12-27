@@ -82,7 +82,6 @@ const Sidebar = () => {
                         <li>
                             <Link to="/warehousestaff">Thống Kê Đơn Hàng</Link>
                         </li>
-                        <li><Link to="/">Log Out</Link></li>
                     </ul>
                 </div>
             )
