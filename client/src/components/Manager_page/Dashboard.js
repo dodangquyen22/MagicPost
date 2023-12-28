@@ -13,8 +13,6 @@ export const Dashboard = () => {
     const monthLimit = 5;
     const { token } = localStorage.getItem('token');
     const { role } = useContext(AuthContext);
-    var response;
-    // Dữ liệu mẫu
 
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
@@ -77,11 +75,7 @@ export const Dashboard = () => {
     //         // Thêm các điểm giao dịch khác tùy ý
     //     ],
     // };
-    console.log("data is: ", data);
     if (Object.keys(data).length === 5) {
-        // setMonthLyIncome(res.data.monthlyIncome); // setMonthLyIncome(response.data.monthlyIncome);
-        // console.log("moth: ", monthLyIncome);
-        // setPackageStatistic(res.data.packageStatistic);
         setLoading(false);
         data.chartData=  {
             options: {
@@ -104,18 +98,18 @@ export const Dashboard = () => {
             }
         }
 
-        const tmp = data.monthlyIncome.map((item) => item.total);
-        console.log("tmp: ", tmp);
+        const incomeTmp = data.monthlyIncome.map((item) => item.total);
+        const categoTmp = data.monthlyIncome.map((item) => (item._id.month + "/" + item._id.year));
         data.lineChartData = {
             options: {
                 xaxis: {
-                    categories: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5'],
+                    categories: categoTmp,
                 },
             },
             series: [
                 {
                     name: 'Doanh Thu',
-                    data: tmp ,
+                    data: incomeTmp ,
                 },
             ],
         }
