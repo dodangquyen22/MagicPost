@@ -37,6 +37,7 @@ body {
 
 .dashboard-summary {
   display: flex;
+  gap: 10px;
   padding: 20px;
   flex-basis: 45%;
 }
@@ -112,6 +113,8 @@ body {
 }
 
 
+
+
 .dashboard-flex {
   display: flex;
   justify-content: space-between;
@@ -156,23 +159,11 @@ body {
 }
 
 @media (max-width: 768px) {
-  .sidebar {
-    display: none;
-  }
-
-  .sidebar-toggle {
-    display: block;
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    cursor: pointer;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-  }
 
   .content {
     margin-left: 0;
+    width: 100%;
+    margin-top: 140px;
   }
 
   .chart-container,
@@ -189,5 +180,32 @@ body {
   .search-box button {
     display: none;
   }
+}
+
+@media (max-width: 600px) {
+  .content.expanded {
+    margin-left: 0;
+  }
+
+  .content {
+    margin-top: 140px;
+  }
+
+  .chart-container,
+  .line-chart-container {
+    width: 100%;
+    max-width: 95%;
+    margin-top: 20px;
+  }
+
+  .sidebar {
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    position: fixed;
+    display: block;
+  }
+
+
 }
 

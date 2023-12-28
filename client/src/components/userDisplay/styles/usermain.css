@@ -35,4 +35,14 @@
     background-color: #3498DB;
     color: white;
   }
+
+  /* reponsive */
+
+  @media screen and (max-width: 600px) {
+    .user-content {
+      margin-left: 0px;
+      margin-right: 0px;
+      width: 100%;
+    }
+  }
   

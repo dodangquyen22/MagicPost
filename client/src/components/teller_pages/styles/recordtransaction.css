@@ -270,3 +270,37 @@ textarea {
     margin-bottom: 20px;
     margin-left: 50px;
 }
+
+/* reponsive */
+@media screen and (max-width: 600px) {
+    .form-transaction {
+        width: 100%;
+    }
+
+    .transaction-info .form-transaction {
+        flex-direction: column;
+        width: 100%;
+        
+    }
+
+    .information {
+        width: 100%;
+    }
+
+    .product {
+        width: 100%;
+    }
+
+    .box1 {
+        width: 100%;
+    }
+
+    .box2 {
+        width: 100%;
+    }
+
+    .footer {
+        width: 100%;
+    }
+}
+

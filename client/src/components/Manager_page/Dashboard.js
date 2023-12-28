@@ -15,9 +15,11 @@ export const Dashboard = () => {
 
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
+    
     useEffect(() => {
         const fetchData = async () => {
             if (loading && Object.keys(data).length === 0) {
+                console.log("token: ", token);
                 try {
                     const response = await axios.get('http://127.0.0.1:3000/manager/statistic', {
                         headers: {
@@ -36,44 +38,7 @@ export const Dashboard = () => {
 
         fetchData();
     }, []);
-    // const data = {
-    //     totalTransactions: 1,
-    //     totalCenters: 1,
-    //     totalDeliveryPoints: 1,
-    //     revenueThisMonth: 1,    
-    //     // const formattedAmount = parseFloat(e.target.value.replace(/\D/g, '')).toLocaleString('vi-VN');
-    //     revenueLastMonth: 900000000,
-    //     growth: 10,
-    //     chartData: {
-    //         options: {
-    //             labels: ['Hàng Gửi', 'Hàng Nhận'],
-    //             colors: ['#008FFB', '#00E396'],
-    //             // chart: {
-    //             //     width: 250,
-    //             //     type: 'donut',
-    //             // },
-    //         },
-    //         series: [700, 800],
-    //     },
-    //     lineChartData: {
-    //         options: {
-    //             xaxis: {
-    //                 categories: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5'],
-    //             },
-    //         },
-    //         series: [
-    //             {
-    //                 name: 'Doanh Thu',
-    //                 data: [500, 800, 700, 900, 1000],
-    //             },
-    //         ],
-    //     },
-    //     deliveryPoints: [
-    //         { id: 1, name: 'Điểm Giao Dịch 1', lat: 10.776889, lng: 106.700867 },
-    //         { id: 2, name: 'Điểm Giao Dịch 2', lat: 10.776949, lng: 106.693993 },
-    //         // Thêm các điểm giao dịch khác tùy ý
-    //     ],
-    // };
+
     if (Object.keys(data).length === 5) {
         setLoading(false);
         data.chartData=  {

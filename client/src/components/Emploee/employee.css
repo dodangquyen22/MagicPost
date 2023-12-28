@@ -44,5 +44,14 @@ table {
     width: 100px;
   }
 
-  
+  /* reponsive */
+  @media screen and (max-width: 600px) {
+    .employee-list {
+      flex-direction: column;
+    }
+
+    table {
+      width: 100%;
+    }
+  }
   

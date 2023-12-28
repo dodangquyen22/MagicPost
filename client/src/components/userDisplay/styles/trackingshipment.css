@@ -38,3 +38,19 @@
 .mt-4 li:hover {
     background-color: #e0e0e0;
 }
+
+@media screen and (max-width: 600px) {
+    .form-content {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-tracking {
+        width: 100%;
+    }
+
+    .image-tracking {
+        width: 100%;
+        height: 100%;
+    }
+}
