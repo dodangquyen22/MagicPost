@@ -15,7 +15,9 @@ const authenticateUser = (requiredRole) => {
       const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET); 
       //console.log(decodedToken)
       const uid = decodedToken.username;
+      console.log("userid: ", uid);
       const user = await User.findOne({ username: uid });
+      
 
       if (!user) {
         throw new Error();

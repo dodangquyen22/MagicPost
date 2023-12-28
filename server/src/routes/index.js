@@ -6,6 +6,8 @@ const areaRouter = require('./area')
 const manager = require('./manager')
 const warehouseLeader = require('./warehouseLeader')
 const pointLeader = require('./pointLeader')
+const warehouseStaff = require('./warehouseStaff')
+const pointStaff = require('./transactionPointStaff')
 
 
 function route(app) {
@@ -15,8 +17,8 @@ function route(app) {
   app.use("/pointLeader", pointLeader)
   app.use("/package", packageRouter)
   app.use("/order", orderRouter)
-  // app.use("/warehouseStaff", )
-  // app.use("/transactionPointStaff", )
+  app.use("/warehouse/:pointID", warehouseStaff)
+  app.use("/transactionPoint/:pointID", pointStaff)
   app.use("/track", trackRouter)
   app.use("/", areaRouter);
 }

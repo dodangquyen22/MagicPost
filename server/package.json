@@ -17,6 +17,7 @@
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
     "mongodb": "^6.2.0",
     "mongoose": "^8.0.0",
     "morgan": "~1.9.1",

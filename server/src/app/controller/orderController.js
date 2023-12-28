@@ -5,18 +5,19 @@ const { ObjectId } = require('mongodb');
 const { toWarehouseType, toCustomerType, toTransactionSpotType, toOtherAreaType } = require('../modulers/order');
 const { successDeliveryStatus, failDeliveryStatus, shippingStatus, confirmedStatus } = require('../modulers/package');
 
+var pointID;
 class orderController {
     // Tạo đơn
     createOrder = async (req, res, next) => {
+        pointID = req.params.pointID;
         const {type} = req.body;
+        console.log("type: ",  type);
         if (type == toTransactionSpotType) {
             await this.createOrderToTransactionSpot(req, res, next);
         } else if (type == toWarehouseType) {
             return this.createOrderToWarehouse(req, res, next);
         } else if (type == toCustomerType) {
             this.createOrderToCustomer(req, res, next);
-        } else {
-            this.createOrderToOtherArea(req, res, next);
         }
     }
 
@@ -29,16 +30,23 @@ class orderController {
         // Your code here
         try {
             const {packageID, type} = req.body;
-            const pack = await packageModule.findOne({id: packageID}).exec();
-            const tranPoint = await point.findOne({id: pack.receiveAreaID}).exec();;
+            const { address_send, address_receive, sendDate } = req.body;
+            console.log(packageID);
+            const pack = await packageModule.findOne({ID: packageID}).exec();
+            if (pack == null) {
+                console.log("Package not found");
+                res.send('Package not found');
+                return;
+            }
+            const rcvPoint = await point.findOne({id: pack.receiveAreaID}).exec();
             const newOrder = await new order({
                 id: Math.floor(Math.random() * 1000000000),
                 packageID: packageID,
                 type: type,
                 address_send: address_send,
                 address_receive: address_receive,
-                receive_point_id: receive_point_id,
-                send_point_id: send_point_id,
+                receive_point_id: rcvPoint.id,
+                send_point_id: pointID,
                 sendDate: sendDate,
                 status: shippingStatus,
             })
