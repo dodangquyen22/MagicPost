@@ -45,7 +45,7 @@ class userController{
             const validPassword = await bcrypt.compare(req.body.password, user.password);
     
             if (validPassword) {
-                const token = jwt.sign({ username: user.username, role: user.role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+                const token = jwt.sign({ username: user.username, role: user.role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5h' });
                 // res.redirect('/');
                 res.status(200).json({
                     message:"Đăng nhập thành công",
@@ -81,7 +81,7 @@ class userController{
         this.pointLeaderGetAccounts = this.pointLeaderGetAccounts.bind(this);
     }
     getAccounts(req, res, next) {
-        console.log(req.body.role)
+        //console.log(req.body.role)
         // Add your code here to get the account list
         if (req.body.role == "manager") {
             return this.leaderGetAccounts(req, res, next);
@@ -89,14 +89,14 @@ class userController{
         if(req.body.role == "warehouse leader") {
             return this.warehouseLeaderGetAccounts(req, res, next)
         }
-        if(req.body.role == "point leader") {
+        if(req.body.role == "transaction leader") {
             return this.pointLeaderGetAccounts(req, res, next);
         }
     }
     // Lấy danh sách tài khoản cho lãnh đạo
     async leaderGetAccounts(req, res, next) {
         try {
-            const users = await User.find({ $or: [{ role: "warehouse leader" }, { role: "point leader" }] });
+            const users = await User.find({ $or: [{ role: "warehouse leader" }, { role: "transaction leader" }] });
             //console.log(users)
             res.status(200).json(users); //res.json(users); 
         } catch (error) {
@@ -115,7 +115,7 @@ class userController{
     // Lấy danh sách tài khoản cho trưởng điểm giao dịch
     async pointLeaderGetAccounts(req, res, next) {
         try {
-            const users = await User.find({role: "point staff"});
+            const users = await User.find({role: "transaction staff"});
             res.json(users);
         } catch (error) {
             next(error);

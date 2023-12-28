@@ -30,40 +30,61 @@ class areaController {
     async getPointTransaction(req, res, next) {
         try {
             const points = await Point.find({ type: "transaction" });
-            const pointIds = points.map(point => point.idArea);
-            const areas = await area.find({ transactionPointID: { $in: pointIds } });
-            res.json({ areas, points });
-        } catch (error) {
+        
+            const resultPromises = points.map(async (point) => {
+              const areas = await area.findOne({ 
+                transactionPointID: point.idArea });
+              return {
+                point: point,
+                area: areas,
+              };
+            });
+        
+            const result = await Promise.all(resultPromises);
+        
+            res.json({ points: result });
+            console.log(result);
+          } catch (error) {
             next(error);
-        }
+          }
     }
 
     async getPointWarehouse(req, res, next) {
         try {
-            const points = await Point.find({ type: "transaction" });
-            const pointIds = points.map(point => point.idArea);
-            const areas = await area.find({ warehouseID: { $in: pointIds } });
-    
-            res.json({ areas, points });
+          const points = await Point.find({ type: "warehouse" });
+      
+          const resultPromises = points.map(async (point) => {
+            const areas = await area.findOne({ warehouseID: point.idArea });
+            return {
+              point: point,
+              area: areas,
+            };
+          });
+      
+          const result = await Promise.all(resultPromises);
+      
+          res.json({ points: result });
+          console.log(result);
         } catch (error) {
-            next(error);
+          next(error);
         }
-    }
+      }
 
 
     async createTransaction(req, res, next) {
-        const {province, district, address} = req.body;
+        console.log(req.body);
+        const {province, district, address, name, gender} = req.body;
         const id = removeVietnameseTones.removeVietnameseTones(district);
         const salt = await bcrypt.genSalt(10);
         const password = id;
         const username = id + "_point";
         const hashedPassword = await bcrypt.hash(password, salt);
         const existingUser = await User.findOne({ username });
-        const role = "point leader";
+        const role = "transaction leader";
         if (existingUser) {
             return res.status(400).json({ error: 'Điểm giao dịch này đã tồn tại' });
           }
-        const user = new User({ username, password: hashedPassword,idArea: id, role });
+        const user = new User({ username, password: hashedPassword,idArea: id, role,name, gender,province: province, district: district});
         const areaa = new area({transactionPointID: id, province: province, district: district});
         const point = new Point({address: address, idArea: id, type: "transaction"});
         await user.save();
@@ -74,7 +95,7 @@ class areaController {
 
 
     async createWarehouse(req, res, next) {
-        const {province, district, address} = req.body;
+        const {province, district, address, name, gender} = req.body;
         const id = removeVietnameseTones.removeVietnameseTones(district);
         const salt = await bcrypt.genSalt(10);
         const password = id;
@@ -83,9 +104,10 @@ class areaController {
         const existingUser = await User.findOne({ username });
         const role = "warehouse leader";
         if (existingUser) {
+            console.log("lỗi");
             return res.status(400).json({ error: 'Điểm giao dịch này đã tồn tại' });
           }
-        const user = new User({ username, password: hashedPassword,idArea: id, role });
+        const user = new User({ username, password: hashedPassword,idArea: id, role,name, gender, province: province, district: district});
         const areaa = new area({warehouseID: id, province: province, district: district});
         const point = new Point({address: address, idArea: id, type: "warehouse"});
         await user.save();
@@ -94,6 +116,47 @@ class areaController {
         res.status(200).json({message: 'Tạo điểm tập kết thành công'})
     }
 
+
+    async deleteWarehouse(req, res, next) {
+        const { warehouseID } = req.params; // Assuming warehouseID is part of the request parameters
+      
+        try {
+          // Delete User
+          await User.findOneAndDelete({ idArea: warehouseID, role: "warehouse leader" });
+      
+          // Delete area
+          await area.findOneAndDelete({ warehouseID });
+      
+          // Delete Point
+          await Point.findOneAndDelete({ idArea: warehouseID, type: "warehouse" });
+      
+          res.status(200).json({ message: 'Xóa điểm tập kết thành công' });
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Internal Server Error' });
+        }
+      }
+
+
+      async deleteTransaction(req, res, next) {
+        const {  transactionPointID } = req.params; // Assuming warehouseID is part of the request parameters
+      
+        try {
+          // Delete User
+          await User.findOneAndDelete({ idArea: transactionPointID, role: "transaction leader" });
+      
+          // Delete area
+          await area.findOneAndDelete({ transactionPointID });
+      
+          // Delete Point
+          await Point.findOneAndDelete({ idArea: transactionPointID, type: "transaction" });
+      
+          res.status(200).json({ message: 'Xóa điểm giao dịch thành công' });
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Internal Server Error' });
+        }
+      }
 
 }
 

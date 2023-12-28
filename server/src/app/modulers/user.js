@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
-    city: {
+    district: {
         type: String,
         require: true
     },
@@ -35,9 +35,13 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["manager", "warehouse leader", "warehouse staff", "point leader", "point staff", "customer"],
+        enum: ["manager", "warehouse leader", "warehouse staff", "transaction leader", "transaction staff", "customer"],
         required: true
-    }
+    },
+    gender: {
+        type: String,
+        require: true
+    },
 })
 
 const User = mongoose.model('User', userSchema)

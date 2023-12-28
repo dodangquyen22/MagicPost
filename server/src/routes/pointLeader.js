@@ -6,11 +6,11 @@ const { route } = require('./area');
 
 
 //Danh sách các tài khoản trưởng điểm tập kết và dao dịch
-router.get('/listAcount', authenticateUser('point leader'), userController.getAccounts)
+router.get('/listAcount', authenticateUser('transaction leader'), userController.getAccounts)
 //Sửa thông tin của nhân viên của điểm tập kết [Viết sau]
-router.post("/updateInfo", authenticateUser('point leader'),userController.updateInfo);
+router.post("/updateInfo", authenticateUser('transaction leader'),userController.updateInfo);
 //Cấp tài khoản cho nhân viên
-router.get("/resgister", authenticateUser('point leader'),userController.register)
+router.get("/resgister", authenticateUser('transaction leader'),userController.register)
 //Thống kê hàng đi , hàng đến[]
 
 module.exports = router;

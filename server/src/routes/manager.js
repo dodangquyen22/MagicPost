@@ -16,12 +16,14 @@ router.get("/district", areaController.getDistrictList);
 
 router.get("/pointTransaction",authenticateUser('manager'), areaController.getPointTransaction);
 router.get("/pointWarehouse",authenticateUser('manager'), areaController.getPointWarehouse);
-router.post("/createTransaction", areaController.createTransaction);
-router.post("/createWarehouse", areaController.createWarehouse);
+router.post("/createTransaction",authenticateUser('manager'), areaController.createTransaction);
+router.post("/createWarehouse", authenticateUser('manager'),areaController.createWarehouse);
+router.delete("/deleteWarehouse/:warehouseID", authenticateUser("manager"),areaController.deleteWarehouse);
+router.delete("/deleteTransaction/:transactionPointID", authenticateUser("manager"),areaController.deleteTransaction);
 
 
 //Danh sách các tài khoản trưởng điểm tập kết và dao dịch
-router.get('/listAcount', authenticateUser('manager'), userController.getAccounts);
+router.post('/listAcount', authenticateUser('manager'), userController.getAccounts);
 //Sửa thông tin của trưởng điểm tập kết và giao dịch [Viết sau]
 router.post("/updateInfo", authenticateUser('manager'),userController.updateInfo);
 
