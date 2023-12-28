@@ -12,7 +12,7 @@ class userController{
     // [POST] tao tai khoan
     async register(req, res, next) {
         try{
-            const { username, password, email, phone,province, district, role } = req.body;
+            const {name, username, password, email, phone,province, district, role, gender} = req.body;
             const salt = await bcrypt.genSalt(10);
             console.log(salt)
             const hashedPassword = await bcrypt.hash(password, salt);
@@ -22,7 +22,7 @@ class userController{
               }
             const id = removeVietnameseTones.removeVietnameseTones(district)
 
-            const user = new User({ username, password: hashedPassword, email, phone, province, district,idArea: id, role });
+            const user = new User({ name,username, password: hashedPassword, email, phone, province, district,idArea: id, role, gender });
 
             await user.save();
             res.status(200).json({message: 'Tạo tài khoản thành công'})
@@ -53,11 +53,15 @@ class userController{
 
                 const token = jwt.sign({ username: user.username, role: user.role, pointID: pointID }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
                 // res.redirect('/');
+                console.log(user.district)
                 res.status(200).json({
                     message:"Đăng nhập thành công",
                     role: user.role,
                     pointID: pointID,
                     token: token,
+                    idArea: user.idArea,
+                    district: user.district,
+                    province: user.province
                 });
                 return;
             }
@@ -75,9 +79,10 @@ class userController{
     //Xóa tài khoản
     async deleteAccount(req, res, next) {
         // Add your code here to delete the account
-        const {username} = req.body.username;
-        const deleteUser = await User.findOneAndDelete({username: username});
-
+        const {_id} = req.params;
+        console.log("req ",req.params);
+        const deleteUser = await User.findOneAndDelete({_id: _id});
+        res.status(200).json({message: "Xóa thành công"})
     }
     //Lấy danh sách tài khoản
 
@@ -112,8 +117,9 @@ class userController{
     }
     // Lấy danh sách tài khoản cho trưởng điểm
     async warehouseLeaderGetAccounts(req, res, next) {
+        const {idArea} = req.body;
         try {
-            const users = await User.find({role: "warehouse staff"});
+            const users = await User.find({idArea: idArea,role: "warehouse staff"});
             res.json(users);
         } catch (error) {
             next(error);
@@ -121,8 +127,9 @@ class userController{
     }
     // Lấy danh sách tài khoản cho trưởng điểm giao dịch
     async pointLeaderGetAccounts(req, res, next) {
+        const {idArea} = req.body;
         try {
-            const users = await User.find({role: "transaction staff"});
+            const users = await User.find({idArea: idArea,role: "transaction staff"});
             res.json(users);
         } catch (error) {
             next(error);
