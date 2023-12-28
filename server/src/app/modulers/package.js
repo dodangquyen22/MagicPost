@@ -30,6 +30,9 @@ const packageSchema = new mongoose.Schema({
     cost: {
         type: Number
     },
+    currentPointID: {
+        type: mongoose.Schema.Types.ObjectId
+    },
     // thông tin gói hàng
     details: {
         type: String
