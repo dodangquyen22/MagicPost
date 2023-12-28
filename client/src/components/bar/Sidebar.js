@@ -37,11 +37,11 @@ const Sidebar = () => {
         ],
         'transaction leader': [
             { to: '/transactionpoint', label: 'Thống Kê Đơn Hàng' },
-            { to: '/employee', label: 'Quản Lý Nhân Viên' },
+            { to: '/transaction/employee', label: 'Quản Lý Nhân Viên' },
         ],
         'warehouse leader': [
             { to: '/warehouse', label: 'Thống Kê Đơn Hàng' },
-            { to: '/employee', label: 'Quản Lý Nhân Viên' },
+            { to: '/warehouse/employee', label: 'Quản Lý Nhân Viên' },
         ],
         'transaction staff': [
             { to: '/tellermain', label: 'Trang Giao Dịch' },

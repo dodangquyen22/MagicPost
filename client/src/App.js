@@ -32,6 +32,7 @@ function App() {
           <Route path="/" element={<Login />} />
           {/* trang chủ admin */}
           <Route path="/dashboard" element={<Dashboard />} /> 
+          <Route path="/employee" element={<EmployeeManagement />} />
           {/* trang người dùng */}
           <Route path="/user" element={<UserMain />} />
           <Route path="/warehouse/employee" exact element={<EmployeeWarehouse />} />

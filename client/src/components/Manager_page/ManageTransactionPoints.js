@@ -160,6 +160,7 @@ const ManageTransactionPoints = () => {
                                             type="text"
                                             className="form-control"
                                             id="name"
+                                            required
                                             value={name}
                                             onChange={(event) => setName(event.target.value)}
                                             />
@@ -169,6 +170,7 @@ const ManageTransactionPoints = () => {
                                             type="text"
                                             className="form-control"
                                             id="gender"
+                                            required
                                             value={gender}
                                             onChange={(event) => setGender(event.target.value)}
                                             />
@@ -178,6 +180,7 @@ const ManageTransactionPoints = () => {
                                             type="text"
                                             className="form-control"
                                             id="city"
+                                            required
                                             value={city}
                                             onChange={(event) => setCity(event.target.value)}
                                             />
@@ -187,6 +190,7 @@ const ManageTransactionPoints = () => {
                                             type="text"
                                             className="form-control"
                                             id="district"
+                                            required
                                             value={district}
                                             onChange={(event) => setDistrict(event.target.value)}
                                             />
@@ -196,6 +200,7 @@ const ManageTransactionPoints = () => {
                                             type="text"
                                             className="form-control"
                                             id="address"
+                                            required
                                             value={address}
                                             onChange={(event) => setAddress(event.target.value)}
                                             />
