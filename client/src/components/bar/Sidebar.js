@@ -17,7 +17,7 @@ const Sidebar = () => {
                             <Link to="/dashboard">Tổng Quát</Link>
                         </li>
                         <li>
-                            <Link to="/employee">Quản Lý Nhân Viên</Link>
+                            <Link to="/warehouse/employee">Quản Lý Nhân Viên</Link>
                         </li>
                         <li>
                             <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
@@ -40,7 +40,7 @@ const Sidebar = () => {
                             <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
                         </li>
                         <li>
-                            <Link to="/employee">Quản Lý Nhân Viên</Link>
+                            <Link to="/transaction/employee">Quản Lý Nhân Viên</Link>
                         </li>
 
                     </ul>
@@ -54,7 +54,7 @@ const Sidebar = () => {
                             <Link to="/warehouse">Thống Kê Đơn Hàng</Link>
                         </li>
                         <li>
-                            <Link to="/employee">Quản Lý Nhân Viên</Link>
+                            <Link to="/warehouse/employee">Quản Lý Nhân Viên</Link>
                         </li>
 
                     </ul>

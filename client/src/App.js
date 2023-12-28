@@ -18,6 +18,8 @@ import axios from 'axios';
 import ManageWarehouse from './components/Manager_page/ManageWarehouse';
 import WareHouse from './components/manager_warehouse/Warehouse';
 import WarehouseStaff from './components/warehouse_staff/WarehouseStaff';
+import EmployeeWarehouse from './components/Emploee/EmployeeWarehouse';
+import EmployeeTransaction from './components/Emploee/EmployeeTransaction';
 
 function App() {
 
@@ -32,7 +34,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} /> 
           {/* trang người dùng */}
           <Route path="/user" element={<UserMain />} />
-          <Route path="/employee" exact element={<EmployeeManagement />} />
+          <Route path="/warehouse/employee" exact element={<EmployeeWarehouse />} />
+          <Route path="/transaction/employee" exact element={<EmployeeTransaction />} />
           {/* <Route path="/employee/:id" element={<EmployeeProfile />} /> */}
           {/* trang giao dịch viên */}
           <Route path="/tellermain" element={<TransactionPage />} />
