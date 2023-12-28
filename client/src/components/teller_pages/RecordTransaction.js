@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faMapMarker, faPhone, faClipboard, faBox, faFileAlt, faList, faWeight, faDollarSign, faComment, faTag, faMoneyBill, faMoneyCheck, faTimes, faCalendarTimes, faTruck, faTruckFast } from '@fortawesome/free-solid-svg-icons';
 import './styles/recordtransaction.css';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Modal from 'react-modal';
+import ReactToPrint from 'react-to-print';
+import QRCode from 'qrcode.react';
 
 
 
@@ -42,19 +44,35 @@ const RecordTransaction = () => {
 
     const componentRef = useRef();
 
-    const [show, setShowModal] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handlePrintOrder = () => {
-        setShowModal(true);
+    const openModal = () => {
+        setIsModalOpen(true);
     };
 
-    const handleClose = () => {
-        setShowModal(false);
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
 
-    const handleShow = () => {
-        setShowModal(true);
-    };
+    let convertWeight = packageDetails.weight / 1000;
+    let mainFee = 0;
+    let extraFee = 0;
+
+
+    switch (convertWeight) {
+        case (convertWeight < 0.5):
+            mainFee = 20000;
+            break;
+        case (convertWeight < 1):
+            mainFee = 25000;
+            break;
+        default:
+            mainFee = 25000 + (convertWeight - 1) * 5000;
+            break;
+    }
+    let GTGT = mainFee * 0.05;
+    let totalFare = mainFee + extraFee + GTGT;
+    let totalFee = totalFare + parseInt(collectionFee.amount);
 
     useEffect(() => {
         // Fetch provinces
@@ -99,6 +117,10 @@ const RecordTransaction = () => {
     const handleRecipientDistrictChange = (e) => {
         const selectedDistrict = e.target.value;
         setRecipient({ ...recipient, district: selectedDistrict });
+    };
+
+    const handlePrint = () => {
+        window.print();
     };
 
 
@@ -153,7 +175,7 @@ const RecordTransaction = () => {
             payer,
             requestPickup,
         };
-    
+
         fetch('http://localhost:3000/package/create', {
             method: 'POST',
             headers: {
@@ -166,6 +188,7 @@ const RecordTransaction = () => {
                 // Process the response as needed
                 console.log('Recorded transaction:', responseData);
                 toast('Đã ghi nhận đơn hàng.');
+                openModal();
                 // Reset the form after recording
                 // ... Reset form code ...
             })
@@ -232,7 +255,7 @@ const RecordTransaction = () => {
 
         <div className='container'>
 
-            <div className="record-transaction-container" ref={componentRef}>
+            <div className="record-transaction-container" >
 
                 <h2>Ghi Nhận Đơn Hàng</h2>
                 <div className="row-content">
@@ -254,25 +277,25 @@ const RecordTransaction = () => {
 
                                 <label><FontAwesomeIcon icon={faMapMarker} /> Địa Chỉ:</label>
                                 <select
-                className="form-control"
-                value={sender.province}
-                onChange={handleSenderProvinceChange}
-            >
-                <option value="Chọn Tỉnh/Thành Phố">Chọn Tỉnh/Thành Phố</option>
-                {provinces.map(item => (
-                    <option key={item._id} value={item.province}>{item.province}</option>
-                ))}
-            </select>
-            <select
-                className="form-control"
-                value={sender.district}
-                onChange={handleSenderDistrictChange}
-            >
-                <option value="Chọn Quận/Huyện">Chọn Quận/Huyện</option>
-                {senderDistricts.map(item => (
-                    <option key={item._id} value={item.district}>{item.district}</option>
-                ))}
-            </select>
+                                    className="form-control"
+                                    value={sender.province}
+                                    onChange={handleSenderProvinceChange}
+                                >
+                                    <option value="Chọn Tỉnh/Thành Phố">Chọn Tỉnh/Thành Phố</option>
+                                    {provinces.map(item => (
+                                        <option key={item._id} value={item.province}>{item.province}</option>
+                                    ))}
+                                </select>
+                                <select
+                                    className="form-control"
+                                    value={sender.district}
+                                    onChange={handleSenderDistrictChange}
+                                >
+                                    <option value="Chọn Quận/Huyện">Chọn Quận/Huyện</option>
+                                    {senderDistricts.map(item => (
+                                        <option key={item._id} value={item.district}>{item.district}</option>
+                                    ))}
+                                </select>
                                 <input
                                     type="text"
                                     placeholder='Số nhà, tên đường, phường/xã'
@@ -309,25 +332,25 @@ const RecordTransaction = () => {
                                 {/* <div className="invalid-feedback">{recipientErrors.name}</div> */}
                                 <label><FontAwesomeIcon icon={faMapMarker} /> Địa Chỉ:</label>
                                 <select
-                className="form-control"
-                value={recipient.province}
-                onChange={handleRecipientProvinceChange}
-            >
-                <option value="Chọn Tỉnh/Thành Phố">Chọn Tỉnh/Thành Phố</option>
-                {provinces.map(item => (
-                    <option key={item._id} value={item.province}>{item.province}</option>
-                ))}
-            </select>
-            <select
-                className="form-control"
-                value={recipient.district}
-                onChange={handleRecipientDistrictChange}
-            >
-                <option value="Chọn Quận/Huyện">Chọn Quận/Huyện</option>
-                {recipientDistricts.map(item => (
-                    <option key={item._id} value={item.district}>{item.district}</option>
-                ))}
-            </select>
+                                    className="form-control"
+                                    value={recipient.province}
+                                    onChange={handleRecipientProvinceChange}
+                                >
+                                    <option value="Chọn Tỉnh/Thành Phố">Chọn Tỉnh/Thành Phố</option>
+                                    {provinces.map(item => (
+                                        <option key={item._id} value={item.province}>{item.province}</option>
+                                    ))}
+                                </select>
+                                <select
+                                    className="form-control"
+                                    value={recipient.district}
+                                    onChange={handleRecipientDistrictChange}
+                                >
+                                    <option value="Chọn Quận/Huyện">Chọn Quận/Huyện</option>
+                                    {recipientDistricts.map(item => (
+                                        <option key={item._id} value={item.district}>{item.district}</option>
+                                    ))}
+                                </select>
                                 <input
                                     type="text"
                                     placeholder='Số nhà, tên đường, phường/xã'
@@ -591,7 +614,7 @@ const RecordTransaction = () => {
                                             value={collectionFee.amount}
                                             onChange={(e) => {
                                                 const formattedAmount = parseFloat(e.target.value.replace(/\D/g, '')).toLocaleString('vi-VN');
-                                                setCollectionFee({ ...collectionFee, amount: formattedAmount });
+                                                setCollectionFee({ ...collectionFee, amount: e.target.value });
                                             }}
                                         />
                                     )}
@@ -733,24 +756,146 @@ const RecordTransaction = () => {
                         <label htmlFor="termsCheckbox">Tôi đồng ý với các</label><a href="https://s.net.vn/RJ9P" rel="noopener noreferrer" target="_blank">Điều khoản quy định</a>
                     </div>
                     <div className="d-grid">
-                        <button type="button" className="btn btn-primary" onClick={handleRecordTransaction}>
+                        <button type="button" className="btn btn-primary" onClick={() => { handleRecordTransaction() }}>
                             Ghi Nhận
                         </button>
                         <button type="button" className="btn btn-secondary" onClick={handleResetForm}>
                             Làm Mới
                         </button>
                         {/* <PrintButton componentRef={componentRef} /> */}
-                        <button type="button" className="btn btn-secondary">
-                            <Link to='/transferreceipt'>In Phiếu Gửi</Link>
-
-                        </button>
                     </div>
 
 
                 </div>
 
+
             </div>
+            <Modal isOpen={isModalOpen} onRequestClose={closeModal} className="react-modal-print"
+                overlayClassName="react-modal-overlay modal-overlay" >
+                <div className='print-container' ref={componentRef}>
+                    <div className='print-content'>
+                        <div className='logo-QR'>
+                            <img src="./images/logo.png" className='logo' alt="logo" />
+                            <div className='QRcode'>
+                                <div className='QR'>
+                                    <QRCode
+                                        id='qrcode'
+                                        value= {packageDetails.code}
+                                        size={100}
+                                        level={'H'}
+                                        includeMargin={true}
+                                    />
+                                </div>
+                                <div className='ID'>Mã đơn hàng: {packageDetails.code}</div>
+                            </div>
+                        </div>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td className='print'>
+                                        <p>1. Họ tên địa chỉ người gửi: {sender.name}</p>
+                                        {sender.address} - {sender.district} - {sender.province}
+                                        <p>Điện thoại: {sender.phone}</p>
+                                        <p>Mã khách hàng:</p>
+                                        <p>Mã bưu chính:</p>
+                                    </td>
+                                    <td colSpan="2" className='print'>
+                                        <p>2. Họ tên địa chỉ người nhận: {recipient.name}</p>
+                                        {recipient.address} - {recipient.district} - {recipient.province}
+                                        <p>Điện thoại: {recipient.phone}</p>
+                                        <p>Mã khách hàng</p>
+                                        <p>Mã bưu chính:</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className='print'>
+                                        <p>3. Loại hàng gửi: {packageDetails.type}</p>
+                                        <p>4. Nội dung trị giá bưu gửi:</p>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Nội dung</td>
+                                                    <td>Số lượng</td>
+                                                    <td>Trị giá</td>
+                                                    <td>Giấy tờ kèm theo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tong</td>
+                                                    <td>{packageDetails.quantity}</td>
+                                                    <td>{packageDetails.price}</td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td className='print'>
+                                        <p>9. Cước</p>
+                                        <p>a. Cước chính: {mainFee}&nbsp;₫</p>
+                                        <p>b. Phụ phí: {extraFee}&nbsp;₫</p>
+                                        <p>c. Cước GTGT: {GTGT}&nbsp;₫</p>
+                                        <p>d. Tổng cước (gồm VAT): {totalFare}&nbsp;₫</p>
+                                        <p>e. Thu khác: {collectionFee.amount}&nbsp;₫</p>
+                                        <p><strong>f. Tổng thu: {totalFee}&nbsp;₫</strong></p>
+                                    </td>
+                                    <td className='print'>
+                                        <p>10. Khối lượng (kg):</p>
+                                        <p><strong>Khối lượng thực tế: {packageDetails.weight} &nbsp;gram</strong></p>
+                                        <p><strong>Khối lượng quy đổi: {convertWeight}</strong></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className='print'>
+                                        <p>5. Dịch vụ đặc biệt/Cộng thêm:</p>
+                                        <p>...........................................................................</p>
+                                        <p>...........................................................................</p>
+                                        <p> Mã hợp đồng EMSC/PPA</p>
+                                    </td>
+                                    <td className='print'>
+                                        <p>11. Thu của người nhận:</p>
+                                        <p>COD: {collectionFee.amount}&nbsp;₫</p>
+                                        <p>Thu khác: </p>
+                                        <p>Tổng thu: </p>
+                                    </td>
+                                    <td className='print'>
+                                        <p>12. Chú dẫn nghiệp vụ:</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className='print'>
+                                        <p>6. Chỉ dẫn của người gửi khi không phát được bưu gửi:</p>
+                                    </td>
+                                    <td colSpan="2" className='print'>
+                                        <p>13. Bưu cục chấp nhận</p>
+                                        <p>Chữ ký giao dịch viên nhận:</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className='print'>
+                                        <p>7. Cam kết của người gửi </p>
+                                        <p>Tôi chấp nhận các điều khoản và cam đoan bưu gửi này không chứa những mặt hàng nguy hiểm. Trường hợp không phát được hãy thực hiện chỉ dẫn ở mục 6, tôi sẽ trả cước chuyển hoàn</p>
+                                        <p>8. Ngày giờ gửi: {new Date().toLocaleString() + ""}</p>
+                                        <p>Chữ ký người gửi</p><br /><br />
+                                    </td>
+                                    <td colSpan="2" className='print'>
+                                        <p>14. Ngày giờ nhận:</p>
+                                        <p>Người nhận/Người được uỷ quyền nhận</p>
+                                        <p>(Ký và ghi rõ họ tên)</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div className='modal-button'>
+
+                    <ReactToPrint trigger={() => <button className="print-button">Xác Nhận In</button>} content={() => componentRef.current} />
+                    <button className="cancel-button" onClick={closeModal}>Huỷ</button>
+                </div>
+            </Modal>
         </div>
+
 
     );
 };

@@ -14,7 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { setRole } = useContext(AuthContext);
+  const { setRole, setUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
 
 
@@ -39,12 +39,14 @@ const Login = () => {
       // console.log(data)
       if (response.ok) {
         setRole(data.role);
+        setUser(username);
+        console.log(data);
         // const uid = data.uid;
         if (data.role === "manager") {
           navigate('/dashboard');
         } else if (data.role === "warehouse leader") {
           navigate('/warehouse');
-        } else if (data.role === "point leader") {
+        } else if (data.role === "transaction leader") {
           navigate('/transactionpoint');
         } else if (data.role === "point staff") {
           navigate('/tellermain');

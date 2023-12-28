@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import AuthContext from '../variable/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import Sidebar from '../bar/Sidebar';
 
 const WareHouse = () => {
   const { role } = useContext(AuthContext);
@@ -70,17 +71,7 @@ const WareHouse = () => {
     <div className="transaction-container">
       <Navbar />
       <div className="content-container">
-          <div className="sidebar">
-            <ul>
-              <li>
-                <Link to="/warehouse">Thống Kê Đơn Hàng</Link>
-              </li>
-              <li>
-                <Link to="/employee">Quản Lý Nhân Viên</Link>
-              </li>
-              <li><Link to="/">Log Out</Link></li>
-            </ul>
-          </div>
+        <Sidebar />
         <div className="content">
           <h1>Thống Kê Đơn Hàng</h1>
           <div className="tab-container">
