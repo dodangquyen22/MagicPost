@@ -12,12 +12,15 @@ const EmployeeManagement = () => {
   useEffect(() => {
     const token =  localStorage.getItem('token');
     console.log(token);
-    axios.get('http://localhost:3000/manager/listAcount', {
+    axios.post(
+      'http://localhost:3000/manager/listAcount',
+      { role: "manager" }, // Role as part of the request body
+      {
         headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        body: JSON.stringify({role: "manager"}),
-        })
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
         .then((response) => {
             const users = response.data;
             setUsername(users);
@@ -156,26 +159,17 @@ const EmployeeManagement = () => {
                   <th>Giới Tính</th>
                   <th>Tỉnh/Thành phố</th>
                   <th>Quận/Huyện</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 {username.map((employee) => (
                   <tr key={employee.id}>
-                    <td>{employee.id}</td>
-                    <td><Link to={`/profile/${employee.id}`}>{employee.name}</Link></td>
+                    <td>{employee._id}</td>
+                    <td>{employee.name}</td>
                     <td>{employee.role}</td>
                     <td>{employee.gender}</td>
                     <td>{employee.province}</td>
                     <td>{employee.district}</td>
-                    <td>
-                      <button onClick={() => openModal(employee)}>
-                        Sửa
-                      </button>
-                      <button onClick={() => handleDeleteEmployee(employee.id)}>
-                        Xoá
-                      </button>
-                    </td>
                   </tr>
                 ))}
               </tbody>

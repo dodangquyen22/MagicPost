@@ -12,22 +12,39 @@ import axios from 'axios';
 const ManageWarehouse = () => {
 
 
-    useEffect(() => {
-        const token =  localStorage.getItem('token');
-        console.log(token);
+    const [areas, setAreas] = useState([]);
+    const [points, setPoints] = useState([]);
+
+
+    const [name, setName] = useState('');
+    const [gender, setGender] = useState('');
+    const [city, setCity] = useState('');
+    const [district, setDistrict] = useState('');
+    const [address, setAddress] = useState('');
+    const [token,setToken] = useState('');
+    
+
+
+    const getData =()=>{
+        const tokens =  localStorage.getItem('token');
+        setToken(tokens)
         axios.get('http://localhost:3000/manager/pointWarehouse', {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${tokens}`,
               },
             })
             .then((response) => {
-                const areas = response.data.areas;
                 const points = response.data.points;
-                console.log(areas);
+                setPoints(points);
+                console.log(points)
             })
             .catch((error) => {
                 
             })
+    }
+
+    useEffect(() => {
+        getData();
     }, [])
 
 
@@ -78,9 +95,31 @@ const ManageWarehouse = () => {
         setModalIsOpen(false);
     };
 
-    const handleAddPoint = () => {
-        // Add your logic for adding a new transaction point
-        closeModal();
+    const handleAddPoint = async(event) => {
+        // const token =  localStorage.getItem('token');
+        console.log(token)
+        event.preventDefault();
+          try {
+            console.log(name,gender, city, district, address)
+            const response = await axios.post('http://localhost:3000/manager/createWarehouse', {
+                name,
+                gender,
+                province: city,
+                district,
+                address,
+              }, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+            })
+            console.log(response.data.message);
+            getData();
+            closeModal();
+          } catch (error) {
+            console.log("lỗi")
+            console.error(error);
+            // Xử lý lỗi (nếu có)
+          } 
     };
 
     const handleEditPoint = () => {
@@ -88,9 +127,32 @@ const ManageWarehouse = () => {
         closeModal();
     };
 
-    const handleDeletePoint = () => {
+    const handleDeletePoint = async(pointId) => {
         // Add your logic for deleting an existing transaction point
         const shouldDelete = window.confirm('Bạn có chắc muốn xoá điểm tập kết này?');
+
+        if (shouldDelete) {
+            try {
+            //   const token = localStorage.getItem('token');
+        
+              // Make a request to delete the point with the given ID using DELETE method
+              console.log(token);
+              const response = await axios.delete(`http://localhost:3000/manager/deleteWarehouse/${pointId}`,{
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+        
+              console.log(response.data.message);
+              
+              // Assuming getData and closeModal are defined elsewhere in your code
+              getData();
+              closeModal();
+            } catch (error) {
+              // Handle error, e.g., show an error message to the user
+              console.error('Error deleting point:', error);
+            }
+          }
     };
 
     return (
@@ -114,51 +176,83 @@ const ManageWarehouse = () => {
                                 overlayClassName="react-modal-overlay"
                             >
                                 <h2>Thêm Điểm Tập Kết</h2>
-                                <form>
+                                <form onSubmit={handleAddPoint}>
 
                                     <div className="form-group">
-                                        <label htmlFor="name">Tên Điểm</label>
-                                        <input type="text" className="form-control" id="name" />
-                                        <label htmlFor="location">Địa Chỉ</label>
-                                        <input type="text" className="form-control" id="location" />
-                                        <label htmlFor="status">Trạng Thái</label>
-                                        <select className="form-control" id="status">
-                                            <option>Hoạt động</option>
-                                            <option>Đang Duyệt</option>
-                                        </select>
+                                    <label htmlFor="name">Họ và Tên</label>
+                                            <input
+                                            type="text"
+                                            className="form-control"
+                                            id="name"
+                                            value={name}
+                                            onChange={(event) => setName(event.target.value)}
+                                            />
+
+                                            <label htmlFor="gender">Giới Tính</label>
+                                            <input
+                                            type="text"
+                                            className="form-control"
+                                            id="gender"
+                                            value={gender}
+                                            onChange={(event) => setGender(event.target.value)}
+                                            />
+
+                                            <label htmlFor="city">Tỉnh/Thành phố</label>
+                                            <input
+                                            type="text"
+                                            className="form-control"
+                                            id="city"
+                                            value={city}
+                                            onChange={(event) => setCity(event.target.value)}
+                                            />
+
+                                            <label htmlFor="district">Quận/Huyện</label>
+                                            <input
+                                            type="text"
+                                            className="form-control"
+                                            id="district"
+                                            value={district}
+                                            onChange={(event) => setDistrict(event.target.value)}
+                                            />
+
+                                            <label htmlFor="address">Địa chỉ cụ thể</label>
+                                            <input
+                                            type="text"
+                                            className="form-control"
+                                            id="address"
+                                            value={address}
+                                            onChange={(event) => setAddress(event.target.value)}
+                                            />
                                     </div>
-                                    <button className="btn btn-primary" onClick={handleAddPoint}>Thêm</button>
+                                    <button className="btn btn-primary">Thêm</button>
                                     <button className="btn btn-secondary" onClick={closeModal}>Đóng</button>
                                 </form>
 
                             </Modal>
                             <table className="table table-bordered table-trans">
-                                <thead>
+                            <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Tên Điểm</th>
                                         <th>Địa Chỉ</th>
-                                        <th>Trạng Thái</th>
-                                        <th>Thao Tác</th>
+                                        <th>Quận/Huyện</th>
+                                        <th>Tỉnh/Thành Phố</th>
+                                        <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {currentItems.map(point => (
-                                        <tr key={point.id} onClick={() => handlePointClick(point)}>
-                                            <td>{point.id}</td>
-                                            <td>{point.name}</td>
-                                            <td>{point.location}</td>
-                                            <td>{point.status}</td>
+                                    {points.map(point => (
+                                        <tr key={point.point._id} >
+                                            <td>{point.point.address}</td>
+                                            <td>{point.area.province}</td>
+                                            <td>{point.area.district}</td>
                                             <td>
-                                                <button className="btn btn-warning">Sửa</button>
-                                                <button onClick={() => handleDeletePoint()} className="btn btn-danger">Xoá</button>
+                                                <button onClick={() => handleDeletePoint(point.area.warehouseID)} className="btn btn-danger">Xoá</button>
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
 
-                            <div className="pagination">
+                            {/* <div className="pagination">
                                 {Array.from({ length: Math.ceil(transactionPoints.length / itemsPerPage) }, (_, index) => (
                                     <button
                                         key={index + 1}
@@ -168,10 +262,10 @@ const ManageWarehouse = () => {
                                         {index + 1}
                                     </button>
                                 ))}
-                            </div>
+                            </div> */}
                         </div>
 
-                        <div className="vertical-line"></div>
+                        {/* <div className="vertical-line"></div> */}
 
                         {selectedPoint && (
                             <div className={`info panel panel-default ${selectedPoint ? 'show' : ''}`}>
