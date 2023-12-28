@@ -7,9 +7,6 @@ const dotenv = require('dotenv').config();
 class userController{
 
 
-    home(req, res, next) {
-        res.send('sdsadsada');
-    }
     // [POST] tao tai khoan
     async register(req, res, next) {
         try{
