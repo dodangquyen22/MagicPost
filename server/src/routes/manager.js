@@ -5,7 +5,7 @@ const userController = require("../app/controller/userController")
 const { authenticateUser } = require('../middleware/authentication');
 const areaController = require('../app/controller/areaController');
 const { route } = require('./area');
-const statisticController = require('../app/controller/statisticController');
+// const statisticController = require('../app/controller/statisticController');
 
 
 //Hệ thống các điểm giao dịch và điểm tập kết
@@ -29,6 +29,6 @@ router.post('/listAcount', authenticateUser('manager'), userController.getAccoun
 router.post("/updateInfo", authenticateUser('manager'),userController.updateInfo);
 
 //Thống kê[]
-router.get("/statistic", statisticController.getLeaderStatistic);
+// router.get("/statistic", statisticController.getLeaderStatistic);
 
 module.exports = router;
