@@ -29,6 +29,6 @@ router.post('/listAcount', authenticateUser('manager'), userController.getAccoun
 router.post("/updateInfo", authenticateUser('manager'),userController.updateInfo);
 
 //Thống kê[]
-// router.get("/statistic", statisticController.getLeaderStatistic);
+router.get("/statistic", authenticateUser('manager'), statisticController.getLeaderStatistic);
 
 module.exports = router;
