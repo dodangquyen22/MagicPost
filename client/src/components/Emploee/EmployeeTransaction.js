@@ -154,57 +154,6 @@ const getData = () => {
       <Navbar />
       <div className="content-container">
         <Sidebar />
-        {/* {role === 'manager' && (
-          <div className="sidebar">
-            <ul>
-              <li>
-                <Link to="/dashboard">Tổng Quát</Link>
-              </li>
-              <li>
-                <Link to="/employee">Quản Lý Nhân Viên</Link>
-              </li>
-              <li>
-                <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
-              </li>
-              <li>
-                <Link to="/managetranspoints">Quản Lý Điểm Giao Dịch</Link>
-              </li>
-              <li>
-                <Link to="/managewarehouse">Quản Lý Điểm Tập Kết</Link>
-              </li>
-              <li><Link to="/">Log Out</Link></li>
-            </ul>
-          </div>
-        )
-        }
-        {role === 'point leader' && (
-          <div className="sidebar">
-            <ul>
-              <li>
-                <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
-              </li>
-              <li>
-                <Link to="/employee">Quản Lý Nhân Viên</Link>
-              </li>
-              <li><Link to="/">Log Out</Link></li>
-            </ul>
-          </div>
-        )
-        }
-        {role === 'warehouse leader' && (
-          <div className="sidebar">
-            <ul>
-              <li>
-                <Link to="/warehouse">Thống Kê Đơn Hàng</Link>
-              </li>
-              <li>
-                <Link to="/employee">Quản Lý Nhân Viên</Link>
-              </li>
-              <li><Link to="/">Log Out</Link></li>
-            </ul>
-          </div>
-        )
-        } */}
         <div className="content">
           <h1>Quản lý nhân viên</h1>
 
@@ -264,6 +213,7 @@ const getData = () => {
           className="form-control"
           id="name"
           value={name}
+          required
           onChange={(event) => setName(event.target.value)}
         />
 
@@ -273,6 +223,7 @@ const getData = () => {
           className="form-control"
           id="username"
           value={usernames}
+          required
           onChange={(event) => setUsernames(event.target.value)}
         />
 
@@ -282,24 +233,30 @@ const getData = () => {
           className="form-control"
           id="password"
           value={password}
+          required
           onChange={(event) => setPassword(event.target.value)}
         />
 
         <label htmlFor="gender">Giới Tính</label>
-        <input
-          type="text"
+        <select
           className="form-control"
           id="gender"
           value={gender}
+          required
           onChange={(event) => setGender(event.target.value)}
-        />
+        >
+          <option value="">-- Chọn giới tính --</option>
+          <option value="male">Nam</option>
+          <option value="female">Nữ</option>
+        </select>
 
         <label htmlFor="email">Email</label>
         <input
-          type="text"
+          type="email"
           className="form-control"
           id="email"
           value={email}
+          required
           onChange={(event) => setEmail(event.target.value)}
         />
 
@@ -309,6 +266,7 @@ const getData = () => {
           className="form-control"
           id="phone"
           value={phone}
+          required
           onChange={(event) => setPhone(event.target.value)}
         />
       </div>
