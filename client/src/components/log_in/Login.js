@@ -30,10 +30,12 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
       })
       const data = await response.json();
+      console.log(data);
       // const uid = data.uid;
       // Cookies.set('uid', uid, { expires: 1, path: '/' });
       // console.log(Cookies.get('uid'));
       localStorage.setItem('token', data.token);
+      localStorage.setItem('pointID', data.pointID);
       // const uidCookie = response.headers.get('set-cookie');
       // console.log(uidCookie);
       // console.log(data)

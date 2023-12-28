@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const removeVietnameseTones = require("../../utils/convertVietNam");
 const dotenv = require('dotenv').config();
+const area = require("../modulers/area");
+const Point = require("../modulers/point")
 
 class userController{
 
@@ -45,11 +47,19 @@ class userController{
             const validPassword = await bcrypt.compare(req.body.password, user.password);
     
             if (validPassword) {
-                const token = jwt.sign({ username: user.username, role: user.role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+                var pointID;
+                if (user.role == "transaction staff" || user.role == "transaction leader") {
+                    pointID = ((await Point.findOne({ idArea: user.idArea, type: "transaction" }).exec())._id);
+                } else if (user.role == "warehouse staff" || user.role == "warehouse leader") {
+                    pointID = (await Point.findOne({ idArea: user.idArea, type: "warehouse" }).exec())._id;
+                }
+
+                const token = jwt.sign({ username: user.username, role: user.role, pointID: pointID }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
                 // res.redirect('/');
                 res.status(200).json({
                     message:"Đăng nhập thành công",
                     role: user.role,
+                    pointID: pointID,
                     token: token,
                 });
                 return;

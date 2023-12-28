@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const warehouseTypeString = "warehouse";
+const transactionTypeString = "transaction";
 // Lưu thông tin cả điểm tập kết và điểm giao dịch
 const point_Schema = new mongoose.Schema({
     id: {
@@ -17,10 +19,12 @@ const point_Schema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['transaction', 'warehouse'],
+        enum: [warehouseTypeString, transactionTypeString],
     }
 })
 
 const Point = mongoose.model('point', point_Schema);
 
 module.exports = Point;
+module.exports.warehouseTypeString = warehouseTypeString;
+module.exports.transactionTypeString = transactionTypeString;

@@ -1,5 +1,11 @@
 const mongoose = require('mongoose')
 
+const managerString = "manager";
+const warehouseLeaderString = "warehouse leader";
+const warehouseStaffString = "warehouse staff";
+const pointLeaderString = "transaction leader";
+const pointStaffString = "transaction staff";
+const customerString = "customer";
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -35,10 +41,16 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["manager", "warehouse leader", "warehouse staff", "point leader", "point staff", "customer"],
+        enum: [managerString, warehouseLeaderString, warehouseStaffString, pointLeaderString, pointStaffString, customerString],
         required: true
     }
 })
 
 const User = mongoose.model('User', userSchema)
 module.exports = User
+module.exports.managerString = managerString;
+module.exports.warehouseLeaderString = warehouseLeaderString;
+module.exports.warehouseStaffString = warehouseStaffString;
+module.exports.pointLeaderString = pointLeaderString;
+module.exports.pointStaffString = pointStaffString;
+module.exports.customerString = customerString;

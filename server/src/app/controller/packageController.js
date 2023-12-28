@@ -1,13 +1,14 @@
 const packageModel = require('../modulers/package');
 const area = require('../modulers/area');
 const { warehouseTypeString, transactionTypeString } = require('../modulers/package');
-const {successDeliveryStatus, failDeliveryStatus, shippingStatus, confirmedStatus} = require("../modulers/package");
+const {successDeliveryStatus, failDeliveryStatus, shippingStatus} = require("../modulers/package");
 class packageController {
     // Thêm dữ liệu hàng gửi
     async addPackage(req, res, next) {
         try {
             console.log("Body: ", req.body);
-            const {sender, recipient, details} = req.body;
+            const {sender, recipient, details, cost} = req.body;
+            console.log(sender.province);
             const sendArea = await area.findOne({province: sender.province, district: sender.district});
             const recipientArea = await area.findOne({province: recipient.province, district: recipient.district});
             console.log(sendArea, recipientArea);
@@ -19,6 +20,8 @@ class packageController {
                 sendAreaID: sendArea.id,
                 receiverDetails: receiverDetails,
                 senderDetails: senderDetails,
+                receiveDate: new Date(),
+                cost: Number(cost),
                 details: details,
                 status: shippingStatus
             })
@@ -41,13 +44,13 @@ class packageController {
     // Lấy dữ liệu hàng gửi
     async getPackages(req, res, next) {
         // Your code here
-        const {spotID} = req.body;
+        const {pointID} = req.params.pointID;
         var queries = {};
-        if (spotID) {
+        if (pointID) {
             queries = {
                 $or: [
-                    {sendPointID: spotID},
-                    {receivePointID: spotID}
+                    {sendPointID: pointID},
+                    {receivePointID: pointID}
                 ]
             }
         }
@@ -77,7 +80,7 @@ class packageController {
     // Thống kê hàng 
     async statistics(req, res, next) {
         // Add your code here to perform the statistics
-        const spotID = req.query.spotID;
+        const spotID = req.params.pointID;
         console.log(req.query);
         var result = {};
         if (spotID) {

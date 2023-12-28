@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const successDeliveryStatus = "success";
 const failDeliveryStatus = "fail";
 const shippingStatus = "shipping";
-const confirmedStatus = "confirmed";
 
 const packageSchema = new mongoose.Schema({
     ID: {
@@ -25,8 +24,11 @@ const packageSchema = new mongoose.Schema({
     senderDetails: {
 
     },
+    receiveDate: {
+        type: Date  
+    },
     cost: {
-
+        type: Number
     },
     // thông tin gói hàng
     details: {
@@ -43,4 +45,3 @@ module.exports = package;
 module.exports.successDeliveryStatus = successDeliveryStatus;
 module.exports.failDeliveryStatus = failDeliveryStatus;
 module.exports.shippingStatus = shippingStatus;
-module.exports.confirmedStatus = confirmedStatus;
