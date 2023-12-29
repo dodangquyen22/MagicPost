@@ -3,6 +3,8 @@ const router = express.Router();
 const userController = require("../app/controller/userController")
 const { authenticateUser } = require('../middleware/authentication');
 const { route } = require('./area');
+const orderController = require('../app/controller/orderController');
+
 
 router.post('/listAcount', authenticateUser('transaction leader'), userController.getAccounts)
 //Sửa thông tin của nhân viên của điểm tập kết [Viết sau]
@@ -12,5 +14,5 @@ router.post("/resgister", authenticateUser('transaction leader'),userController.
 //Xóa tài khoản nhân viên
 router.delete("/delete/:_id", authenticateUser('transaction leader'),userController.deleteAccount)
 //Thống kê hàng đi , hàng đến[]
-
+router.get("/order", authenticateUser('transaction leader'), orderController.getOrderList);
 module.exports = router;

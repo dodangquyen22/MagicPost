@@ -145,7 +145,20 @@ class orderController {
                 }
             }
             console.log("queries: ", queries);
-            res.json(await order.find(queries).exec());
+            const result = await order.aggregate([
+                {
+                  $match: queries // Apply the initial query condition
+                },
+                {
+                  $lookup: {
+                    from: 'packages',
+                    localField: 'packageID',
+                    foreignField: 'ID',
+                    as: 'package'
+                  }
+                }
+              ]).exec();
+              res.json(result);
         } catch (error) {
             res.send('Error when collecting order list');
             console.log(error);

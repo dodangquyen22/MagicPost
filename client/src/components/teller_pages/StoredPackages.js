@@ -45,7 +45,7 @@ const StoredPackages = () => {
             try {
                 await axios.get('http://127.0.0.1:3000/transactionPoint/package?pointID=' + pointID, {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        Authorization: `Bearer ${token}`
                     }
                 }).then((res) => {
                     setPackages(res.data);
@@ -66,7 +66,7 @@ const StoredPackages = () => {
     return (
         <div className='container'>
             <div className='confirm-return-container'>
-                <h2>Xác Nhận Hàng Chuyển Hàng</h2>
+                <h2>Quản Lý Hàng Đang Lưu Tại Điểm</h2>
 
                 <div className='list-order-return'>
                     <table>
@@ -75,9 +75,9 @@ const StoredPackages = () => {
                                 <th>Mã Đơn Hàng</th>
                                 <th>Người Gửi</th>
                                 <th>Người Nhận</th>
-                                <th>Ngày Xác Nhận Đơn</th>
-                                <th> Gửi Đến Điểm Tập Kết</th>
-                                <th>Thông tin hàng</th>
+                                <th>Ngày Giờ  Xác Nhận Đơn</th>
+                                <th> Tên Hàng</th>
+                                <th>Chi Phí</th>
                                 <th>Tạo đơn</th>
                             </tr>
                         </thead>
@@ -97,9 +97,9 @@ const StoredPackages = () => {
                                 {", SĐT:"+pack.senderDetails.phone}{
                                 }</td>
                                 <td>{"Tên: "+pack.receiverDetails.name +", SĐT:"+pack.receiverDetails.phone}</td>
-                                <td>{pack.receiveDate}</td>
-                                <td></td>
-                                <td>{pack.status}</td>
+                                <td>{(pack.receiveDate).replace("T", " ").replace("Z", "")}</td>
+                                <td>{pack.details.name}</td>
+                                <td>{pack.details.price}đ</td>
                                 <td>
                                     <button onClick={() => handleToCustomer(pack.ID)}>Đến khách </button>
                                     <button onClick={() => handleToWarehouse(pack.ID)}>Đến tập kết</button>

@@ -13,17 +13,10 @@ const ProductList = () => {
   const [selectAll, setSelectAll] = useState(false);
   const [showActionsMenu, setShowActionsMenu] = useState(false);
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Temporaly fixed id
   const pointID = localStorage.getItem('pointID');
   const token = localStorage.getItem('token');
-  // Giả sử bạn có một danh sách các đơn hàng
-  // const orders = [
-  //   { id: 1, status: "Successful", printed: true },
-  //   { id: 2, status: "Unsuccessful", printed: false },
-  //   { id: 3, status: "Cancelled", printed: false },
-  //   // Thêm các đơn hàng khác tùy ý
-  // ];
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -34,8 +27,8 @@ const ProductList = () => {
             Authorization: `Bearer ${token}`,
           }, 
         }).then((response) => {
-          console.log("order data: ", response.data);
           setOrders(response.data);
+          console.log("order data: ", response.data);
         }); 
          // Assuming the response contains the array of orders
       } catch (error) {
@@ -75,8 +68,6 @@ const ProductList = () => {
         return order.status === "failed";
       case "shipping":
         return order.status === "shipping";
-      case "inWarehouse":
-        return order.status === "Còn Trong Kho";
       default:
         return true; // Hiển thị tất cả các đơn hàng nếu không có tab nào được chọn
     }
@@ -162,6 +153,21 @@ const ProductList = () => {
     setSelectAll(false);
   }
 
+  const printStatus = (status) => {
+    switch (status) {
+      case "confirmed":
+        return "Vận Chuyển Thành Công";
+      case "success":
+        return "Vận Chuyển Thành Công";
+      case "shipping":
+        return "Đang Vận Chuyên";
+      case "failed":
+        return "Đã Hủy";
+      default:
+        return status;
+    }
+  }
+
 
   return (
     <div className="order-container">
@@ -176,12 +182,6 @@ const ProductList = () => {
               onClick={() => setActiveTab("all")}
             >
               Tất Cả
-            </button>
-            <button
-              className={activeTab === "inWarehouse" ? "active" : ""}
-              onClick={() => setActiveTab("inWarehouse")}
-            >
-              Đơn Hàng Trong Kho
             </button>
             <button
               className={activeTab === "confirmed" ? "active" : ""}
@@ -230,45 +230,28 @@ const ProductList = () => {
             <table>
               <thead>
                 <tr>
-                  <th className="checkbox-select">
-                    <input
-                      type="checkbox"
-                      checked={selectAll}
-                      onChange={handleSelectAllChange}
-                    />
-
-                  </th>
                   <th>Mã vận đơn</th>
                   <th>Mã Đơn Hàng</th>
-                  <th>Người Gửi</th>
-                  <th>Người Nhận</th>
-                  <th>Hàng Hoá</th>
+                  <th>Đối Tượng Nhận</th>
+                  <th>Tên Người Nhận</th>
+                  <th>Ngày Gửi</th>
                   <th>Trạng Thái</th>
-                  <th>Ngày Lập</th>
+                  <th>ID Khu Vực Người Nhận </th>
                   <th>Thu Hộ</th>
-                  <th>Tổng Cước</th>
                   <th>Xác Nhận Giao Thành Công</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredOrders.map(order => (
                   <tr key={order._id}>
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={selectedOrders.includes(order._id)}
-                        onChange={() => handleCheckboxChange(order._id)}
-                      />
-                    </td>
-                    <td></td>
                     <td>{order._id}</td>
-                    <td>{order.type == "toWarehouse" ? "Gửi kho": "Gửi khách"}</td>
-                    <td>{order.type == "toWarehouse" ? order.receive_point_id: ""}</td>
-                    <td>{order.sendDate}</td>
-                    <td>{order.status}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{order.packageID}</td>
+                    <td>{order.type == "toWarehouse" ? "Kho": "Khách hàng"}</td>
+                    <td>{order.package[0].senderDetails.name}</td>
+                    <td>{(order.sendDate).replace("T", " ").replace("Z", "")}</td>
+                    <td>{printStatus(order.status)}</td>
+                    <td>{order.package[0].receiveAreaID}</td>
+                    <td>{order.package[0].cost}</td>
                     <td>
                     <button onClick={() => handleConfirm(order._id)}>Xác nhận</button>
                     </td>

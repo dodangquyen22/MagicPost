@@ -3,6 +3,7 @@ const router = express.Router();
 // const warehouseController = require('../app/controller/warehouseController');
 const userController = require("../app/controller/userController");
 const { authenticateUser } = require('../middleware/authentication');
+const orderController = require('../app/controller/orderController');
 
 
 //Hệ thống các điểm giao dịch và điểm tập kết
@@ -16,5 +17,5 @@ router.post("/resgister", authenticateUser('warehouse leader'),userController.re
 //Xóa tài khoản nhân viên
 router.delete("/delete/:_id", authenticateUser('warehouse leader'),userController.deleteAccount)
 //Thống kê hàng đi , hàng đến[]
-
+router.get("/order", authenticateUser('warehouse leader'), orderController.getOrderList);
 module.exports = router;

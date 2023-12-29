@@ -31,12 +31,6 @@ const TransactionPage = () => {
               Ghi Nhận Hàng
             </button>
             <button
-              className={selectedTab === 'createOrder' ? 'active' : ''}
-              onClick={() => handleTabChange('createOrder')}
-            >
-              Tạo Đơn Chuyển Hàng
-            </button>
-            <button
               className={selectedTab === 'confirmReturn' ? 'active' : ''}
               onClick={() => handleTabChange('confirmReturn')}
             >
