@@ -4,7 +4,6 @@ const router = express.Router();
 const userController = require("../app/controller/userController")
 const { authenticateUser } = require('../middleware/authentication');
 const areaController = require('../app/controller/areaController');
-const { route } = require('./area');
 const statisticController = require('../app/controller/statisticController');
 
 
@@ -29,6 +28,8 @@ router.post('/listAcount', authenticateUser('manager'), userController.getAccoun
 router.post("/updateInfo", authenticateUser('manager'),userController.updateInfo);
 
 //Thống kê[]
-router.get("/statistic", statisticController.getLeaderStatistic);
+router.get("/statistic",authenticateUser("manager"), statisticController.getLeaderStatistic);
+router.get("/statistic/warehouse/:idArea",authenticateUser("manager"), statisticController.getLeaderWarehouseStatistic);
+router.post("/statistic/transaction/:idArea",authenticateUser("manager"), statisticController.getLeaderTransactionStatistic);
 
 module.exports = router;

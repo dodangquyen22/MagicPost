@@ -5,7 +5,7 @@ class trackingController {
     async trackPackage(req, res, next) {
         try {
             const {packageID} = req.body;
-            console.log(packageID);
+            // console.log(packageID);
             var query = orderModel.find({packageID: packageID}).sort({sendDate: 1});
             var orders = await query.exec();
             res.json(orders);

@@ -10,7 +10,7 @@ class orderController {
     // Tạo đơn
     createOrder = async (req, res, next) => {
         const {type} = req.query;
-        console.log("query", req.query);
+        // console.log("query", req.query);
         if (type == toTransactionSpotType) {
             this.createOrderToTransactionSpot(req, res, next);
         } else if (type == toWarehouseType) {
@@ -48,7 +48,7 @@ class orderController {
         // Your code here
         try {
             const {packageID, type, pointID} = req.query;
-            console.log(packageID);
+            // console.log(packageID);
             const pack = await packageModule.findOne({ID: packageID}).exec();
             if (pack == null) {
                 console.log("Package not found");
@@ -76,7 +76,7 @@ class orderController {
     async createOrderToCustomer(req, res, next) {
         try {
             const {type, pointID, packageID} = req.query;
-            console.log(type, pointID, packageID);
+            // console.log(type, pointID, packageID);
             const newOrder = new order({
                 id: Math.floor(Math.random() * 1000000000),
                 packageID: packageID,
@@ -104,7 +104,7 @@ class orderController {
         try {
             const point_id = req.query.pointID;
             const type = req.query.type;
-            console.log("point_id: ", point_id);
+            // console.log("point_id: ", point_id);
             var queries = {};
             if (type == "pending") {
                 queries = {receive_point_id: new ObjectId(point_id), status: shippingStatus};
@@ -113,7 +113,7 @@ class orderController {
                     queries = {send_point_id: new ObjectId(point_id)};
                 }
             }
-            console.log("queries: ", queries);
+            // console.log("queries: ", queries);
             res.json(await order.find(queries).exec());
         } catch (error) {
             res.send('Error when collecting order list');
@@ -127,7 +127,7 @@ class orderController {
     async confirmOrder(req, res, next) {
         try {
             const orderID = req.query.orderID;
-            console.log("order id", orderID);
+            // console.log("order id", orderID);
             const ord = await order.findOneAndUpdate({id: orderID}, {$set : {status: confirmedStatus}}).exec();
             if (ord.type == toCustomerType) {
                 await packageModule.updateOne({ID: ord.packageID}, {$set: {currentPointID: undefined, status: successDeliveryStatus}}).exec();
@@ -143,7 +143,7 @@ class orderController {
 
     async statistics(req, res, next) {
         const spotID = req.query.spotID;
-        console.log(req.query);
+        // console.log(req.query);
         var result = {};
         if (spotID) {
             // Số lượng hàng gửi đi khu vực khác

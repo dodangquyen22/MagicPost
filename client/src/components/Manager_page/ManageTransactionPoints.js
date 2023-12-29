@@ -33,7 +33,7 @@ const ManageTransactionPoints = () => {
             })
             .then((response) => {
                 const points = response.data.points;
-                setPointSta([10,100,50]);
+                setPointSta([10,100,100]);
                 setPoints(points)
             })
             .catch((error) => {

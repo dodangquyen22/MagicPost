@@ -14,7 +14,7 @@ class userController{
         try{
             const {name, username, password, email, phone,province, district, role, gender} = req.body;
             const salt = await bcrypt.genSalt(10);
-            console.log(salt)
+            // console.log(salt)
             const hashedPassword = await bcrypt.hash(password, salt);
             const existingUser = await User.findOne({ username });
             if (existingUser) {
@@ -33,7 +33,7 @@ class userController{
     }
     async login(req, res, next) {
         const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
-        console.log(accessTokenSecret)
+        // console.log(accessTokenSecret)
         try {
             const user = await User.findOne({ username: req.body.username });
             if (!user) {
@@ -51,11 +51,11 @@ class userController{
                 //     pointID = (await Point.findOne({ idArea: user.idArea, type: "warehouse" }).exec())._id;
                 // }
                 var pointID;
-                console.log("user", user);
+                // console.log("user", user);
                 if (user.role == "transaction staff" || user.role == "transaction leader") {
                     const transactionPoint = await Point.findOne({ idArea: user.idArea, type: "transaction" });
                     if (transactionPoint) {
-                        console.log("trans", transactionPoint);
+                        // console.log("trans", transactionPoint);
                         pointID = transactionPoint._id;
                     } else {
                         // Handle the case where transactionPoint is null or undefined
@@ -71,7 +71,7 @@ class userController{
 
                 const token = jwt.sign({ username: user.username, role: user.role, pointID: pointID }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
                 // res.redirect('/');
-                console.log("point id ", pointID);
+                // console.log("point id ", pointID);
                 res.status(200).json({
                     message:"Đăng nhập thành công",
                     role: user.role,
@@ -98,7 +98,7 @@ class userController{
     async deleteAccount(req, res, next) {
         // Add your code here to delete the account
         const {_id} = req.params;
-        console.log("req ",req.params);
+        // console.log("req ",req.params);
         const deleteUser = await User.findOneAndDelete({_id: _id});
         res.status(200).json({message: "Xóa thành công"})
     }

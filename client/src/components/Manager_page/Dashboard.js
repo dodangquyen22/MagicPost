@@ -10,7 +10,7 @@ import axios from 'axios';
 
 export const Dashboard = () => {
     const monthLimit = 5;
-    const { token } = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const { role } = useContext(AuthContext);
 
     const [data, setData] = useState({});
@@ -23,7 +23,7 @@ export const Dashboard = () => {
                 try {
                     const response = await axios.get('http://127.0.0.1:3000/manager/statistic', {
                         headers: {
-                            'Authorization': `Bearer ${token}`
+                            Authorization: `Bearer ${token}`
                         }
                     }).then((res) => {
                         setData(res.data);

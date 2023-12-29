@@ -43,7 +43,7 @@ class areaController {
             const result = await Promise.all(resultPromises);
         
             res.json({ points: result });
-            console.log(result);
+            // console.log(result);
           } catch (error) {
             next(error);
           }
@@ -64,7 +64,7 @@ class areaController {
           const result = await Promise.all(resultPromises);
       
           res.json({ points: result });
-          console.log(result);
+        //   console.log(result);
         } catch (error) {
           next(error);
         }
@@ -72,7 +72,7 @@ class areaController {
 
 
     async createTransaction(req, res, next) {
-        console.log(req.body);
+        // console.log(req.body);
         const {province, district, address, name, gender} = req.body;
         const id = removeVietnameseTones.removeVietnameseTones(district);
         const salt = await bcrypt.genSalt(10);
