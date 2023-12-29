@@ -72,7 +72,7 @@ const RecordTransaction = () => {
     }
     let GTGT = mainFee * 0.05;
     let totalFare = mainFee + extraFee + GTGT;
-    let totalFee = totalFare + parseInt(collectionFee.amount);
+    let totalFee = totalFare;
 
     useEffect(() => {
         // Fetch provinces
@@ -616,7 +616,7 @@ const RecordTransaction = () => {
                                             value={collectionFee.amount}
                                             onChange={(e) => {
                                                 const formattedAmount = parseFloat(e.target.value.replace(/\D/g, '')).toLocaleString('vi-VN');
-                                                setCollectionFee({ ...collectionFee, amount: e.target.value });
+                                                setCollectionFee({ ...collectionFee, amount: formattedAmount });
                                             }}
                                         />
                                     )}
@@ -733,6 +733,8 @@ const RecordTransaction = () => {
 
             </div>
 
+            {!isModalOpen && (
+
             <div className='footer'>
                 <div className='footer1'>
                     <label>Tổng cước</label>
@@ -772,6 +774,7 @@ const RecordTransaction = () => {
 
 
             </div>
+            )}
             <Modal isOpen={isModalOpen} onRequestClose={closeModal} className="react-modal-print"
                 overlayClassName="react-modal-overlay modal-overlay" >
                 <div className='print-container' ref={componentRef}>
@@ -837,7 +840,7 @@ const RecordTransaction = () => {
                                         <p>b. Phụ phí: {extraFee}&nbsp;₫</p>
                                         <p>c. Cước GTGT: {GTGT}&nbsp;₫</p>
                                         <p>d. Tổng cước (gồm VAT): {totalFare}&nbsp;₫</p>
-                                        <p>e. Thu khác: {collectionFee.amount}&nbsp;₫</p>
+                                        <p>e. Thu khác: </p>
                                         <p><strong>f. Tổng thu: {totalFee}&nbsp;₫</strong></p>
                                     </td>
                                     <td className='print'>
@@ -892,7 +895,7 @@ const RecordTransaction = () => {
                 </div>
                 <div className='modal-button'>
 
-                    <ReactToPrint trigger={() => <button className="print-button">Xác Nhận In</button>} content={() => componentRef.current} />
+                    <ReactToPrint trigger={() => <button className="print-button" onClick={closeModal}>Xác Nhận In</button>} content={() => componentRef.current} />
                     <button className="cancel-button" onClick={closeModal}>Huỷ</button>
                 </div>
             </Modal>
