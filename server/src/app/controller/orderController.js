@@ -1,13 +1,16 @@
 const order = require('../modulers/order');
 const packageModule = require('../modulers/package');
 const point = require('../modulers/point');
+const area = require('../modulers/area');
 const { ObjectId } = require('mongodb');
 const { toWarehouseType, toCustomerType, toTransactionSpotType, toOtherAreaType } = require('../modulers/order');
 const { successDeliveryStatus, failDeliveryStatus, shippingStatus, confirmedStatus } = require('../modulers/order');
+const {pendingStatus} = require('../modulers/package');
 
 var pointID;
 class orderController {
     // Tạo đơn
+    // Phải có type trong tạo đơn hàng
     createOrder = async (req, res, next) => {
         const {type} = req.query;
         // console.log("query", req.query);
@@ -29,15 +32,15 @@ class orderController {
             const idArea = (await point.findOne({_id: new ObjectId(pointID)}).exec()).idArea;
             const receivePointID = (await point.findOne({idArea: idArea, type: "warehouse"}).exec())._id;
             const newOrder = await new order({
-                _id: new ObjectId(),
                 packageID: packageID,
                 type: type,
                 send_point_id: new ObjectId(pointID), //pointID,
                 receive_point_id: receivePointID,
-                receiveDate: Date.now(),
+                sendDate: Date.now(),
                 status: shippingStatus,
             })
             await newOrder.save();
+            packageModule.updateOne({ID: packageID}, {$set: {status: shippingStatus}}).exec();
             console.log("Order created successfully");
         } catch (error) {
             console.log(error);
@@ -56,18 +59,17 @@ class orderController {
                 return;
             }
             const rcvPoint = await point.findOne({idArea: pack.receiveAreaID, type: "transaction"}).exec();
+            console.log("receive point: ", rcvPoint);
             const newOrder = await new order({
-                id: Math.floor(Math.random() * 1000000000),
                 packageID: packageID,
                 type: type,
-                address_send: address_send,
-                address_receive: address_receive,
                 receive_point_id: rcvPoint._id,
-                send_point_id: new ObjectId(pack.sendAreaID), //pointID,
+                send_point_id: new ObjectId(pointID), //pointID,
                 sendDate: Date.now(),
                 status: shippingStatus,
             })
             await newOrder.save();
+            packageModule.updateOne({ID: packageID}, {$set: {status: shippingStatus}}).exec();
             console.log("Order created successfully");
         } catch (error) {
             console.log("Order creation failed: ", error);
@@ -78,7 +80,6 @@ class orderController {
             const {type, pointID, packageID} = req.query;
             // console.log(type, pointID, packageID);
             const newOrder = new order({
-                id: Math.floor(Math.random() * 1000000000),
                 packageID: packageID,
                 type: type,
                 receive_point_id: undefined,
@@ -87,6 +88,31 @@ class orderController {
                 status: shippingStatus
             })
             await newOrder.save();
+            packageModule.updateOne({ID: packageID}, {$set: {status: shippingStatus}}).exec();
+        } catch (error) {
+            console.log("Order creation failed: ", error);
+        }
+    }
+
+    async createOrderToOtherArea(req, res, next) {
+        try {
+            
+            const {type, pointID, packageID} = req.query;
+            const pack = await packageModule.findOne({ID: packageID}).exec();
+            console.log("package: ", pack);
+            const rcvPoint = await point.findOne({idArea: pack.receiveAreaID, type: "warehouse"}).exec();
+            console.log("receive point: ", rcvPoint);
+
+            const newOrder = new order({
+                packageID: packageID,
+                type: type,
+                receive_point_id: rcvPoint._id,
+                send_point_id: pointID,
+                sendDate: new Date(),
+                status: shippingStatus
+            })
+            await newOrder.save();
+            packageModule.updateOne({ID: packageID}, {$set: {status: shippingStatus}}).exec();
         } catch (error) {
             console.log("Order creation failed: ", error);
         }
@@ -110,7 +136,12 @@ class orderController {
                 queries = {receive_point_id: new ObjectId(point_id), status: shippingStatus};
             } else {
                 if (point_id) {
-                    queries = {send_point_id: new ObjectId(point_id)};
+                    queries = {
+                        $or : [
+                            {receive_point_id: new ObjectId(point_id)},
+                            {send_point_id: new ObjectId(point_id)}
+                        ]
+                    }
                 }
             }
             // console.log("queries: ", queries);
@@ -130,9 +161,9 @@ class orderController {
             // console.log("order id", orderID);
             const ord = await order.findOneAndUpdate({id: orderID}, {$set : {status: confirmedStatus}}).exec();
             if (ord.type == toCustomerType) {
-                await packageModule.updateOne({ID: ord.packageID}, {$set: {currentPointID: undefined, status: successDeliveryStatus}}).exec();
-            } else if (order.type == toTransactionSpotType || order.type == toWarehouseType) {
-                await packageModule.updateOne({ID: ord.packageID}, {$set: {currentPointID: ord.receive_point_id}}).exec();
+                await packageModule.updateOne({ID: ord.packageID}, {$set: {currentPointID: undefined, status: successDeliveryStatus, receciveDate: Date.now()}}).exec();
+            } else if (ord.type == toTransactionSpotType || ord.type == toWarehouseType || ord.type == toOtherAreaType) {
+                await packageModule.updateOne({ID: ord.packageID}, {$set: {currentPointID: ord.receive_point_id, status: pendingStatus, receiveDate: Date.now()}}).exec();
             }
             res.json(ord);
         } catch (error) {

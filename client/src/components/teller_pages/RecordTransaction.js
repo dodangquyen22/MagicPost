@@ -76,7 +76,7 @@ const RecordTransaction = () => {
 
     useEffect(() => {
         // Fetch provinces
-        axios.get('http://localhost:3000/province')
+        axios.get('http://localhost:3000/manager/province')
             .then(response => setProvinces(response.data))
             .catch(error => console.error('Error fetching provinces:', error));
     }, []);
@@ -86,7 +86,7 @@ const RecordTransaction = () => {
 
         // Fetch districts based on selected province for sender
         try {
-            const response = await axios.get(`http://localhost:3000/district?province=${selectedProvince}`);
+            const response = await axios.get(`http://localhost:3000/manager/district?province=${selectedProvince}`);
             setSenderDistricts(response.data);
         } catch (error) {
             console.error('Error fetching sender districts:', error);

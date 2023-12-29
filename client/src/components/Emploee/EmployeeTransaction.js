@@ -248,6 +248,7 @@ const getData = () => {
           <option value="">-- Chọn giới tính --</option>
           <option value="male">Nam</option>
           <option value="female">Nữ</option>
+          <option value="other">Khác</option>
         </select>
 
         <label htmlFor="email">Email</label>

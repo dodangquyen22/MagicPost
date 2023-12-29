@@ -43,7 +43,7 @@ const WarehousePackage = () => {
     useEffect(() => {
         const fetchPackages = async () => {
             try {
-                await axios.get('http://127.0.0.1:3000/warehouse/package?pointID=' + pointID + "type=pending", {
+                await axios.get('http://127.0.0.1:3000/warehouse/package?pointID=' + pointID + "&type=pending", {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -96,8 +96,8 @@ const WarehousePackage = () => {
                                     // onChange={() => handleCheckboxChange(pack.id)}
                                 /> */}
                                 </td>
-                                <td>{pack.senderDetails}</td>
-                                <td>{pack.receiverDetails}</td>
+                                <td>{pack.senderDetails.name}</td>
+                                <td>{pack.receiverDetails.name}</td>
                                 <td></td>
                                 <td></td>
                                 <td>{pack.status}</td>

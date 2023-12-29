@@ -187,14 +187,18 @@ const ManageTransactionPoints = () => {
                                             />
 
                                             <label htmlFor="gender">Giới Tính</label>
-                                            <input
-                                            type="text"
-                                            className="form-control"
-                                            id="gender"
-                                            required
-                                            value={gender}
-                                            onChange={(event) => setGender(event.target.value)}
-                                            />
+                                            <select
+                                                className="form-control"
+                                                id="gender"
+                                                required
+                                                value={gender}
+                                                onChange={(event) => setGender(event.target.value)}
+                                            >
+                                                <option value="">-- Chọn giới tính --</option>
+                                                <option value="male">Nam</option>
+                                                <option value="female">Nữ</option>
+                                                <option value="other">Khác</option>
+                                            </select>
 
                                             <label htmlFor="city">Tỉnh/Thành phố</label>
                                             <input

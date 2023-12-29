@@ -18,6 +18,10 @@ const WarehouseStaff = () => {
     const pointID = localStorage.getItem('pointID');
     const token = localStorage.getItem('token');
 
+    const confirmedStatus = "confirmed";
+    const failedStatus = "failed";
+    const shippingStatus = "shipping";
+
     useEffect(() => {
         const fetchOrders = async () => {
             try {
@@ -42,7 +46,7 @@ const WarehouseStaff = () => {
     const handleConfirm = async (orderId) => {
     try {
         // Send the request here
-        axios.get('http://127.0.0.1:3000/transactionPoint/' + pointID + '/order/confirm?orderID=' + orderId, {
+        axios.get('http://127.0.0.1:3000/warehouse/order/confirm?orderID=' + orderId + '&pointID=' + pointID, {
         headers: {
             'Authorization': `Bearer ${token}`,
         },
@@ -67,20 +71,21 @@ const WarehouseStaff = () => {
     // ]);
 
     // Lọc đơn hàng dựa trên trạng thái
-    let filteredOrders = orders.filter(order => {
+    let filteredOrders;
+    if (orders) {filteredOrders = orders.filter(order => {
         switch (activeTab) {
-            case "successful":
-                return order.status === "Chuyển Thành Công";
-            case "unsuccessful":
-                return order.status === "Chuyển Thất Bại";
-            case "cancelled":
-                return order.status === "Đã Huỷ Đơn";
+            case confirmedStatus:
+                return order.status === confirmedStatus;
+            case shippingStatus:
+                return order.status === shippingStatus;
+            case failedStatus:
+                return order.status === failedStatus;
             case "inWarehouse":
                 return order.status === "Còn Trong Kho";
             default:
                 return true; // Hiển thị tất cả các đơn hàng nếu không có tab nào được chọn
         }
-    });
+    });}
 
     const handleCheckboxChange = (orderId) => {
         const isSelected = selectedOrders.includes(orderId);
@@ -254,18 +259,17 @@ const WarehouseStaff = () => {
                             </thead>
                             <tbody>
                                 {filteredOrders.map(order => (
-                                    <tr key={order.id}>
+                                    <tr key={order._id}>
                                         <td>
                                             <input
                                                 type="checkbox"
-                                                checked={selectedOrders.includes(order.id)}
-                                                onChange={() => handleCheckboxChange(order.id)}
+                                                checked={selectedOrders.includes(order._id)}
+                                                onChange={() => handleCheckboxChange(order._id)}
                                             />
                                         </td>
+                                        <td>{order._id}</td>
                                         <td></td>
-                                        <td>{order.id}</td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{order.sendDate}</td>
                                         <td></td>
                                         <td></td>
                                         <td>
@@ -275,8 +279,8 @@ const WarehouseStaff = () => {
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            {order.confirm === 'newOrder' && (
-                                                <button className="confirm-btn">Xác Nhận</button>
+                                            {order.status === shippingStatus && (
+                                                <button className="confirm-btn" onClick={() => handleConfirm(order._id)}>Xác Nhận</button>
                                             )}
 
                                         </td>

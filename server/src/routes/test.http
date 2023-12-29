@@ -97,3 +97,10 @@ GET http://127.0.0.1:3000/manager/statistic
 GET http://127.0.0.1:3000/transactionPoint/order?type=pending&pointID=658dace90fc0efb969007e0c
 ### 
 GET http://127.0.0.1:3000/transactionPoint/order/create?type=toCustomer&packageID=420233557&pointID=658dd07c373d3ae33ac5d480
+###
+GET http://127.0.0.1:3000/warehouse/order?pointID=658a5655cb954fd8511ef8b8 HTTP/1.1
+###
+GET http://127.0.0.1:3000/warehouse/package?pointID=658a5655cb954fd8511ef8b8&type=pending HTTP/1.1
+###
+GET http://127.0.0.1:3000/transactionPoint/package?pointID=658dd07c373d3ae33ac5d480 HTTP/1.1
+###

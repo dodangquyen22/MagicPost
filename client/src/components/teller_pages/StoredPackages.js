@@ -16,7 +16,7 @@ const StoredPackages = () => {
         try {
             axios.get('http://127.0.0.1:3000/transactionPoint/order/create?type=toCustomer&packageID=' + packageID + '&pointID=' + pointID, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 }
             }).then((res) => {
                 console.log(res.data);
@@ -30,7 +30,7 @@ const StoredPackages = () => {
         try {
             axios.get('http://127.0.0.1:3000/transactionPoint/order/create?type=toWarehouse&packageID=' + packageID + '&pointID=' + pointID, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 }
             }).then((res) => {
                 console.log(res.data);
@@ -78,7 +78,7 @@ const StoredPackages = () => {
                                 <th>Ngày Xác Nhận Đơn</th>
                                 <th> Gửi Đến Điểm Tập Kết</th>
                                 <th>Thông tin hàng</th>
-                                <th>Thao tác</th>
+                                <th>Tạo đơn</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,9 +93,11 @@ const StoredPackages = () => {
                                     // onChange={() => handleCheckboxChange(pack.id)}
                                 /> */}
                                 </td>
-                                <td>{pack.senderDetails}</td>
-                                <td>{pack.receiverDetails}</td>
-                                <td></td>
+                                <td>{"Tên: "+pack.senderDetails.name}
+                                {", SĐT:"+pack.senderDetails.phone}{
+                                }</td>
+                                <td>{"Tên: "+pack.receiverDetails.name +", SĐT:"+pack.receiverDetails.phone}</td>
+                                <td>{pack.receiveDate}</td>
                                 <td></td>
                                 <td>{pack.status}</td>
                                 <td>
