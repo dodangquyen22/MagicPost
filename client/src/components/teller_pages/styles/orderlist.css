@@ -22,7 +22,6 @@ button {
   background-color: #3498db;
   color: #fff;
   border-radius: 4px;
-  
 }
 
 button.active {
@@ -113,3 +112,15 @@ tr.selected {
   padding-bottom: 20px;
   border-bottom: 2px solid #ccc;
 }
+
+/* reponsive */
+@media screen and (max-width: 600px) {
+
+  button {
+    margin-bottom: 0;
+    width: max-content;
+    height: max-content;
+    padding: 5px;
+  }
+}
+
