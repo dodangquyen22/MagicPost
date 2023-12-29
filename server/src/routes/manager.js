@@ -13,12 +13,17 @@ router.get('/province', areaController.getProvinceList);
 
 router.get("/district", areaController.getDistrictList);
 
-
+//lấy thông tin các điểm gaio dịch
 router.get("/pointTransaction",authenticateUser('manager'), areaController.getPointTransaction);
+//lấy thông tin các điểm tập kết
 router.get("/pointWarehouse",authenticateUser('manager'), areaController.getPointWarehouse);
+//tạo điểm giao dịch
 router.post("/createTransaction",authenticateUser('manager'), areaController.createTransaction);
+//tạo điểm tập kết
 router.post("/createWarehouse", authenticateUser('manager'),areaController.createWarehouse);
+//xóa điểm tập kết
 router.delete("/deleteWarehouse/:warehouseID", authenticateUser("manager"),areaController.deleteWarehouse);
+//xóa điểm giao dịch
 router.delete("/deleteTransaction/:transactionPointID", authenticateUser("manager"),areaController.deleteTransaction);
 
 
@@ -27,9 +32,11 @@ router.post('/listAcount', authenticateUser('manager'), userController.getAccoun
 //Sửa thông tin của trưởng điểm tập kết và giao dịch [Viết sau]
 router.post("/updateInfo", authenticateUser('manager'),userController.updateInfo);
 
-//Thống kê[]
+//Thống kê cả nước
 router.get("/statistic",authenticateUser("manager"), statisticController.getLeaderStatistic);
+//Thống kê ở điểm tập kết
 router.get("/statistic/warehouse/:idArea",authenticateUser("manager"), statisticController.getLeaderWarehouseStatistic);
-router.post("/statistic/transaction/:idArea",authenticateUser("manager"), statisticController.getLeaderTransactionStatistic);
+//Thống kê ở điểm giao dịch
+router.post("/statistic/transaction/:idArea", statisticController.getLeaderTransactionStatistic);
 
 module.exports = router;
