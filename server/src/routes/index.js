@@ -3,6 +3,7 @@ const orderRouter = require('./order')
 const trackRouter = require('./track')
 const packageRouter = require('./package')
 const manager = require('./manager')
+const areaRouter = require('./area')
 const warehouseLeader = require('./warehouseLeader')
 const transactionLeader = require('./transactionLeader')
 const warehouseStaff = require('./warehouseStaff')
@@ -19,6 +20,7 @@ function route(app) {
   app.use("/warehouse", warehouseStaff)
   app.use("/transactionPoint", pointStaff)
   app.use("/track", trackRouter)
+  app.use("/", areaRouter);
 }
 
 module.exports = route

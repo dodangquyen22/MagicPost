@@ -5,6 +5,7 @@ const userController = require("../app/controller/userController")
 const { authenticateUser } = require('../middleware/authentication');
 const areaController = require('../app/controller/areaController');
 const statisticController = require('../app/controller/statisticController');
+const { route } = require('./area');
 
 
 //Hệ thống các điểm giao dịch và điểm tập kết
