@@ -760,7 +760,7 @@ const RecordTransaction = () => {
                         <label htmlFor="termsCheckbox">Tôi đồng ý với các</label><a href="https://s.net.vn/RJ9P" rel="noopener noreferrer" target="_blank">Điều khoản quy định</a>
                     </div>
                     <div className="d-grid">
-                        <button type="button" className="btn btn-primary" onClick={() => { openModal() }}>
+                        <button type="button" className="btn btn-primary" onClick={() => { handleRecordTransaction() }}>
                             Ghi Nhận
                         </button>
                         <button type="button" className="btn btn-secondary" onClick={handleResetForm}>
