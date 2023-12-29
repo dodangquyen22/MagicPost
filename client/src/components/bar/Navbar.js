@@ -19,13 +19,21 @@ const Navbar = () => {
         <div className="account-icon">
           <i className="fas fa-user-circle"></i>
         </div>
-        <div className="account-dropdown">
-          <span className="account-name">{user}</span>
-          
-          <div className="dropdown-content">
-            <Link to="/">Log Out</Link>
+        {user !== '' && (
+          <div className="account-dropdown">
+            <span className="account-name">{user}</span>
+            <div className="dropdown-content">
+              <Link to="/login"> Đăng Xuất </Link>
+            </div>
           </div>
-        </div>
+        )}
+        {user === '' && (
+          <div className="account-dropdown">
+            
+            <span className="account-name"><Link to="/login">Đăng Nhập</Link></span>
+          </div>
+          
+        )}
         <i className="fas fa-caret-down"></i>
       </div>
     </div>

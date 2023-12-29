@@ -29,12 +29,12 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           {/* trang chủ admin */}
           <Route path="/dashboard" element={<Dashboard />} /> 
           <Route path="/employee" element={<EmployeeManagement />} />
           {/* trang người dùng */}
-          <Route path="/user" element={<UserMain />} />
+          <Route path="/" element={<UserMain />} />
           <Route path="/warehouse/employee" exact element={<EmployeeWarehouse />} />
           <Route path="/transaction/employee" exact element={<EmployeeTransaction />} />
           {/* <Route path="/employee/:id" element={<EmployeeProfile />} /> */}
