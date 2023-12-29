@@ -6,8 +6,8 @@ const packageController = require("../app/controller/packageController");
 const { authenticateUser } = require('../middleware/authentication');
 const { pointStaffString } = require('../app/modulers/user');
 
-router.get('/package', authenticateUser(pointStaffString), packageController.getPackages);
-router.post('/package/create', authenticateUser(pointStaffString), packageController.addPackage);
+router.get('/package',  packageController.getPackages);
+router.post('/package/create', packageController.addPackage);
 
 router.get('/order',  orderController.getOrderList);
 

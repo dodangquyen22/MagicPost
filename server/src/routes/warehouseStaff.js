@@ -6,11 +6,12 @@ const packageController = require("../app/controller/packageController");
 const { authenticateUser } = require('../middleware/authentication');
 const { warehouseStaffString } = require('../app/modulers/user');
 
+router.get('/package', packageController.getPackages);
 router.get('/order', orderController.getOrderList);
 
-router.post('/order/create', authenticateUser(warehouseStaffString), orderController.createOrder);
+router.get('/order/create', orderController.createOrder);
 
-router.get('/order/confirm', authenticateUser(warehouseStaffString), orderController.confirmOrder);
+router.get('/order/confirm',  orderController.confirmOrder);
 
 router.get('/order/statistics', authenticateUser(warehouseStaffString), orderController.statistics);
 

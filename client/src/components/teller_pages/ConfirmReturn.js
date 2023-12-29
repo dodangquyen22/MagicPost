@@ -69,7 +69,7 @@ const ConfirmReturn = () => {
                         <tbody>
                             {loading ? <div>Loading...</div> : 
                             (orders.map(order => (
-                            <tr key={order.id}>
+                            <tr key={order._id}>
                                 <td>
                                     {order.packageID}
                                 {/* <input
@@ -84,7 +84,7 @@ const ConfirmReturn = () => {
                                 <td>{order.sendDate}</td>
                                 <td>{order.status}</td>
                                 <td>
-                                <button onClick={() => handleConfirm(order.id)}>Xác nhận</button>
+                                <button onClick={() => handleConfirm(order._id)}>Xác nhận</button>
                                 </td>
                             </tr>
                             )))}
