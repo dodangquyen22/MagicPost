@@ -15,12 +15,14 @@ h2 {
 
 button {
   margin-right: 10px;
+  margin-bottom: 10px;
   padding: 8px 16px;
   cursor: pointer;
   border: none;
   background-color: #3498db;
   color: #fff;
   border-radius: 4px;
+  
 }
 
 button.active {

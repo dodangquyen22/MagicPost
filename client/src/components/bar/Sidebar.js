@@ -31,7 +31,6 @@ const Sidebar = () => {
         manager: [
             { to: '/dashboard', label: 'Tổng Quát' },
             { to: '/employee', label: 'Quản Lý Nhân Viên' },
-            { to: '/transactionpoint', label: 'Thống Kê Đơn Hàng' },
             { to: '/managetranspoints', label: 'Quản Lý Điểm Giao Dịch' },
             { to: '/managewarehouse', label: 'Quản Lý Điểm Tập Kết' },
         ],

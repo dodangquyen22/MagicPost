@@ -23,7 +23,6 @@ const Navbar = () => {
           <span className="account-name">{user}</span>
           
           <div className="dropdown-content">
-            <Link to="/profile">Profile</Link>
             <Link to="/">Log Out</Link>
           </div>
         </div>

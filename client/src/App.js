@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from './components/Manager_page/Dashboard';
 import EmployeeManagement from './components/Emploee/EmployeeManagement';
 import Login from './components/log_in/Login';
-import Profile from './components/general_pages/Profile';
 import EmployeeProfile from './components/Emploee/EmployeeProfile';
 import TransactionPage from './components/teller_pages/TellerMain';
 import UserMain from './components/userDisplay/UserMain';
@@ -52,7 +51,7 @@ function App() {
           {/* nhân viên điểm tập kết */}
           <Route path='/warehousestaff' element={<WarehouseStaff  />}></Route>  
           <Route path="/warehousestaff/package" element={<WarehousePackage />} />
-          <Route path="/profile" element={<Profile />} />
+
           {/* quản lí điểm giao dịch admin */}
           <Route path="/managetranspoints" element={<ManageTransactionPoints />} />
           {/* quản lí điểm tập kết admin */}
