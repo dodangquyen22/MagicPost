@@ -79,9 +79,9 @@ const WarehousePackage = () => {
                                 <th>Người Gửi</th>
                                 <th>Người Nhận</th>
                                 <th>Ngày Xác Nhận Đơn</th>
-                                <th> Gửi Đến Điểm Tập Kết</th>
-                                <th>Thông tin hàng</th>
-                                <th>Thao tác</th>
+                                <th> Chi phí</th>
+                                <th>Trạng thái</th>
+                                <th>Tạo đơn</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,8 +98,8 @@ const WarehousePackage = () => {
                                 </td>
                                 <td>{pack.senderDetails.name}</td>
                                 <td>{pack.receiverDetails.name}</td>
-                                <td></td>
-                                <td></td>
+                                <td>{pack.receiveDate}</td>
+                                <td>{pack.cost}</td>
                                 <td>{pack.status}</td>
                                 <td>
                                     <button onClick={() => handleToTransactionPoint(pack.ID)}>Đến điểm giao dịch </button>
