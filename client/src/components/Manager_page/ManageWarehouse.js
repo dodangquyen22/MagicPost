@@ -14,6 +14,8 @@ const ManageWarehouse = () => {
 
     const [areas, setAreas] = useState([]);
     const [points, setPoints] = useState([]);
+    const [pointSta, setPointSta] = useState([]);
+    const [data, setData] = useState({});
 
 
     const [name, setName] = useState('');
@@ -64,6 +66,7 @@ const ManageWarehouse = () => {
 
     const handlePointClick = (point) => {
         setSelectedPoint(point);
+        getPointStatistic(point.point._id);
     }
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -75,6 +78,39 @@ const ManageWarehouse = () => {
         setModalIsOpen(false);
     };
 
+
+    const getPointStatistic = (pointID) => {
+        const tokens =  localStorage.getItem('token');
+        setToken(tokens)
+        //console.log(token);
+        console.log("point sta poinid",pointID);
+        axios.get('http://localhost:3000/manager/statistic?pointID='+pointID, {
+            headers: {
+                Authorization: `Bearer ${tokens}`,
+              },
+            })
+            .then((response) => {
+                setPointSta(response.data.packageStatistic);
+                console.log("point data: ",response.data.packageStatistic);
+            })
+            .catch((error) => {
+                
+            })
+    }
+    const countsArray = Object.values(pointSta).map(item => (item && item.count) || 0);
+    console.log(countsArray)
+    // data.series = [0, 0, 0];
+    // for (const [key, item] of Object.entries(data.packageStatistic)) {
+    //         if (item._id == "success") {
+    //             data.series[1] += item.count;
+    //         } else if (item._id == "failed") {
+    //             data.series[2] += item.count;
+    //         } else if (item._id == "shipping") {
+    //             data.series[0] += item.count;
+    //         } else if (item._id == "pending") {
+    //             data.series[0] += item.count;
+    //         }
+    //     }
     const handleAddPoint = async(event) => {
         // const token =  localStorage.getItem('token');
         console.log(token)
@@ -229,7 +265,7 @@ const ManageWarehouse = () => {
                                 </thead>
                                 <tbody>
                                     {currentItems.map(point => (
-                                        <tr key={point.point._id} >
+                                        <tr key={point.point._id} onClick={() => handlePointClick(point)}>
                                             <td>{point.point.address}</td>
                                             <td>{point.area.district}</td>
                                             <td>{point.area.province}</td>
@@ -266,21 +302,23 @@ const ManageWarehouse = () => {
                                     {/* Add more details as needed */}
                                     <p><strong>Đơn Hàng</strong></p>
                                     <br />
-                                    <Chart
-                                        options={{
-                                            labels: ['Đơn Hàng Tiếp Nhận', 'Đơn Hàng Đã Chuyển','Hàng Trả Về' , 'Hàng Tồn Kho'],
-                                            colors: ['#00FF00', '#FF0000', '#FFA500', '#0000FF'],
-                                            legend: {
-                                                position: 'right',
-                                            },
-                                        }}
-                                        series={selectedPoint.order}
-                                        type="donut"
-                                        width="500"
-                                        height="300"
-                                    />
-                                    <br />
-                                    <p><strong>Doanh Thu:</strong></p>
+                                    {pointSta && (
+        <Chart
+            options={{
+            labels: ['Đơn Hàng Đã Nhận', 'Đơn Hàng Đã Chuyển', 'Đơn Hàng Đã Hủy'],
+            colors: ['#00FF00', '#FF0000', '#FFA500'],
+            legend: {
+                position: 'right',
+            },
+            }}
+            series={countsArray}
+            type="donut"
+            width="500"
+            height="300"
+        />
+        )}
+                                    {/* <br /> */}
+                                    {/* <p><strong>Doanh Thu:</strong></p>
                                     <br />
                                     <Chart
                                         options={{
@@ -297,7 +335,7 @@ const ManageWarehouse = () => {
                                         type="line"
                                         width="500"
                                         height="300"
-                                    />
+                                    /> */}
                                 </div>
                             </div>
                         )}

@@ -41,18 +41,22 @@ const ManageTransactionPoints = () => {
             })
     }
 
+    const getPointStatistics =() =>{
+        setPointSta([1,0,0]);
+    }
+
     const getPointStatistic = (pointID) => {
         const tokens =  localStorage.getItem('token');
         setToken(tokens)
         //console.log(token);
-        console.log("point sta poinid",     pointID);
+        console.log("point sta poinid",pointID);
         axios.get('http://localhost:3000/manager/statistic?pointID='+pointID, {
             headers: {
                 Authorization: `Bearer ${tokens}`,
               },
             })
             .then((response) => {
-                setPointSta(response.data);
+                setPointSta(response.data.packageStatistic);
                 console.log("point data: ",response.data);
             })
             .catch((error) => {
@@ -64,24 +68,25 @@ const ManageTransactionPoints = () => {
         getData()
     }, [])
 
-
+    const countsArray = Object.values(pointSta).map(item => (item && item.count) || 0);
 
     const itemsPerPage = 10;
     const [currentPage, setCurrentPage] = useState(1);
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = points.slice(indexOfFirstItem, indexOfLastItem);
+    // const indexOfLastItem = currentPage * itemsPerPage;
+    // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    //const currentItems = Array.isArray(points) ? points.slice(indexOfFirstItem, indexOfLastItem) : [];
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
     }
 
-    const [selectedPoint, setSelectedPoint] = useState(null);
+    const [selectedPoint, setSelectedPoint] = useState("");
 
     const handlePointClick = (point) => {
         setSelectedPoint(point);
         getPointStatistic(point.point._id);
+        //getPointStatistics();
     }
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -245,7 +250,7 @@ const ManageTransactionPoints = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {currentItems.map(point => (
+                                    {points.map(point => (
                                         <tr  key={point.point._id} onClick={() => handlePointClick(point)}>
                                             <td>{point.point.address}</td>
                                             <td>{point.area.district}</td>
@@ -259,7 +264,7 @@ transactionPointID)} className="btn btn-danger">Xoá</button>
                                 </tbody>
                             </table>
 
-                            <div className="pagination">
+                            {/* <div className="pagination">
                                 {Array.from({ length: Math.ceil(points.length / itemsPerPage) }, (_, index) => (
                                     <button
                                         key={index + 1}
@@ -269,7 +274,7 @@ transactionPointID)} className="btn btn-danger">Xoá</button>
                                         {index + 1}
                                     </button>
                                 ))}
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className="vertical-line"></div>
@@ -285,21 +290,23 @@ transactionPointID)} className="btn btn-danger">Xoá</button>
                                     {/* Add more details as needed */}
                                     <p><strong>Đơn Hàng</strong></p>
                                     <br />
-                                    <Chart
-                                        options={{
-                                            labels: ['Đơn Hàng Đã Nhận', 'Đơn Hàng Đã Chuyển', 'Đơn Hàng Đã Hủy'],
-                                            colors: ['#00FF00', '#FF0000', '#FFA500'],
-                                            legend: {
-                                                position: 'right',
-                                            },
-                                        }}
-                                        series={pointSta}
-                                        type="donut"
-                                        width="500"
-                                        height="300"
-                                    />
+
+                                            {pointSta && (
+        <Chart
+            options={{
+            labels: ['Đơn Hàng Đã Nhận', 'Đơn Hàng Đã Chuyển', 'Đơn Hàng Đã Hủy'],
+            colors: ['#00FF00', '#FF0000', '#FFA500'],
+            legend: {
+                position: 'right',
+            },
+            }}
+            series={countsArray}
+            type="donut"
+            width="500"
+            height="300"
+        />
+        )}
                                     <br />
-                                    <p><strong>Doanh Thu:</strong></p>
                                     <br />
                                     {/* <Chart
                                         options={{

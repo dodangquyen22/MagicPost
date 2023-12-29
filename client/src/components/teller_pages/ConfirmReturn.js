@@ -16,9 +16,6 @@ const ConfirmReturn = () => {
     useEffect(() => {
         try {
             axios.get('http://127.0.0.1:3000/transactionPoint/order?type=pending&pointID=' + pointID , {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
                 
             }).then((response) => {
                 setOrders(response.data);
@@ -72,7 +69,7 @@ const ConfirmReturn = () => {
                         <tbody>
                             {loading ? <div>Loading...</div> : 
                             (orders.map(order => (
-                            <tr key={order._id}>
+                            <tr key={order.id}>
                                 <td>
                                     {order.packageID}
                                 {/* <input
@@ -87,7 +84,7 @@ const ConfirmReturn = () => {
                                 <td>{order.sendDate}</td>
                                 <td>{order.status}</td>
                                 <td>
-                                <button onClick={() => handleConfirm(order._id)}>Xác nhận</button>
+                                <button onClick={() => handleConfirm(order.id)}>Xác nhận</button>
                                 </td>
                             </tr>
                             )))}
