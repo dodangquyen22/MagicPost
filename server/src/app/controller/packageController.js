@@ -23,7 +23,7 @@ class packageController {
                 senderDetails: sender,
                 receiveDate: new Date(),
                 currentPointID: pointID,
-                cost : packageDetails.cost,
+                cost : Number((packageDetails.price).replace(/./g, '')),
                 details: packageDetails,
                 status: pendingStatus
             })
