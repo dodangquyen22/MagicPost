@@ -760,7 +760,7 @@ const RecordTransaction = () => {
                         <label htmlFor="termsCheckbox">Tôi đồng ý với các</label><a href="https://s.net.vn/RJ9P" rel="noopener noreferrer" target="_blank">Điều khoản quy định</a>
                     </div>
                     <div className="d-grid">
-                        <button type="button" className="btn btn-primary" onClick={() => { handleRecordTransaction() }}>
+                        <button type="button" className="btn btn-primary" onClick={() => { openModal() }}>
                             Ghi Nhận
                         </button>
                         <button type="button" className="btn btn-secondary" onClick={handleResetForm}>
@@ -802,15 +802,14 @@ const RecordTransaction = () => {
                                         <p>1. Họ tên địa chỉ người gửi: {sender.name}</p>
                                         {sender.address} - {sender.district} - {sender.province}
                                         <p>Điện thoại: {sender.phone}</p>
-                                        <p>Mã khách hàng:</p>
-                                        <p>Mã bưu chính:</p>
+                                        <p>Mã khách hàng: {Math.floor(10000 + Math.random() * 90000)}</p>
+                                        <p>Mã bưu chính: {Math.floor(10000 + Math.random() * 90000)}</p>
                                     </td>
                                     <td colSpan="2" className='print'>
                                         <p>2. Họ tên địa chỉ người nhận: {recipient.name}</p>
                                         {recipient.address} - {recipient.district} - {recipient.province}
                                         <p>Điện thoại: {recipient.phone}</p>
-                                        <p>Mã khách hàng</p>
-                                        <p>Mã bưu chính:</p>
+                                        <p>Mã bưu chính: {Math.floor(10000 + Math.random() * 90000)}</p>
                                     </td>
                                 </tr>
                                 <tr>
