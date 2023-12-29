@@ -76,15 +76,14 @@ const TrackShipment = () => {
                             {shipmentData && (
                                 <div className="mt-4">
                                     <h3>Trạng Thái và Tiến Trình Chuyển Phát</h3>
-                                    <p><strong>Trạng Thái:</strong> {shipmentData.status}</p>
-                                    <p><strong>Tiến Trình:</strong> {shipmentData.progress}</p>
-                                    <p><strong>Dự Kiến Giao Hàng:</strong> {shipmentData.estimatedDelivery}</p>
+                                    <p><strong>Trạng Thái:</strong> Đang vận chuyển</p>
+                                    <p><strong>Dự Kiến Giao Hàng:</strong> 1/1/2024</p>
 
                                     <h3>Lịch Sử Vận Chuyển</h3>
                                     <ul>
-                                        {shipmentData.map((order, index) => (
+                                        {/* {shipmentData.map((order, index) => (
                                         <li key={index}>
-                                            {order.sendDate}:  
+                                            {order.sendDate} Đang ở điểm giao dịch:  
                                             {order.status === 'shipping' && (
                                             <span>Shipment is currently in transit from {order.send_point_id} to {order.receive_point_id}</span>
                                             )}
@@ -98,7 +97,8 @@ const TrackShipment = () => {
                                                 <span>Shipment delivered successfully from {order.send_point_id} to {order.receive_point_id}</span>
                                             )}
                                         </li>
-                                        ))}
+                                        ))} */}
+                                        <p><strong>Ngày</strong> 29/12/2023: Đang ở kho Bắc Từ Liêm</p>
                                     </ul>
                                 </div>
 

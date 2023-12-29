@@ -13,7 +13,7 @@ class orderController {
     // Phải có type trong tạo đơn hàng
     createOrder = async (req, res, next) => {
         const {type} = req.query;
-        // console.log("query", req.query);
+        console.log("query", req.query);
         if (type == toTransactionSpotType) {
             this.createOrderToTransactionSpot(req, res, next);
         } else if (type == toWarehouseType) {
@@ -51,7 +51,7 @@ class orderController {
         // Your code here
         try {
             const {packageID, type, pointID} = req.query;
-            // console.log(packageID);
+            console.log(packageID);
             const pack = await packageModule.findOne({ID: packageID}).exec();
             if (pack == null) {
                 console.log("Package not found");
@@ -78,7 +78,7 @@ class orderController {
     async createOrderToCustomer(req, res, next) {
         try {
             const {type, pointID, packageID} = req.query;
-            // console.log(type, pointID, packageID);
+            console.log(type, pointID, packageID);
             const newOrder = new order({
                 packageID: packageID,
                 type: type,
@@ -130,7 +130,7 @@ class orderController {
         try {
             const point_id = req.query.pointID;
             const type = req.query.type;
-            // console.log("point_id: ", point_id);
+            console.log("point_id: ", point_id);
             var queries = {};
             if (type == "pending") {
                 queries = {receive_point_id: new ObjectId(point_id), status: shippingStatus};
@@ -171,8 +171,8 @@ class orderController {
     async confirmOrder(req, res, next) {
         try {
             const orderID = req.query.orderID;
-            // console.log("order id", orderID);
-            const ord = await order.findOneAndUpdate({id: orderID}, {$set : {status: confirmedStatus}}).exec();
+            const ord = await order.findOneAndUpdate({_id: new ObjectId(orderID)}, {$set : {status: confirmedStatus}}).exec();
+            console.log("updated order: ", ord);
             if (ord.type == toCustomerType) {
                 await packageModule.updateOne({ID: ord.packageID}, {$set: {currentPointID: undefined, status: successDeliveryStatus, receciveDate: Date.now()}}).exec();
             } else if (ord.type == toTransactionSpotType || ord.type == toWarehouseType || ord.type == toOtherAreaType) {
@@ -187,7 +187,7 @@ class orderController {
 
     async statistics(req, res, next) {
         const spotID = req.query.spotID;
-        // console.log(req.query);
+        console.log(req.query);
         var result = {};
         if (spotID) {
             // Số lượng hàng gửi đi khu vực khác
