@@ -16,6 +16,9 @@ const ConfirmReturn = () => {
     useEffect(() => {
         try {
             axios.get('http://127.0.0.1:3000/transactionPoint/order?type=pending&pointID=' + pointID , {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
                 
             }).then((response) => {
                 setOrders(response.data);
@@ -34,7 +37,7 @@ const ConfirmReturn = () => {
             // Send the request here
             axios.get('http://127.0.0.1:3000/transactionPoint/order/confirm?orderID=' + orderId, {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             })
                 .then((response) => {

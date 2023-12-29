@@ -31,7 +31,7 @@ const ProductList = () => {
         console.log("token",token);
         axios.get('http://127.0.0.1:3000/transactionPoint/order?pointID=' + pointID, {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           }, 
         }).then((response) => {
           console.log("order data: ", response.data);
@@ -53,7 +53,7 @@ const ProductList = () => {
       // Send the request here
       axios.get('http://127.0.0.1:3000/transactionPoint/order/confirm?orderID=' + orderId + '&pointID=' + pointID, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
         .then((response) => {
