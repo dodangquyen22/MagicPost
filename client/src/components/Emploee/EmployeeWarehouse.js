@@ -7,14 +7,28 @@ import { Outlet, Link } from "react-router-dom";
 import Sidebar from '../bar/Sidebar';
 import axios from 'axios';
 
-const EmployeeManagement = () => {
+const EmployeeWarehouse = () => {
   const [username, setUsername] = useState([]);
+
+  const [name, setName] = useState('');
+  const [usernames, setUsernames] = useState('');
+  const [password, setPassword] = useState('');
+  const [gender, setGender] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+
+
   useEffect(() => {
+    getData()
+}, []);
+
+const getData = () => {
     const token =  localStorage.getItem('token');
+    const idArea = localStorage.getItem('idArea')
     console.log(token);
     axios.post(
-      'http://localhost:3000/manager/listAcount',
-      { role: "manager" }, // Role as part of the request body
+      'http://localhost:3000/warehouseLeader/listAcount',
+      { role: "warehouse leader", idArea: idArea }, // Role as part of the request body
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -28,14 +42,45 @@ const EmployeeManagement = () => {
         .catch((error) => {
 
         })
-}, []);
+}
+
   const [employees, setEmployees] = useState([
     { id: 1, name: 'Nguyen Van A', account: 'A123', password: 'A123', position: 'Giao Dịch Viên', gender: 'Nam' },
     { id: 2, name: 'Tran Thi B', position: 'Nhân Viên Giao Hàng', account: 'B123', password: 'B123', gender: 'Nữ' },
     // Thêm nhân viên khác tùy ý
   ]);
 
-
+  const addEmployee = async(event) => {
+        event.preventDefault();
+          try {
+            const token =  localStorage.getItem('token');
+            const district = localStorage.getItem('district');
+            console.log(district)
+            const province = localStorage.getItem('province');
+            const response = await axios.post('http://localhost:3000/warehouseLeader/resgister', {
+                name,
+                gender,
+                username: usernames,
+                password,
+                email,
+                phone,
+                district,
+                province,
+                role: "warehouse staff"
+              }, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+            })
+            console.log(response.data.message);
+            getData();
+            closeModal();
+          } catch (error) {
+            console.log("lỗi")
+            console.error(error);
+            // Xử lý lỗi (nếu có)
+          }
+  };
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -73,16 +118,32 @@ const EmployeeManagement = () => {
     closeModal();
   };
 
-  const handleDeleteEmployee = (id) => {
+  const handleDeleteEmployee = async(id) => {
     // Hiển thị cảnh báo trước khi xoá
     const shouldDelete = window.confirm('Bạn có chắc muốn xoá nhân viên này?');
 
     if (shouldDelete) {
-      // Lọc ra những nhân viên không có ID trùng với ID được chọn để xoá
-      const updatedEmployees = employees.filter((employee) => employee.id !== id);
-
-      // Cập nhật danh sách nhân viên
-      setEmployees(updatedEmployees);
+        try {
+            //   const token = localStorage.getItem('token');
+        
+              // Make a request to delete the point with the given ID using DELETE method
+              const token =  localStorage.getItem('token');
+              console.log(token);
+              const response = await axios.delete(`http://localhost:3000/warehouseLeader/delete/${id}`,{
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+        
+            //   console.log(response.data.message);
+              
+              // Assuming getData and closeModal are defined elsewhere in your code
+              getData();
+              closeModal();
+            } catch (error) {
+              // Handle error, e.g., show an error message to the user
+              console.error('Error deleting point:', error);
+            }
     }
 
   };
@@ -147,9 +208,9 @@ const EmployeeManagement = () => {
         <div className="content">
           <h1>Quản lý nhân viên</h1>
 
-          {/* <div>
+          <div>
             <button onClick={() => openModal()}>Thêm Nhân Viên</button>
-          </div> */}
+          </div>
 
           <div className='employee-list'>
             <table>
@@ -161,6 +222,7 @@ const EmployeeManagement = () => {
                   <th>Giới Tính</th>
                   <th>Tỉnh/Thành phố</th>
                   <th>Quận/Huyện</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -172,6 +234,14 @@ const EmployeeManagement = () => {
                     <td>{employee.gender}</td>
                     <td>{employee.province}</td>
                     <td>{employee.district}</td>
+                    <td>
+                    <button onClick={() => openModal(employee)}>
+                        Sửa
+                      </button>
+                    <button onClick={() => handleDeleteEmployee(employee._id)}>
+                        Xóa
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -186,57 +256,77 @@ const EmployeeManagement = () => {
       <Modal isOpen={isModalOpen} onRequestClose={closeModal} className="react-modal-content"
         overlayClassName="react-modal-overlay">
         <h2>{editingEmployee.id ? 'Sửa' : 'Thêm'} Nhân Viên</h2>
-        <form>
-          <div className="form-group">
-            <label>Tên Nhân Viên:</label>
-            <input
-              type="text"
-              className='form-control'
-              value={editingEmployee.name}
-              onChange={(e) => setEditingEmployee({ ...editingEmployee, name: e.target.value })}
-            />
-            <label>Tài Khoản</label>
-            <input
-              type="text"
-              className='form-control'
-              value={editingEmployee.account}
-              onChange={(e) => setEditingEmployee({ ...editingEmployee, account: e.target.value })}
-            />
-            <label>Mật Khẩu</label>
-            <input
-              type="text"
-              className='form-control'
-              value={editingEmployee.password}
-              onChange={(e) => setEditingEmployee({ ...editingEmployee, password: e.target.value })}
-            />
-            <label>Chức Vụ:</label>
-            <input
-              type="text"
-              className='form-control'
-              value={editingEmployee.position}
-              onChange={(e) => setEditingEmployee({ ...editingEmployee, position: e.target.value })}
-            />
-            <label>Giới Tính:</label>
-            <select
-              value={editingEmployee.gender}
-              className='form-control'
-              onChange={(e) => setEditingEmployee({ ...editingEmployee, gender: e.target.value })}
-            >
-              <option value="Nam">Nam</option>
-              <option value="Nữ">Nữ</option>
-            </select>
-          </div>
+        <form onSubmit={addEmployee}>
+      <div className="form-group">
+        <label htmlFor="name">Họ và Tên</label>
+        <input
+          type="text"
+          className="form-control"
+          id="name"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+        />
 
+        <label htmlFor="username">Tên đăng nhập</label>
+        <input
+          type="text"
+          className="form-control"
+          id="username"
+          value={usernames}
+          onChange={(event) => setUsernames(event.target.value)}
+        />
 
-        </form>
-        <button onClick={editingEmployee.id ? handleEditEmployee : handleAddEmployee}>
+        <label htmlFor="password">Mật khẩu</label>
+        <input
+          type="password"
+          className="form-control"
+          id="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+
+        <label htmlFor="gender">Giới Tính</label>
+        <input
+          type="text"
+          className="form-control"
+          id="gender"
+          value={gender}
+          onChange={(event) => setGender(event.target.value)}
+        />
+
+        <label htmlFor="email">Email</label>
+        <input
+          type="text"
+          className="form-control"
+          id="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+
+        <label htmlFor="phone">Phone</label>
+        <input
+          type="text"
+          className="form-control"
+          id="phone"
+          value={phone}
+          onChange={(event) => setPhone(event.target.value)}
+        />
+      </div>
+
+      <button className="btn btn-primary" type="submit">
+        Thêm
+      </button>
+      <button className="btn btn-secondary" onClick={closeModal}>
+        Đóng
+      </button>
+    </form>
+        {/* <button onClick={editingEmployee.id ? handleEditEmployee : handleAddEmployee}>
           {editingEmployee.id ? 'Lưu' : 'Thêm'}
-        </button>
-        <button onClick={closeModal}>Đóng</button>
+        </button> */}
       </Modal>
     </div>
 
   );
 };
 
-export default EmployeeManagement;
+export default EmployeeWarehouse;

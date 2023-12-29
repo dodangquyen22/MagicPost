@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import AuthContext from '../variable/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import Sidebar from '../bar/Sidebar';
 
 const WareHouse = () => {
   const { role } = useContext(AuthContext);
@@ -87,17 +88,7 @@ const WareHouse = () => {
     <div className="transaction-container">
       <Navbar />
       <div className="content-container">
-          <div className="sidebar">
-            <ul>
-              <li>
-                <Link to="/warehouse">Thống Kê Đơn Hàng</Link>
-              </li>
-              <li>
-                <Link to="/employee">Quản Lý Nhân Viên</Link>
-              </li>
-              <li><Link to="/">Log Out</Link></li>
-            </ul>
-          </div>
+        <Sidebar />
         <div className="content">
           <h1>Thống Kê Đơn Hàng</h1>
           <div className="tab-container">
@@ -162,7 +153,7 @@ const WareHouse = () => {
                   <th>Mã vận đơn</th>
                   <th>Mã Đơn Hàng</th>
                   <th>Người Gửi</th>
-                  <th>Người Nhận</th>
+                  <th>Loại Đơn</th>
                   <th>Hàng Hoá</th>
                   <th>Trạng Thái</th>
                   <th>Ngày Lập</th>
@@ -181,15 +172,16 @@ const WareHouse = () => {
                       />
                     </td>
                     <td></td>
-                    <td>{order.id}</td>
+                    <td>{order._id}</td>
                     <td></td>
-                    <td></td>
+                    <td>{order.type == "toWarehouse" ? "Gửi kho": "Gửi khách"}</td>
+                    <td>{order.type == "toWarehouse" ? order.receive_point_id: ""}</td>
                     <td></td>
                     <td>
                       {order.status}
                     </td>
-                    <td></td>
-                    <td></td>
+                    <td>{order.sendDate}</td>
+                    <td>{order.cost}</td>
                     <td></td>
                   </tr>
                 ))}

@@ -1,94 +1,58 @@
 // src/components/Navbar.js
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Outlet, Link } from "react-router-dom";
 import AuthContext from '../variable/AuthContext';
 
-
 const Sidebar = () => {
     const { role } = useContext(AuthContext);
-    return (
-        <div>
+    const [isSidebarOpen, setSidebarOpen] = useState(true);
 
-            {role === 'manager' && (
-                <div className="sidebar">
-                    <ul>
-                        <li>
-                            <Link to="/dashboard">Tổng Quát</Link>
-                        </li>
-                        <li>
-                            <Link to="/employee">Quản Lý Nhân Viên</Link>
-                        </li>
-                        <li>
-                            <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
-                        </li>
-                        <li>
-                            <Link to="/managetranspoints">Quản Lý Điểm Giao Dịch</Link>
-                        </li>
-                        <li>
-                            <Link to="/managewarehouse">Quản Lý Điểm Tập Kết</Link>
-                        </li>
+    const toggleSidebar = () => {
+        setSidebarOpen(!isSidebarOpen);
+    };
 
-                    </ul>
-                </div>
-            )
-            }
-            {role === 'transaction leader' && (
-                <div className="sidebar">
-                    <ul>
-                        <li>
-                            <Link to="/transactionpoint">Thống Kê Đơn Hàng</Link>
-                        </li>
-                        <li>
-                            <Link to="/employee">Quản Lý Nhân Viên</Link>
-                        </li>
-
-                    </ul>
-                </div>
-            )
-            }
-            {role === 'warehouse leader' && (
-                <div className="sidebar">
-                    <ul>
-                        <li>
-                            <Link to="/warehouse">Thống Kê Đơn Hàng</Link>
-                        </li>
-                        <li>
-                            <Link to="/employee">Quản Lý Nhân Viên</Link>
-                        </li>
-
-                    </ul>
-                </div>
-            )
-            }
-            {role === 'point staff' && (
-                <div className="sidebar">
-                    <ul>
-                        <li>
-                            <Link to="/tellermain">Trang Giao Dịch</Link>
-                        </li>
-                        <li>
-                            <Link to="/tellermain/orderlist">Thống Kê Đơn Hàng</Link>
-                        </li>
-                        <li>
-                            <Link to="/">Log Out</Link>
-                        </li>
-                    </ul>
-                </div>
+    const getLinks = (links) => (
+        <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
+            <button onClick={toggleSidebar}>{isSidebarOpen ? 'Close' : 'Open'} Sidebar</button>
+            {isSidebarOpen && (
+            <ul>
+                {links.map(({ to, label }) => (
+                    <li key={to}>
+                        <Link to={to}>{label}</Link>
+                    </li>
+                ))}
+            </ul>
             )}
-            {role === "warehouse staff" && (
-                <div className="sidebar">
-                    <ul>
-                        <li>
-                            <Link to="/warehousestaff">Thống Kê Đơn Hàng</Link>
-                        </li>
-                        <li><Link to="/">Log Out</Link></li>
-                    </ul>
-                </div>
-            )
-            }
         </div>
     );
+
+    const roleLinks = {
+        manager: [
+            { to: '/dashboard', label: 'Tổng Quát' },
+            { to: '/employee', label: 'Quản Lý Nhân Viên' },
+            { to: '/transactionpoint', label: 'Thống Kê Đơn Hàng' },
+            { to: '/managetranspoints', label: 'Quản Lý Điểm Giao Dịch' },
+            { to: '/managewarehouse', label: 'Quản Lý Điểm Tập Kết' },
+        ],
+        'transaction leader': [
+            { to: '/transactionpoint', label: 'Thống Kê Đơn Hàng' },
+            { to: '/transaction/employee', label: 'Quản Lý Nhân Viên' },
+        ],
+        'warehouse leader': [
+            { to: '/warehouse', label: 'Thống Kê Đơn Hàng' },
+            { to: '/warehouse/employee', label: 'Quản Lý Nhân Viên' },
+        ],
+        'transaction staff': [
+            { to: '/tellermain', label: 'Trang Giao Dịch' },
+            { to: '/tellermain/orderlist', label: 'Thống Kê Đơn Hàng' },
+        ],
+        'warehouse staff': [
+            { to: '/warehousestaff', label: 'Thống Kê Đơn Hàng' },
+        ],
+    };
+
+    return roleLinks[role] && getLinks(roleLinks[role]);
 };
 
 export default Sidebar;

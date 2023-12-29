@@ -9,13 +9,10 @@ const Point = require("../modulers/point")
 class userController{
 
 
-    home(req, res, next) {
-        res.send('sdsadsada');
-    }
     // [POST] tao tai khoan
     async register(req, res, next) {
         try{
-            const { username, password, email, phone,province, district, role } = req.body;
+            const {name, username, password, email, phone,province, district, role, gender} = req.body;
             const salt = await bcrypt.genSalt(10);
             console.log(salt)
             const hashedPassword = await bcrypt.hash(password, salt);
@@ -25,7 +22,7 @@ class userController{
               }
             const id = removeVietnameseTones.removeVietnameseTones(district)
 
-            const user = new User({ username, password: hashedPassword, email, phone, province, district,idArea: id, role });
+            const user = new User({ name,username, password: hashedPassword, email, phone, province, district,idArea: id, role, gender });
 
             await user.save();
             res.status(200).json({message: 'Tạo tài khoản thành công'})
@@ -80,6 +77,9 @@ class userController{
                     role: user.role,
                     pointID: pointID,
                     token: token,
+                    idArea: user.idArea,
+                    district: user.district,
+                    province: user.province
                 });
                 return;
             }
@@ -97,9 +97,10 @@ class userController{
     //Xóa tài khoản
     async deleteAccount(req, res, next) {
         // Add your code here to delete the account
-        const {username} = req.body.username;
-        const deleteUser = await User.findOneAndDelete({username: username});
-
+        const {_id} = req.params;
+        console.log("req ",req.params);
+        const deleteUser = await User.findOneAndDelete({_id: _id});
+        res.status(200).json({message: "Xóa thành công"})
     }
     //Lấy danh sách tài khoản
 
@@ -110,7 +111,7 @@ class userController{
         this.pointLeaderGetAccounts = this.pointLeaderGetAccounts.bind(this);
     }
     getAccounts(req, res, next) {
-        console.log(req.body.role)
+        //console.log(req.body.role)
         // Add your code here to get the account list
         if (req.body.role == "manager") {
             return this.leaderGetAccounts(req, res, next);
@@ -118,14 +119,14 @@ class userController{
         if(req.body.role == "warehouse leader") {
             return this.warehouseLeaderGetAccounts(req, res, next)
         }
-        if(req.body.role == "point leader") {
+        if(req.body.role == "transaction leader") {
             return this.pointLeaderGetAccounts(req, res, next);
         }
     }
     // Lấy danh sách tài khoản cho lãnh đạo
     async leaderGetAccounts(req, res, next) {
         try {
-            const users = await User.find({ $or: [{ role: "warehouse leader" }, { role: "point leader" }] });
+            const users = await User.find({ $or: [{ role: "warehouse leader" }, { role: "transaction leader" }] });
             //console.log(users)
             res.status(200).json(users); //res.json(users); 
         } catch (error) {
@@ -134,8 +135,9 @@ class userController{
     }
     // Lấy danh sách tài khoản cho trưởng điểm
     async warehouseLeaderGetAccounts(req, res, next) {
+        const {idArea} = req.body;
         try {
-            const users = await User.find({role: "warehouse staff"});
+            const users = await User.find({idArea: idArea,role: "warehouse staff"});
             res.json(users);
         } catch (error) {
             next(error);
@@ -143,8 +145,9 @@ class userController{
     }
     // Lấy danh sách tài khoản cho trưởng điểm giao dịch
     async pointLeaderGetAccounts(req, res, next) {
+        const {idArea} = req.body;
         try {
-            const users = await User.find({role: "point staff"});
+            const users = await User.find({idArea: idArea,role: "transaction staff"});
             res.json(users);
         } catch (error) {
             next(error);

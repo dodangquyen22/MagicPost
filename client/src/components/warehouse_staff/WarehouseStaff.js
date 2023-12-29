@@ -5,6 +5,7 @@ import AuthContext from '../variable/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import Sidebar from '../bar/Sidebar';
 
 const WarehouseStaff = () => {
     const { role } = useContext(AuthContext);
@@ -167,6 +168,7 @@ const WarehouseStaff = () => {
         <div className="transaction-container">
             <Navbar />
             <div className="content-container">
+                <Sidebar />
                 {role === 'manager' && (
                     <div className="sidebar">
                         <ul>

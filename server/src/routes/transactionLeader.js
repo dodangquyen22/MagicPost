@@ -5,12 +5,14 @@ const { authenticateUser } = require('../middleware/authentication');
 const { route } = require('./area');
 
 
-//Danh sách các tài khoản trưởng điểm tập kết và dao dịch
-router.get('/listAcount', authenticateUser('point leader'), userController.getAccounts)
+
+router.post('/listAcount', authenticateUser('transaction leader'), userController.getAccounts)
 //Sửa thông tin của nhân viên của điểm tập kết [Viết sau]
-router.post("/updateInfo", authenticateUser('point leader'),userController.updateInfo);
+router.post("/updateInfo", authenticateUser('transaction leader'),userController.updateInfo)
 //Cấp tài khoản cho nhân viên
-router.get("/resgister", authenticateUser('point leader'),userController.register)
+router.post("/resgister", authenticateUser('transaction leader'),userController.register)
+//Xóa tài khoản nhân viên
+router.delete("/delete/:_id", authenticateUser('transaction leader'),userController.deleteAccount)
 //Thống kê hàng đi , hàng đến[]
 
 module.exports = router;
