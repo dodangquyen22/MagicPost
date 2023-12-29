@@ -41,7 +41,7 @@ const WarehousePackage = () => {
     useEffect(() => {
         const fetchPackages = async () => {
             try {
-                await axios.get('http://127.0.0.1:3000/warehouse/package?pointID=' + pointID, {
+                await axios.get('http://127.0.0.1:3000/warehouse/package?pointID=' + pointID + "type=pending", {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

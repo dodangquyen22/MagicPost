@@ -7,7 +7,7 @@ class packageController {
     async addPackage(req, res, next) {
         try {
             console.log("Body: ", req.body);
-            const {sender, recipient, details, cost} = req.body;
+            const {sender, recipient, details, packageDetails} = req.body;
             console.log(sender.province);
             const sendArea = await area.findOne({province: sender.province, district: sender.district});
             const recipientArea = await area.findOne({province: recipient.province, district: recipient.district});
@@ -15,14 +15,14 @@ class packageController {
             const senderDetails = "Name: " + sender.name + ", Phone: " + sender.phone + ", Address: " + sender.address;
             const receiverDetails = "Name: " + recipient.name + ", Phone: " + recipient.phone + ", Address: " + recipient.address;
             const newPackage = new packageModel({
-                ID: Math.floor(Math.random() * 1000000000),
+                ID: packageDetails.code,
                 receiveAreaID: recipientArea.id,
                 sendAreaID: sendArea.id,
                 receiverDetails: receiverDetails,
                 senderDetails: senderDetails,
                 receiveDate: new Date(),
                 currentPointID: sendArea.id,
-                cost: Number(cost),
+                // cost: Number(cost),
                 details: details,
                 status: shippingStatus
             })

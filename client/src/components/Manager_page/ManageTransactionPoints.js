@@ -12,7 +12,7 @@ const ManageTransactionPoints = () => {
 
     const [areas, setAreas] = useState([]);
     const [points, setPoints] = useState([]);
-
+    const [pointSta, setPointSta] = useState([]);
 
     const [name, setName] = useState('');
     const [gender, setGender] = useState('');
@@ -33,6 +33,26 @@ const ManageTransactionPoints = () => {
             })
             .then((response) => {
                 const points = response.data.points;
+                setPointSta([10,100,50]);
+                setPoints(points)
+            })
+            .catch((error) => {
+                
+            })
+    }
+
+    const getPointStatistic = (pointID) => {
+        const tokens =  localStorage.getItem('token');
+        setToken(tokens)
+        //console.log(token);
+        axios.get('http://localhost:3000/', {
+            headers: {
+                Authorization: `Bearer ${tokens}`,
+              },
+            })
+            .then((response) => {
+                const points = response.data.points;
+                setPointSta([10,100,50]);
                 setPoints(points)
             })
             .catch((error) => {
@@ -61,6 +81,7 @@ const ManageTransactionPoints = () => {
 
     const handlePointClick = (point) => {
         setSelectedPoint(point);
+        getPointStatistic(point._id);
     }
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -221,14 +242,14 @@ const ManageTransactionPoints = () => {
                                 </thead>
                                 <tbody>
                                     {currentItems.map(point => (
-                                        <tr key={point.point._id}>
+                                        <tr  key={point.point._id} onClick={() => handlePointClick(point)}>
                                             <td>{point.point.address}</td>
                                             <td>{point.area.district}</td>
                                             <td>{point.area.province}</td>
                                             <td>
                                                 <button onClick={() => handleDeletePoint(point.area.
 transactionPointID)} className="btn btn-danger">Xoá</button>
-                                            </td>
+                                            </td> 
                                         </tr>
                                     ))}
                                 </tbody>
@@ -268,7 +289,7 @@ transactionPointID)} className="btn btn-danger">Xoá</button>
                                                 position: 'right',
                                             },
                                         }}
-                                        series={selectedPoint.order}
+                                        series={pointSta}
                                         type="donut"
                                         width="500"
                                         height="300"
@@ -276,7 +297,7 @@ transactionPointID)} className="btn btn-danger">Xoá</button>
                                     <br />
                                     <p><strong>Doanh Thu:</strong></p>
                                     <br />
-                                    <Chart
+                                    {/* <Chart
                                         options={{
                                             xaxis: {
                                                 categories: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5'],
@@ -291,7 +312,7 @@ transactionPointID)} className="btn btn-danger">Xoá</button>
                                         type="line"
                                         width="500"
                                         height="300"
-                                    />
+                                    /> */}
                                 </div>
                             </div>
                         )}

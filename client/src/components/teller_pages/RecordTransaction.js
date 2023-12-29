@@ -177,11 +177,11 @@ const RecordTransaction = () => {
         };
         console.log('data: ', data);
     
-        fetch('http://localhost:3000/transactionPoint/' + localStorage.getItem('pointID') +  '/package/create', {
+        fetch('http://localhost:3000/transactionPoint/package/create?pointID=' + localStorage.getItem('pointID'), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
             body: JSON.stringify(data),
         })
