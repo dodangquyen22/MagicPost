@@ -4,8 +4,6 @@ const userController = require("../app/controller/userController")
 const { authenticateUser } = require('../middleware/authentication');
 const { route } = require('./area');
 
-
-
 router.post('/listAcount', authenticateUser('transaction leader'), userController.getAccounts)
 //Sửa thông tin của nhân viên của điểm tập kết [Viết sau]
 router.post("/updateInfo", authenticateUser('transaction leader'),userController.updateInfo)
