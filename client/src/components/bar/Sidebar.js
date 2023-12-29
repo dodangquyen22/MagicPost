@@ -29,10 +29,10 @@ const Sidebar = () => {
 
     const roleLinks = {
         manager: [
-            { to: '/dashboard', label: 'Tổng Quát' },
-            { to: '/employee', label: 'Quản Lý Nhân Viên' },
-            { to: '/managetranspoints', label: 'Quản Lý Điểm Giao Dịch' },
-            { to: '/managewarehouse', label: 'Quản Lý Điểm Tập Kết' },
+            { to: '/admin', label: 'Tổng Quát' },
+            { to: '/admin/employee', label: 'Quản Lý Nhân Viên' },
+            { to: '/admin/managetranspoints', label: 'Quản Lý Điểm Giao Dịch' },
+            { to: '/admin/managewarehouse', label: 'Quản Lý Điểm Tập Kết' },
         ],
         'transaction leader': [
             { to: '/transactionpoint', label: 'Thống Kê Đơn Hàng' },

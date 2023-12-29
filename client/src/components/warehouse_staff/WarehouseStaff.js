@@ -269,13 +269,14 @@ const WarehouseStaff = () => {
                                         </td>
                                         <td>{order._id}</td>
                                         <td></td>
-                                        <td>{order.sendDate}</td>
+                                        <td></td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td>
                                             {order.status}
                                         </td>
-                                        <td></td>
+                                        <td>{order.sendDate}</td>
                                         <td></td>
                                         <td></td>
                                         <td>

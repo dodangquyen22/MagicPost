@@ -31,8 +31,8 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           {/* trang chủ admin */}
-          <Route path="/dashboard" element={<Dashboard />} /> 
-          <Route path="/employee" element={<EmployeeManagement />} />
+          <Route path="/admin" element={<Dashboard />} /> 
+          <Route path="/admin/employee" element={<EmployeeManagement />} />
           {/* trang người dùng */}
           <Route path="/" element={<UserMain />} />
           <Route path="/warehouse/employee" exact element={<EmployeeWarehouse />} />
@@ -53,9 +53,9 @@ function App() {
           <Route path="/warehousestaff/package" element={<WarehousePackage />} />
 
           {/* quản lí điểm giao dịch admin */}
-          <Route path="/managetranspoints" element={<ManageTransactionPoints />} />
+          <Route path="/admin/managetranspoints" element={<ManageTransactionPoints />} />
           {/* quản lí điểm tập kết admin */}
-          <Route path="/managewarehouse" element={<ManageWarehouse />} />
+          <Route path="/admin/managewarehouse" element={<ManageWarehouse />} />
           <Route path="*" element={<h1>Not Found</h1>} />
 
         </Routes>

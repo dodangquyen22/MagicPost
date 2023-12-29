@@ -264,9 +264,9 @@ const ProductList = () => {
                     <td>{order._id}</td>
                     <td>{order.type == "toWarehouse" ? "Gửi kho": "Gửi khách"}</td>
                     <td>{order.type == "toWarehouse" ? order.receive_point_id: ""}</td>
-                    <td>{order.sendDate}</td>
-                    <td>{order.status}</td>
                     <td></td>
+                    <td>{order.status}</td>
+                    <td>{order.sendDate}</td>
                     <td></td>
                     <td></td>
                     <td>
