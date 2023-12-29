@@ -54,11 +54,13 @@ export const Dashboard = () => {
         data.chartData.series = [0, 0, 0];
         for (const item of data.packageStatistic) {
             if (item._id == "success") {
-                data.chartData.series[1] = item.count;
-            } else if (item._id == "fail") {
-                data.chartData.series[2] = item.count;
+                data.chartData.series[1] += item.count;
+            } else if (item._id == "failed") {
+                data.chartData.series[2] += item.count;
             } else if (item._id == "shipping") {
-                data.chartData.series[0] = item.count;
+                data.chartData.series[0] += item.count;
+            } else if (item._id == "pending") {
+                data.chartData.series[0] += item.count;
             }
         }
 

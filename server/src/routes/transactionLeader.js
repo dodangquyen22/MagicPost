@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const userController = require("../app/controller/userController")
 const { authenticateUser } = require('../middleware/authentication');
+const { route } = require('./area');
 
-
-//hiển thị danh sách nhân viên
 router.post('/listAcount', authenticateUser('transaction leader'), userController.getAccounts)
 //Cấp tài khoản cho nhân viên
 router.post("/resgister", authenticateUser('transaction leader'),userController.register)

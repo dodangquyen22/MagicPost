@@ -33,8 +33,8 @@ const ManageTransactionPoints = () => {
             })
             .then((response) => {
                 const points = response.data.points;
-                setPointSta([10,100,100]);
-                setPoints(points)
+                setPoints(points);
+                console.log("point data: ",points);
             })
             .catch((error) => {
                 
@@ -45,15 +45,15 @@ const ManageTransactionPoints = () => {
         const tokens =  localStorage.getItem('token');
         setToken(tokens)
         //console.log(token);
-        axios.get('http://localhost:3000/', {
+        console.log("point sta poinid",     pointID);
+        axios.get('http://localhost:3000/manager/statistic?pointID='+pointID, {
             headers: {
                 Authorization: `Bearer ${tokens}`,
               },
             })
             .then((response) => {
-                const points = response.data.points;
-                setPointSta([10,100,50]);
-                setPoints(points)
+                setPointSta(response.data);
+                console.log("point data: ",response.data);
             })
             .catch((error) => {
                 
@@ -81,7 +81,7 @@ const ManageTransactionPoints = () => {
 
     const handlePointClick = (point) => {
         setSelectedPoint(point);
-        getPointStatistic(point._id);
+        getPointStatistic(point.point._id);
     }
 
     const [modalIsOpen, setModalIsOpen] = useState(false);

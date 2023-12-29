@@ -33,11 +33,9 @@ router.post('/listAcount', authenticateUser('manager'), userController.getAccoun
 //Sửa thông tin của trưởng điểm tập kết và giao dịch [Viết sau]
 router.post("/updateInfo", authenticateUser('manager'),userController.updateInfo);
 
-//Thống kê cả nước
-router.get("/statistic",authenticateUser("manager"), statisticController.getLeaderStatistic);
-//Thống kê ở điểm tập kết
-router.get("/statistic/warehouse/:idArea",authenticateUser("manager"), statisticController.getLeaderWarehouseStatistic);
-//Thống kê ở điểm giao dịch
-router.post("/statistic/transaction/:idArea", statisticController.getLeaderTransactionStatistic);
+//Thống kê[]
+router.get("/statistic", statisticController.getStatistic);
+
+
 
 module.exports = router;
