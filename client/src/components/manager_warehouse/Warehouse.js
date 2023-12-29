@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from '../bar/Navbar';
 import { Link } from 'react-router-dom';
 import AuthContext from '../variable/AuthContext';
@@ -11,25 +12,41 @@ const WareHouse = () => {
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const [showActionsMenu, setShowActionsMenu] = useState(false);
+  const [orders, setOrders] = useState([]);
 
+  const confirmedStatus = "confirmed";
+  const failedStatus = "failed";
+  const shippingStatus = "shipping";
 
-  // Giả sử bạn có một danh sách các đơn hàng
-  const [orders, setOrder] = useState([
-    { id: 1, status: "Successful", confirm: 'chuyển đến kho' },
-    { id: 2, status: "Unsuccessful", confirm: 'đã giao thành công' },
-    { id: 3, status: "Cancelled", confirm: 'chuyển hàng thất bại' },
-    // Thêm các đơn hàng khác tùy ý
-  ]);
+  const pointID = localStorage.getItem('pointID');
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    // Make the HTTP request to the endpoint
+    axios.get('http://127.0.0.1:3000/warehouse/order?pointID=' + pointID, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => {
+        // Set the retrieved orders in the state
+        setOrders(response.data);
+      })
+      .catch(error => {
+        // Handle any errors that occur during the request
+        console.error('Error fetching orders:', error);
+      });
+  }, []);
 
   // Lọc đơn hàng dựa trên trạng thái
   let filteredOrders = orders.filter(order => {
     switch (activeTab) {
-      case "successful":
-        return order.status === "Successful";
-      case "unsuccessful":
-        return order.status === "Unsuccessful";
-      case "cancelled":
-        return order.status === "Cancelled";
+      case confirmedStatus:
+        return order.status === confirmedStatus;
+      case failedStatus:
+        return order.status === failedStatus;
+        case shippingStatus:
+          return order.status === shippingStatus;
       default:
         return true; // Hiển thị tất cả các đơn hàng nếu không có tab nào được chọn
     }
@@ -97,16 +114,16 @@ const WareHouse = () => {
               Vận Chuyển Thành Công
             </button>
             <button
-              className={activeTab === "unsuccessful" ? "active" : ""}
-              onClick={() => setActiveTab("unsuccessful")}
+              className={activeTab === "failed" ? "active" : ""}
+              onClick={() => setActiveTab("failed")}
             >
               Vận Chuyển Không Thành Công
             </button>
             <button
-              className={activeTab === "cancelled" ? "active" : ""}
-              onClick={() => setActiveTab("cancelled")}
+              className={activeTab === "shipping" ? "active" : ""}
+              onClick={() => setActiveTab("shipping")}
             >
-              Đã Hủy
+              Đang Vận Chuyển
             </button>
             {selectedOrders.length > 0 && (
               <button>

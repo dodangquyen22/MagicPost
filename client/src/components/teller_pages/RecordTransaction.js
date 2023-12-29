@@ -174,11 +174,13 @@ const RecordTransaction = () => {
             payer,
             requestPickup,
         };
+        console.log('data: ', data);
     
-        fetch('http://localhost:3000/package/create', {
+        fetch('http://localhost:3000/transactionPoint/' + localStorage.getItem('pointID') +  '/package/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
             },
             body: JSON.stringify(data),
         })

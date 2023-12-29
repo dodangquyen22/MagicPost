@@ -9,11 +9,11 @@ const { pointStaffString } = require('../app/modulers/user');
 router.get('/package', authenticateUser(pointStaffString), packageController.getPackages);
 router.post('/package/create', authenticateUser(pointStaffString), packageController.addPackage);
 
-router.get('/order', authenticateUser(pointStaffString), orderController.getOrderList);
+router.get('/order',  orderController.getOrderList);
 
-router.post('/order/create', authenticateUser(pointStaffString), orderController.createOrder);
+router.get('/order/create', orderController.createOrder);
 
-router.get('/order/confirm', authenticateUser(pointStaffString), orderController.confirmOrder);
+router.get('/order/confirm', orderController.confirmOrder);
 
 router.get('/order/statistics', authenticateUser(pointStaffString), orderController.statistics);
 

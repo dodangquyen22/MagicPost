@@ -15,8 +15,8 @@ const ProductList = () => {
   const [orders, setOrders] = useState([]);
 
   // Temporaly fixed id
-  var pointID = 25;
-
+  const pointID = localStorage.getItem('pointID');
+  const token = localStorage.getItem('token');
   // Giả sử bạn có một danh sách các đơn hàng
   // const orders = [
   //   { id: 1, status: "Successful", printed: true },
@@ -28,9 +28,16 @@ const ProductList = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:3000/order/?pointID=' + pointID); 
-        console.log(response.data);
-        setOrders(response.data); // Assuming the response contains the array of orders
+        console.log("token",token);
+        axios.get('http://127.0.0.1:3000/transactionPoint/order?pointID=' + pointID, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          }, 
+        }).then((response) => {
+          console.log("order data: ", response.data);
+          setOrders(response.data);
+        }); 
+         // Assuming the response contains the array of orders
       } catch (error) {
         console.error('Error fetching orders:', error);
       }
@@ -42,8 +49,15 @@ const ProductList = () => {
   const handleConfirm = async (orderId) => {
     try {
       // Send the request here
-      const response = await axios.get('http://127.0.0.1:3000/order/confirm?orderID=' + orderId);
-      console.log('Confirm response:', response.data);
+      axios.get('http://127.0.0.1:3000/transactionPoint/' + pointID + '/order/confirm?orderID=' + orderId, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          console.log('Confirm response:', response.data);
+        });
+      
       // Perform any necessary actions after the request is successful
     } catch (error) {
       console.error('Error confirming orders:', error);
@@ -53,12 +67,12 @@ const ProductList = () => {
   // Lọc đơn hàng dựa trên trạng thái
   let filteredOrders = orders.filter(order => {
     switch (activeTab) {
-      case "successful":
-        return order.status === "Chuyển Thành Công";
-      case "unsuccessful":
-        return order.status === "Chuyển Thất Bại";
-      case "cancelled":
-        return order.status === "Đã Huỷ Đơn";
+      case "confirmed":
+        return order.status === "confirmed";
+      case "failed":
+        return order.status === "failed";
+      case "shipping":
+        return order.status === "shipping";
       case "inWarehouse":
         return order.status === "Còn Trong Kho";
       default:
@@ -168,20 +182,20 @@ const ProductList = () => {
               Đơn Hàng Trong Kho
             </button>
             <button
-              className={activeTab === "successful" ? "active" : ""}
-              onClick={() => setActiveTab("successful")}
+              className={activeTab === "confirmed" ? "active" : ""}
+              onClick={() => setActiveTab("confirmed")}
             >
               Vận Chuyển Thành Công
             </button>
             <button
-              className={activeTab === "unsuccessful" ? "active" : ""}
-              onClick={() => setActiveTab("unsuccessful")}
+              className={activeTab === "shipping" ? "active" : ""}
+              onClick={() => setActiveTab("shipping")}
             >
-              Vận Chuyển Không Thành Công
-            </button>
-            <button
-              className={activeTab === "cancelled" ? "active" : ""}
-              onClick={() => setActiveTab("cancelled")}
+              Đang Vận Chuyển
+              </button>
+              <button
+              className={activeTab === "failed" ? "active" : ""}
+              onClick={() => setActiveTab("failed")}
             >
               Đã Hủy
             </button>
@@ -236,7 +250,7 @@ const ProductList = () => {
               </thead>
               <tbody>
                 {filteredOrders.map(order => (
-                  <tr key={order.id}>
+                  <tr key={order._id}>
                     <td>
                       <input
                         type="checkbox"
@@ -245,16 +259,16 @@ const ProductList = () => {
                       />
                     </td>
                     <td></td>
-                    <td>{order.id}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{order._id}</td>
+                    <td>{order.type == "toWarehouse" ? "Gửi kho": "Gửi khách"}</td>
+                    <td>{order.type == "toWarehouse" ? order.receive_point_id: ""}</td>
+                    <td>{order.sendDate}</td>
                     <td>{order.status}</td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td>
-                    <button onClick={() => handleConfirm(order.id)}>Xác nhận</button>
+                    <button onClick={() => handleConfirm(order._id)}>Xác nhận</button>
                     </td>
                   </tr>
                 ))}

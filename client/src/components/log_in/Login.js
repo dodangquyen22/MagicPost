@@ -30,7 +30,7 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
       })
       const data = await response.json();
-      console.log(data);
+      console.log("login data" ,data);
       // const uid = data.uid;
       // Cookies.set('uid', uid, { expires: 1, path: '/' });
       // console.log(Cookies.get('uid'));
@@ -48,7 +48,7 @@ const Login = () => {
           navigate('/warehouse');
         } else if (data.role === "transaction leader") {
           navigate('/transactionpoint');
-        } else if (data.role === "point staff") {
+        } else if (data.role === "transaction staff") {
           navigate('/tellermain');
         } else if (data.role === "warehouse staff") {
           navigate('/admin');

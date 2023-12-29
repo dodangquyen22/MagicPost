@@ -18,6 +18,7 @@ import axios from 'axios';
 import ManageWarehouse from './components/Manager_page/ManageWarehouse';
 import WareHouse from './components/manager_warehouse/Warehouse';
 import WarehouseStaff from './components/warehouse_staff/WarehouseStaff';
+import WarehousePackage from './components/warehouse_staff/WareHousePackage';
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
           <Route path='/warehouse' element={<WareHouse />}></Route>
           {/* nhân viên điểm tập kết */}
           <Route path='/warehousestaff' element={<WarehouseStaff  />}></Route>  
+          <Route path="/warehousestaff/package" element={<WarehousePackage />} />
           <Route path="/profile" element={<Profile />} />
           {/* quản lí điểm giao dịch admin */}
           <Route path="/managetranspoints" element={<ManageTransactionPoints />} />

@@ -21,6 +21,7 @@ class packageController {
                 receiverDetails: receiverDetails,
                 senderDetails: senderDetails,
                 receiveDate: new Date(),
+                currentPointID: sendArea.id,
                 cost: Number(cost),
                 details: details,
                 status: shippingStatus
@@ -44,15 +45,11 @@ class packageController {
     // Lấy dữ liệu hàng gửi
     async getPackages(req, res, next) {
         // Your code here
-        const {pointID} = req.params.pointID;
+        console.log("req: ", req.params);
+        const pointID = req.query.pointID;
         var queries = {};
         if (pointID) {
-            queries = {
-                $or: [
-                    {sendPointID: pointID},
-                    {receivePointID: pointID}
-                ]
-            }
+            queries = {currentPointID: pointID}
         }
         const packages = await packageModel.find(queries).exec();
         res.json(packages);

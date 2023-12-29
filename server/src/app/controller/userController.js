@@ -47,15 +47,34 @@ class userController{
             const validPassword = await bcrypt.compare(req.body.password, user.password);
     
             if (validPassword) {
+                // var pointID;
+                // if (user.role == "transaction staff" || user.role == "transaction leader") {
+                //     pointID = ((await Point.findOne({ idArea: user.idArea, type: "transaction" }).exec())._id);
+                // } else if (user.role == "warehouse staff" || user.role == "warehouse leader") {
+                //     pointID = (await Point.findOne({ idArea: user.idArea, type: "warehouse" }).exec())._id;
+                // }
                 var pointID;
+                console.log("user", user);
                 if (user.role == "transaction staff" || user.role == "transaction leader") {
-                    pointID = ((await Point.findOne({ idArea: user.idArea, type: "transaction" }).exec())._id);
+                    const transactionPoint = await Point.findOne({ idArea: user.idArea, type: "transaction" });
+                    if (transactionPoint) {
+                        console.log("trans", transactionPoint);
+                        pointID = transactionPoint._id;
+                    } else {
+                        // Handle the case where transactionPoint is null or undefined
+                    }
                 } else if (user.role == "warehouse staff" || user.role == "warehouse leader") {
-                    pointID = (await Point.findOne({ idArea: user.idArea, type: "warehouse" }).exec())._id;
-                }
+                    const warehousePoint = await Point.findOne({ idArea: user.idArea, type: "warehouse" }).exec();
+                    if (warehousePoint) {
+                        pointID = warehousePoint._id;
+                    } else {
+                        // Handle the case where warehousePoint is null or undefined
+                    }
+}
 
                 const token = jwt.sign({ username: user.username, role: user.role, pointID: pointID }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
                 // res.redirect('/');
+                console.log("point id ", pointID);
                 res.status(200).json({
                     message:"Đăng nhập thành công",
                     role: user.role,

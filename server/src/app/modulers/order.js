@@ -6,17 +6,13 @@ const failDeliveryStatus = "fail";
 const shippingStatus = "shipping";
 const confirmedStatus = "confirmed";
 
-const toWarehouseType = "to warehouse";
-const toCustomerType = "to customer";
-const toTransactionSpotType = "to transaction spot";
-const toOtherAreaType = "to other area";
+const toWarehouseType = "toWarehouse";
+const toCustomerType = "toCustomer";
+const toTransactionSpotType = "toTransactionSpot";
+const toOtherAreaType = "toArea";
 
 // Lưu thông tin các đơn vận chuyển 
 const orderSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        unique: true,
-    },
     packageID: {
         type: String,
         // ref: 'package',
@@ -34,8 +30,10 @@ const orderSchema = new mongoose.Schema({
         type: String,
     },
     receive_point_id: {
+        type: mongoose.Schema.Types.ObjectId
     },
     send_point_id:{
+        type: mongoose.Schema.Types.ObjectId
     },
     sendDate: {
                 type: Date,

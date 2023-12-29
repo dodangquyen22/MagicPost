@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Navbar from '../bar/Navbar';
 import { Link } from 'react-router-dom';
 import AuthContext from '../variable/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 const WarehouseStaff = () => {
     const { role } = useContext(AuthContext);
@@ -11,16 +12,58 @@ const WarehouseStaff = () => {
     const [selectedOrders, setSelectedOrders] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
     const [showActionsMenu, setShowActionsMenu] = useState(false);
+    const [orders, setOrders] = useState([]);
 
+    const pointID = localStorage.getItem('pointID');
+    const token = localStorage.getItem('token');
 
-    // Giả sử bạn có một danh sách các đơn hàng
-    const [orders, setOrder] = useState([
-        { id: 1, status: "Chuyển Thành Công", confirm: '' },
-        { id: 2, status: "Chuyển Thất Bại", confirm: '' },
-        { id: 3, status: "Đã Huỷ Đơn", confirm: '' },
-        { id: 4, status: "Còn Trong Kho", confirm: 'newOrder' },
-        // Thêm các đơn hàng khác tùy ý
-    ]);
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+            console.log("token",token);
+            axios.get('http://127.0.0.1:3000/warehouse/order?pointID=' + pointID, {
+                headers: {
+                'Authorization': `Bearer ${token}`,
+                }, 
+            }).then((response) => {
+                console.log("order data: ", response.data);
+                setOrders(response.data);
+            }); 
+                // Assuming the response contains the array of orders
+            } catch (error) {
+            console.error('Error fetching orders:', error);
+            }
+        };
+    
+        fetchOrders();
+    }, []);
+    
+    const handleConfirm = async (orderId) => {
+    try {
+        // Send the request here
+        axios.get('http://127.0.0.1:3000/transactionPoint/' + pointID + '/order/confirm?orderID=' + orderId, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+        })
+        .then((response) => {
+            console.log('Confirm response:', response.data);
+        });
+        
+        // Perform any necessary actions after the request is successful
+    } catch (error) {
+        console.error('Error confirming orders:', error);
+    }
+    };
+
+    // // Giả sử bạn có một danh sách các đơn hàng
+    // const [orders, setOrder] = useState([
+    //     { id: 1, status: "Chuyển Thành Công", confirm: '' },
+    //     { id: 2, status: "Chuyển Thất Bại", confirm: '' },
+    //     { id: 3, status: "Đã Huỷ Đơn", confirm: '' },
+    //     { id: 4, status: "Còn Trong Kho", confirm: 'newOrder' },
+    //     // Thêm các đơn hàng khác tùy ý
+    // ]);
 
     // Lọc đơn hàng dựa trên trạng thái
     let filteredOrders = orders.filter(order => {
@@ -152,6 +195,9 @@ const WarehouseStaff = () => {
                         <ul>
                             <li>
                                 <Link to="/warehousestaff">Thống Kê Đơn Hàng</Link>
+                            </li>
+                            <li>
+                                <Link to="/warehousestaff/package">Quản Lý Hàng Lưu Tại Điểm</Link>
                             </li>
                             <li><Link to="/">Log Out</Link></li>
                         </ul>

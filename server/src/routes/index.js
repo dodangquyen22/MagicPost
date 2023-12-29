@@ -17,8 +17,8 @@ function route(app) {
   app.use("/pointLeader", pointLeader)
   app.use("/package", packageRouter)
   app.use("/order", orderRouter)
-  app.use("/warehouse/:pointID", warehouseStaff)
-  app.use("/transactionPoint/:pointID", pointStaff)
+  app.use("/warehouse", warehouseStaff)
+  app.use("/transactionPoint", pointStaff)
   app.use("/track", trackRouter)
   app.use("/", areaRouter);
 }

@@ -6,7 +6,7 @@ const packageController = require("../app/controller/packageController");
 const { authenticateUser } = require('../middleware/authentication');
 const { warehouseStaffString } = require('../app/modulers/user');
 
-router.get('/order', authenticateUser(warehouseStaffString), orderController.getOrderList);
+router.get('/order', orderController.getOrderList);
 
 router.post('/order/create', authenticateUser(warehouseStaffString), orderController.createOrder);
 

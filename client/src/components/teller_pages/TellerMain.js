@@ -6,6 +6,7 @@ import './styles/tellermain.css';
 import ConfirmReturn from './ConfirmReturn';
 import ConfirmOrder from './ConfirmOrder';
 import Sidebar from '../bar/Sidebar';
+import StoredPackages from './StoredPackages';
 
 const TransactionPage = () => {
   const [selectedTab, setSelectedTab] = useState('record'); // Tab mặc định
@@ -41,6 +42,12 @@ const TransactionPage = () => {
             >
               Xác Nhận Hàng Trả Về
             </button>
+            <button
+              className={selectedTab === 'storedPackage' ? 'active' : ''}
+              onClick={() => handleTabChange('storedPackage')}
+            >
+              Quản Lý Hàng Lưu Tại Điểm
+            </button>
             {/* Thêm các tab khác tùy theo chức năng */}
           </div>
 
@@ -61,6 +68,12 @@ const TransactionPage = () => {
               // Giao diện cho chức năng Xác Nhận Hàng Trả Về
               <div>
                 <ConfirmReturn />
+              </div>
+            )}
+            {selectedTab === 'storedPackage' && (
+              // Giao diện cho chức năng liệt kê hàng lưu tại điểm
+              <div>
+                <StoredPackages />
               </div>
             )}
             {/* Thêm các phần giao diện cho các chức năng khác */}
