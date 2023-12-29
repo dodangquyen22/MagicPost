@@ -4,9 +4,9 @@ MagicPost là một ứng dụng được thiết kế để quản lý hệ th�
 
 ## Thành viên trong nhóm
 
-- Đỗ Đăng Quyền
-- Nguyễn Văn Tuấn
-- Chu Quang Tú
+- Đỗ Đăng Quyền : 21020387
+- Nguyễn Văn Tuấn : 21020393
+- Chu Quang Tú : 21020396
 
 ## Cài đặt dự án
 
@@ -34,4 +34,4 @@ Xem demo của web tại [Liên kết Demo](https://example.com).
 
 ## Slide thuyết trình
 
-Xem slide tại [Liên kết Slide](https://example.com).
+Xem slide tại [Liên kết Slide](https://www.canva.com/design/DAF4V2LZRvo/ZMu-anDbGKzCPW1y7kTYew/edit?fbclid=IwAR0sOU9rt_LjTTdRYitsdlJi_Cdnn8WHKp5z1c7chQPFg9QFFMXgA4fBVk0).
