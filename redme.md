@@ -1,29 +1,37 @@
 # MagicPost
 
-Dự án MagicPost là một ứng dụng với mục đích [phần mềm nhằm quản lý hệ thống chuyển phát].
+MagicPost là một ứng dụng được thiết kế để quản lý hệ thống chuyển phát.
 
-## Thành viên
+## Thành viên trong nhóm
 
 - Đỗ Đăng Quyền
 - Nguyễn Văn Tuấn
 - Chu Quang Tú
 
-## Hướng dẫn chạy dự án
+## Cài đặt dự án
 
-### Cài đặt
+### Cài đặt server
 
-#### 1. Cài đặt server
+1. Di chuyển vào thư mục "server": `cd server`
+2. Cài đặt các gói phụ thuộc: `npm install`
+3. Khởi động server: `npm start`
 
-```bash
-cd server
-npm install
-npm start
+### Cài đặt client
 
+1. Di chuyển vào thư mục "client": `cd client`
+2. Cài đặt các gói phụ thuộc: `npm install`
+3. Khởi động client: `npm start`
 
-#### 2. Cài đặt client
+### Công nghệ sử dụng
 
-```bash
-cd client
-npm install
-npm start
+- Express.js: Framework JavaScript để xây dựng server.
+- ReactJs: Thư viện JavaScript để xây dựng giao diện người dùng.
+- MongoDB: Hệ quản trị cơ sở dữ liệu NoSQL để lưu trữ dữ liệu.
 
+## Demo
+
+Xem demo của web tại [Liên kết Demo](https://example.com).
+
+## Slide thuyết trình
+
+Xem slide tại [Liên kết Slide](https://example.com).
