@@ -56,7 +56,7 @@ const Login = () => {
         } else if (data.role === "transaction staff") {
           navigate('/tellermain');
         } else if (data.role === "warehouse staff") {
-          navigate('/admin');
+          navigate('/warehousestaff');
         } else {
           navigate('/user');
         }

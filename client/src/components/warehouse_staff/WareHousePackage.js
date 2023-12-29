@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './styles/orderlist.css';
+import Navbar from "../bar/Navbar";
+import Sidebar from "../bar/Sidebar";
 
 const WarehousePackage = () => {
 
@@ -62,7 +64,11 @@ const WarehousePackage = () => {
 
     return (
         <div className='container'>
-            <div className='confirm-return-container'>
+            <Navbar />  
+            <div className="content-container">
+
+            <Sidebar />
+            <div className='content'>
                 <h2>Xác Nhận Hàng Chuyển Hàng</h2>
 
                 <div className='list-order-return'>
@@ -104,6 +110,7 @@ const WarehousePackage = () => {
                         </tbody>
                     </table>
                 </div>
+            </div>
             </div>
         </div>
     );

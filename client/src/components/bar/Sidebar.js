@@ -49,6 +49,7 @@ const Sidebar = () => {
         ],
         'warehouse staff': [
             { to: '/warehousestaff', label: 'Thống Kê Đơn Hàng' },
+            { to: '/warehousestaff/package', label: 'Quản Lý Kiện Hàng' },
         ],
     };
 
