@@ -737,7 +737,7 @@ const RecordTransaction = () => {
 
             <div className='footer'>
                 <div className='footer1'>
-                    <label>Tổng cước</label>
+                    <label>Tổng cước: {totalFare}&nbsp;₫</label>
                 </div>
                 <div className='footer2'>
                     <label>Tiền thu hộ</label>
