@@ -48,7 +48,7 @@ const Login = () => {
         console.log(data);
         // const uid = data.uid;
         if (data.role === "manager") {
-          navigate('/dashboard');
+          navigate('/admin');
         } else if (data.role === "warehouse leader") {
           navigate('/warehouse');
         } else if (data.role === "transaction leader") {
