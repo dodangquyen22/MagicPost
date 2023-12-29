@@ -24,7 +24,7 @@ const WareHouse = () => {
 
   useEffect(() => {
     // Make the HTTP request to the endpoint
-    axios.get('http://127.0.0.1:3000/warehouse/order?pointID=' + pointID, {
+    axios.get('http://127.0.0.1:3000/warehouseLeader/order?pointID=' + pointID, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -43,7 +43,7 @@ const WareHouse = () => {
   let filteredOrders = orders.filter(order => {
     switch (activeTab) {
       case confirmedStatus:
-        return order.status === confirmedStatus;
+        return order.status === confirmedStatus || order.status === "success";
       case failedStatus:
         return order.status === failedStatus;
         case shippingStatus:
@@ -83,6 +83,21 @@ const WareHouse = () => {
     setShowActionsMenu(false);
     setSelectAll(false);
   };
+
+  const printStatus = (status) => {
+    switch (status) {
+      case "confirmed":
+        return "Vận Chuyển Thành Công";
+      case "success":
+        return "Vận Chuyển Thành Công";
+      case "shipping":
+        return "Đang Vận Chuyên";
+      case "failed":
+        return "Đã Hủy";
+      default:
+        return status;
+    }
+  }
 
   return (
     <div className="transaction-container">
@@ -138,51 +153,31 @@ const WareHouse = () => {
             )}
 
           </div>
-          <div className="order-list">
+          <div>
             <table>
               <thead>
                 <tr>
-                  <th className="checkbox-select">
-                    <input
-                      type="checkbox"
-                      checked={selectAll}
-                      onChange={handleSelectAllChange}
-                    />
-
-                  </th>
                   <th>Mã vận đơn</th>
                   <th>Mã Đơn Hàng</th>
-                  <th>Người Gửi</th>
-                  <th>Loại Đơn</th>
-                  <th>Hàng Hoá</th>
+                  <th>Đối Tượng Nhận</th>
+                  <th>Tên Người Nhận</th>
+                  <th>Ngày Gửi</th>
                   <th>Trạng Thái</th>
-                  <th>Ngày Lập</th>
+                  <th>ID Khu Vực Người Nhận </th>
                   <th>Thu Hộ</th>
-                  <th>Tổng Cước</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredOrders.map(order => (
-                  <tr key={order.id}>
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={selectedOrders.includes(order.id)}
-                        onChange={() => handleCheckboxChange(order.id)}
-                      />
-                    </td>
-                    <td></td>
+                  <tr key={order._id}>
                     <td>{order._id}</td>
-                    <td></td>
-                    <td>{order.type == "toWarehouse" ? "Gửi kho": "Gửi khách"}</td>
-                    <td>{order.type == "toWarehouse" ? order.receive_point_id: ""}</td>
-                    <td></td>
-                    <td>
-                      {order.status}
-                    </td>
-                    <td>{order.sendDate}</td>
-                    <td>{order.cost}</td>
-                    <td></td>
+                    <td>{order.packageID}</td>
+                    <td>{order.type == "toWarehouse" ? "Kho": "Khách hàng"}</td>
+                    <td>{order.package[0].senderDetails.name}</td>
+                    <td>{(order.sendDate).replace("T", " ").replace("Z", "")}</td>
+                    <td>{printStatus(order.status)}</td>
+                    <td>{order.package[0].receiveAreaID}</td>
+                    <td>{order.package[0].cost}</td>
                   </tr>
                 ))}
               </tbody>

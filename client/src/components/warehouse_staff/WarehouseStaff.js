@@ -61,27 +61,16 @@ const WarehouseStaff = () => {
     }
     };
 
-    // // Giả sử bạn có một danh sách các đơn hàng
-    // const [orders, setOrder] = useState([
-    //     { id: 1, status: "Chuyển Thành Công", confirm: '' },
-    //     { id: 2, status: "Chuyển Thất Bại", confirm: '' },
-    //     { id: 3, status: "Đã Huỷ Đơn", confirm: '' },
-    //     { id: 4, status: "Còn Trong Kho", confirm: 'newOrder' },
-    //     // Thêm các đơn hàng khác tùy ý
-    // ]);
-
     // Lọc đơn hàng dựa trên trạng thái
     let filteredOrders;
     if (orders) {filteredOrders = orders.filter(order => {
         switch (activeTab) {
             case confirmedStatus:
-                return order.status === confirmedStatus;
+                return order.status === confirmedStatus || order.status === "success";
             case shippingStatus:
                 return order.status === shippingStatus;
             case failedStatus:
                 return order.status === failedStatus;
-            case "inWarehouse":
-                return order.status === "Còn Trong Kho";
             default:
                 return true; // Hiển thị tất cả các đơn hàng nếu không có tab nào được chọn
         }
@@ -167,6 +156,19 @@ const WarehouseStaff = () => {
         setSelectAll(false);
     }
 
+    const printStatus = (status) => {
+        switch (status) {
+            case "confirmed":
+                return "Chuyển thành công";
+            case "success":
+                return "Chuyển thành công";
+            case "shipping":
+                return "Đang vận chuyển";
+            case "failed":
+                return "Đã hủy";
+            default:
+                return status;
+    }}
 
 
     return (
@@ -184,28 +186,22 @@ const WarehouseStaff = () => {
                             Tất Cả
                         </button>
                         <button
-                            className={activeTab === "inWarehouse" ? "active" : ""}
-                            onClick={() => setActiveTab("inWarehouse")}
-                        >
-                            Đơn Hàng Trong Kho
-                        </button>
-                        <button
-                            className={activeTab === "successful" ? "active" : ""}
-                            onClick={() => setActiveTab("successful")}
+                            className={activeTab === "confirmed" ? "active" : ""}
+                            onClick={() => setActiveTab("confirmed")}
                         >
                             Vận Chuyển Thành Công
                         </button>
                         <button
-                            className={activeTab === "unsuccessful" ? "active" : ""}
-                            onClick={() => setActiveTab("unsuccessful")}
+                            className={activeTab === "failed" ? "active" : ""}
+                            onClick={() => setActiveTab("failed")}
                         >
                             Vận Chuyển Không Thành Công
                         </button>
                         <button
-                            className={activeTab === "cancelled" ? "active" : ""}
-                            onClick={() => setActiveTab("cancelled")}
+                            className={activeTab === "shipping" ? "active" : ""}
+                            onClick={() => setActiveTab("shipping")}
                         >
-                            Đã Hủy
+                            Đang vận chuyển
                         </button>
                         {selectedOrders.length > 0 && (
                             <button>
@@ -233,62 +229,38 @@ const WarehouseStaff = () => {
 
                     </div>
                     <div className="order-list">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th className="checkbox-select">
-                                        <input
-                                            type="checkbox"
-                                            checked={selectAll}
-                                            onChange={handleSelectAllChange}
-                                        />
-
-                                    </th>
-                                    <th>Mã vận đơn</th>
-                                    <th>Mã Đơn Hàng</th>
-                                    <th>Người Gửi</th>
-                                    <th>Người Nhận</th>
-                                    <th>Điểm Giao Dịch Đích</th>
-                                    <th>Hàng Hoá</th>
-                                    <th>Trạng Thái</th>
-                                    <th>Ngày Lập</th>
-                                    <th>Thu Hộ</th>
-                                    <th>Tổng Cước</th>
-                                    <th>Xác Nhận Nhập Đơn</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {filteredOrders.map(order => (
-                                    <tr key={order._id}>
-                                        <td>
-                                            <input
-                                                type="checkbox"
-                                                checked={selectedOrders.includes(order._id)}
-                                                onChange={() => handleCheckboxChange(order._id)}
-                                            />
-                                        </td>
-                                        <td>{order._id}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            {order.status}
-                                        </td>
-                                        <td>{order.sendDate}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            {order.status === shippingStatus && (
-                                                <button className="confirm-btn" onClick={() => handleConfirm(order._id)}>Xác Nhận</button>
-                                            )}
-
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                    <table>
+                        <thead>
+                            <tr>
+                            <th>Mã vận đơn</th>
+                            <th>Mã Đơn Hàng</th>
+                            <th>Đối Tượng Nhận</th>
+                            <th>Tên Người Nhận</th>
+                            <th>Ngày Gửi</th>
+                            <th>Trạng Thái</th>
+                            <th>ID Khu Vực Người Nhận </th>
+                            <th>Thu Hộ</th>
+                            <th>Xác Nhận Giao Thành Công</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredOrders.map(order => (
+                            <tr key={order._id}>
+                                <td>{order._id}</td>
+                                <td>{order.packageID}</td>
+                                <td>{order.type == "toWarehouse" ? "Kho": "Khách hàng"}</td>
+                                <td>{order.package[0].senderDetails.name}</td>
+                                <td>{(order.sendDate).replace("T", " ").replace("Z", "")}</td>
+                                <td>{printStatus(order.status)}</td>
+                                <td>{order.package[0].receiveAreaID}</td>
+                                <td>{order.package[0].cost}</td>
+                                <td>
+                                <button onClick={() => handleConfirm(order._id)}>Xác nhận</button>
+                                </td>
+                            </tr>
+                            ))}
+                        </tbody>
+                        </table>    
                     </div>
                 </div>
             </div>
