@@ -93,8 +93,8 @@ const StoredPackages = () => {
                                     // onChange={() => handleCheckboxChange(pack.id)}
                                 /> */}
                                 </td>
-                                <td>{pack.senderDetails}</td>
-                                <td>{pack.receiverDetails}</td>
+                                <td>{pack.senderDetails.name}</td>
+                                <td>{pack.receiverDetails.name}</td>
                                 <td></td>
                                 <td></td>
                                 <td>{pack.status}</td>

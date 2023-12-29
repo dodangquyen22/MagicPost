@@ -1,30 +1,31 @@
 const packageModel = require('../modulers/package');
 const area = require('../modulers/area');
 const { warehouseTypeString, transactionTypeString } = require('../modulers/package');
-const {successDeliveryStatus, failDeliveryStatus, shippingStatus} = require("../modulers/package");
+const {successDeliveryStatus, failDeliveryStatus, shippingStatus, confirmedStatus, pendingStatus} = require("../modulers/package");
+const { ObjectId } = require('mongodb');
+const { removeVietnameseTones } = require('../../utils/convertVietNam');
+
 class packageController {
     // Thêm dữ liệu hàng gửi
     async addPackage(req, res, next) {
         try {
             console.log("Body: ", req.body);
+            const {pointID} = req.query;
             const {sender, recipient, details, packageDetails} = req.body;
             console.log(sender.province);
-            const sendArea = await area.findOne({province: sender.province, district: sender.district});
-            const recipientArea = await area.findOne({province: recipient.province, district: recipient.district});
-            console.log(sendArea, recipientArea);
-            const senderDetails = "Name: " + sender.name + ", Phone: " + sender.phone + ", Address: " + sender.address;
-            const receiverDetails = "Name: " + recipient.name + ", Phone: " + recipient.phone + ", Address: " + recipient.address;
+            const sendArea = await area.findOne({province: sender.province, district: sender.district}).exec();
+            const recipientArea = await area.findOne({province: recipient.province, district: recipient.district}).exec();
             const newPackage = new packageModel({
                 ID: packageDetails.code,
-                receiveAreaID: recipientArea.id,
-                sendAreaID: sendArea.id,
-                receiverDetails: receiverDetails,
-                senderDetails: senderDetails,
+                receiveAreaID: removeVietnameseTones(recipientArea.district),
+                sendAreaID: removeVietnameseTones(sendArea.district),
+                receiverDetails: recipient,
+                senderDetails: sender,
                 receiveDate: new Date(),
-                currentPointID: sendArea.id,
-                // cost: Number(cost),
-                details: details,
-                status: shippingStatus
+                currentPointID: pointID,
+                cost : packageDetails.cost,
+                details: packageDetails,
+                status: pendingStatus
             })
             await newPackage.save();
             console.log("Package created successfully");
@@ -44,12 +45,13 @@ class packageController {
 
     // Lấy dữ liệu hàng gửi
     async getPackages(req, res, next) {
+        // For pending package
         // Your code here
-        console.log("req: ", req.params);
+        console.log("req: ", req.query);
         const pointID = req.query.pointID;
         var queries = {};
         if (pointID) {
-            queries = {currentPointID: pointID}
+            queries = {currentPointID: new ObjectId(pointID), status: pendingStatus};
         }
         const packages = await packageModel.find(queries).exec();
         res.json(packages);

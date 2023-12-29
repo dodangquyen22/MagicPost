@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const successDeliveryStatus = "success";
 const failDeliveryStatus = "fail";
 const shippingStatus = "shipping";
+const pendingStatus = "pending";
 
 const packageSchema = new mongoose.Schema({
     ID: {
@@ -18,11 +19,39 @@ const packageSchema = new mongoose.Schema({
     },
     //Thông tin người nhận
     receiverDetails:{
+        name: {
+            type: String
+        },
+        province: {
+            
+        },
+        district: {
 
+        },
+        address: {
+
+        },
+        phone: {
+            
+        }
     },
     // Thông tin người gửi
     senderDetails: {
+        name: {
+            type: String
+        },
+        province: {
+            
+        },
+        district: {
 
+        },
+        address: {
+
+        },
+        phone: {
+            
+        }
     },
     receiveDate: {
         type: Date  
@@ -35,10 +64,37 @@ const packageSchema = new mongoose.Schema({
     },
     // thông tin gói hàng
     details: {
-        type: String
+        code: {
+
+        },
+        type: {
+
+        },
+        name: {
+            
+        },
+        quantity: {
+            
+        },
+        weight: {
+            
+        },
+        price: {
+            
+        },
+        length: {
+            
+        },
+        width: {
+            
+        },
+        height: {
+            
+        },
+        specialFeatures: []
     },
     status: {
-        type: String
+        type: String,
     },
 })
 
@@ -48,3 +104,4 @@ module.exports = package;
 module.exports.successDeliveryStatus = successDeliveryStatus;
 module.exports.failDeliveryStatus = failDeliveryStatus;
 module.exports.shippingStatus = shippingStatus;
+module.exports.pendingStatus = pendingStatus;

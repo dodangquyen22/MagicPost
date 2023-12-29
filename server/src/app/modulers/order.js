@@ -8,7 +8,7 @@ const confirmedStatus = "confirmed";
 
 const toWarehouseType = "toWarehouse";
 const toCustomerType = "toCustomer";
-const toTransactionSpotType = "toTransactionSpot";
+const toTransactionPointType = "toTransactionPoint";
 const toOtherAreaType = "toArea";
 
 // Lưu thông tin các đơn vận chuyển 
@@ -20,7 +20,7 @@ const orderSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: [toWarehouseType, toCustomerType, toTransactionSpotType, toOtherAreaType] // To customer or to another spot
+        enum: [toWarehouseType, toCustomerType, toTransactionPointType, toOtherAreaType] // To customer or to another spot
         // required: true
     },
     address_send: {
@@ -57,5 +57,5 @@ module.exports.shippingStatus = shippingStatus;
 module.exports.confirmedStatus = confirmedStatus;
 module.exports.toWarehouseType = toWarehouseType;
 module.exports.toCustomerType = toCustomerType;
-module.exports.toTransactionSpotType = toTransactionSpotType;
+module.exports.toTransactionSpotType = toTransactionPointType;
 module.exports.toOtherAreaType = toOtherAreaType;

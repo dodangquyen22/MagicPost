@@ -48,8 +48,10 @@ const ProductList = () => {
 
   const handleConfirm = async (orderId) => {
     try {
+      
+      console.log("order id to confirm", orderId);
       // Send the request here
-      axios.get('http://127.0.0.1:3000/transactionPoint/' + pointID + '/order/confirm?orderID=' + orderId, {
+      axios.get('http://127.0.0.1:3000/transactionPoint/order/confirm?orderID=' + orderId + '&pointID=' + pointID, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -254,8 +256,8 @@ const ProductList = () => {
                     <td>
                       <input
                         type="checkbox"
-                        checked={selectedOrders.includes(order.id)}
-                        onChange={() => handleCheckboxChange(order.id)}
+                        checked={selectedOrders.includes(order._id)}
+                        onChange={() => handleCheckboxChange(order._id)}
                       />
                     </td>
                     <td></td>
