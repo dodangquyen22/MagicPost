@@ -1,0 +1,673 @@
+[{
+  "_id": {
+    "$oid": "658e9b5c2bb3e111ff5a5939"
+  },
+  "ID": "123456",
+  "receiveAreaID": "bac_tu_liem",
+  "sendAreaID": "nam_tu_liem",
+  "receiverDetails": {
+    "name": "Tú",
+    "province": "Hà Nội",
+    "district": "Bắc Từ Liêm",
+    "address": "Đại Học Quốc Gia Hà Nội",
+    "phone": "0987654321"
+  },
+  "senderDetails": {
+    "name": "Quyền",
+    "province": "Hà Nội",
+    "district": "Nam Từ Liêm",
+    "address": "30 Phạm Văn Đồng",
+    "phone": "0123456789"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T15:52:18.295Z"
+  },
+  "currentPointID": {
+    "$oid": "658a5655cb954fd8511ef8b8"
+  },
+  "details": {
+    "code": "123456",
+    "type": "Bưu kiện",
+    "name": "Ma tóe",
+    "quantity": "1",
+    "weight": "1",
+    "price": "10.000",
+    "length": "1",
+    "width": "1",
+    "height": "1",
+    "specialFeatures": []
+  },
+  "status": "shipping",
+  "__v": 0,
+  "cost": 10000
+},
+{
+  "_id": {
+    "$oid": "658ea01eb03eec6fb0c9c6e8"
+  },
+  "ID": "5462165648",
+  "receiveAreaID": "binh_giang",
+  "sendAreaID": "van_giang",
+  "receiverDetails": {
+    "name": "Đặng Thị Nguyệt",
+    "province": "Hải Dương",
+    "district": "Bình Giang",
+    "address": "84 Đồng Khởi",
+    "phone": "0326595656"
+  },
+  "senderDetails": {
+    "name": "Nguyễn Văn Nguyên",
+    "province": "Hưng Yên",
+    "district": "Văn Giang",
+    "address": "33 Hồ Chí Minh",
+    "phone": "0351626895"
+  },
+  "receiveDate": {
+    "$date": "2023-11-29T10:31:58.595Z"
+  },
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "5462165648",
+    "type": "Bưu kiện",
+    "name": "Tình yêu",
+    "quantity": "5",
+    "weight": "999",
+    "price": "1.000",
+    "length": "18",
+    "width": "2",
+    "height": "25",
+    "specialFeatures": [
+      "Monolithic",
+      "Oversized"
+    ]
+  },
+  "status": "success",
+  "__v": 0,
+  "cost": 1000
+},
+{
+  "_id": {
+    "$oid": "658ea3b4b03eec6fb0c9c726"
+  },
+  "ID": "13245986",
+  "receiveAreaID": "sam_son",
+  "sendAreaID": "hai_ba_trung",
+  "receiverDetails": {
+    "name": "Khiêm",
+    "province": "Thanh Hoa",
+    "district": "Sầm Sơn",
+    "address": "23 Thanh Nhàn",
+    "phone": "0956232356"
+  },
+  "senderDetails": {
+    "name": "Quỳnh",
+    "province": "Hà Nội",
+    "district": "Hai Bà Trưng",
+    "address": "12 Trần Khát Chân",
+    "phone": "0356656656"
+  },
+  "receiveDate": {
+    "$date": "2023-10-29T10:47:16.775Z"
+  },
+  "currentPointID": {
+    "$oid": "658eaf49482248fc6e5e900e"
+  },
+  "details": {
+    "code": "13245986",
+    "type": "Bưu kiện",
+    "name": "Tài liệu quân sự",
+    "quantity": "100",
+    "weight": "2",
+    "price": "1.000.000",
+    "length": "5",
+    "width": "6",
+    "height": "85",
+    "specialFeatures": [
+      "Fragile"
+    ]
+  },
+  "status": "failed",
+  "__v": 0,
+  "cost": 1000000
+},
+{
+  "_id": {
+    "$oid": "658eabd8e4add1d475e21c8b"
+  },
+  "ID": "24368383365",
+  "receiveAreaID": "van_giang",
+  "sendAreaID": "ba_dinh",
+  "receiverDetails": {
+    "name": "Hốt Tất Liệt",
+    "province": "Hưng Yên",
+    "district": "Văn Giang",
+    "address": "124 Trần Bình",
+    "phone": "0965635635"
+  },
+  "senderDetails": {
+    "name": "Nguyễn Khuyến",
+    "province": "Hà Nội",
+    "district": "Ba Đình",
+    "address": "33 Nguyễn Công Trứ",
+    "phone": "0965463233"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T11:22:00.031Z"
+  },
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "24368383365",
+    "type": "Bưu kiện",
+    "name": "Phim chưởng Trung Quốc",
+    "quantity": "80",
+    "weight": "75",
+    "price": "805.000",
+    "length": "12",
+    "width": "34",
+    "height": "20",
+    "specialFeatures": [
+      "HighValue"
+    ]
+  },
+  "status": "pending",
+  "__v": 0,
+  "cost": 805000
+},
+{
+  "_id": {
+    "$oid": "658eac99e4add1d475e21c94"
+  },
+  "ID": "45465468",
+  "receiveAreaID": "van_giang",
+  "sendAreaID": "cam_giang",
+  "receiverDetails": {
+    "name": "Tình",
+    "province": "Hưng Yên",
+    "district": "Văn Giang",
+    "address": "25 Giải Phóng",
+    "phone": "0965683686"
+  },
+  "senderDetails": {
+    "name": "Nguyễn Trãi",
+    "province": "Hải Dương",
+    "district": "Cẩm Giàng",
+    "address": "33 Hoàng Mai",
+    "phone": "0965463233"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T11:25:13.637Z"
+  },
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "45465468",
+    "type": "Bưu kiện",
+    "name": "Thơ",
+    "quantity": "100",
+    "weight": "5",
+    "price": "1.000.000",
+    "length": "12",
+    "width": "10",
+    "height": "8",
+    "specialFeatures": [
+      "HighValue"
+    ]
+  },
+  "status": "pending",
+  "__v": 0,
+  "cost": 1000000
+},
+{
+  "_id": {
+    "$oid": "658eb7c2647b6e8a330834d1"
+  },
+  "ID": "12345",
+  "receiveAreaID": "nam_tu_liem",
+  "sendAreaID": "van_giang",
+  "receiverDetails": {
+    "name": "Nguyễn Văn Tuấn",
+    "province": "Hà Nội",
+    "district": "Nam Từ Liêm",
+    "address": "20 mỹ đình",
+    "phone": "0387464558"
+  },
+  "senderDetails": {
+    "name": "Đỗ Đăng Quyền",
+    "province": "Hưng Yên",
+    "district": "Văn Giang",
+    "address": "Giang Sơn",
+    "phone": "0387464558"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T12:12:50.251Z"
+  },
+  "cost": 0,
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "12345",
+    "type": "Bưu kiện",
+    "name": "đồ chơi",
+    "quantity": "2",
+    "weight": "2000",
+    "price": "500.000",
+    "length": "2",
+    "width": "34",
+    "height": "50",
+    "specialFeatures": [
+      "HighValue"
+    ]
+  },
+  "status": "pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658ebaffbcdcb3d6b3b1981a"
+  },
+  "ID": "12a34",
+  "receiveAreaID": "cam_giang",
+  "sendAreaID": "ba_dinh",
+  "receiverDetails": {
+    "name": "Nguyễn Minh Tuấn",
+    "province": "Hải Dương",
+    "district": "Cẩm Giàng",
+    "address": "số 13",
+    "phone": "0987654321"
+  },
+  "senderDetails": {
+    "name": "Chu Quang Tú",
+    "province": "Hà Nội",
+    "district": "Ba Đình",
+    "address": "số 12",
+    "phone": "0123456789"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T12:26:39.351Z"
+  },
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "12a34",
+    "type": "Bưu kiện",
+    "name": "sách",
+    "quantity": "2",
+    "weight": "200",
+    "price": "10.000",
+    "length": "10",
+    "width": "10",
+    "height": "10",
+    "specialFeatures": [
+      "Monolithic"
+    ]
+  },
+  "status": "pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658edaea87e788b24f147c5c"
+  },
+  "ID": "axc14567aaa",
+  "receiveAreaID": "bac_tu_liem",
+  "sendAreaID": "binh_giang",
+  "receiverDetails": {
+    "name": "Tuấn Khỉ",
+    "province": "Hà Nội",
+    "district": "Bắc Từ Liêm",
+    "address": "số 26",
+    "phone": "0213456661"
+  },
+  "senderDetails": {
+    "name": "Chu Quang Tuấn",
+    "province": "Hải Dương",
+    "district": "Bình Giang",
+    "address": "số 15",
+    "phone": "0123456788"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T14:42:50.919Z"
+  },
+  "cost": 0,
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "axc14567aaa",
+    "type": "Bưu kiện",
+    "name": "sách",
+    "quantity": "1",
+    "weight": "50",
+    "price": "100.000",
+    "length": "10",
+    "width": "10",
+    "height": "10",
+    "specialFeatures": [
+      "HighValue"
+    ]
+  },
+  "status": "pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658edb4887e788b24f147c62"
+  },
+  "ID": "axc14567888",
+  "receiveAreaID": "hai_ba_trung",
+  "sendAreaID": "ba_dinh",
+  "receiverDetails": {
+    "name": "Tuấn Nghẹo",
+    "province": "Hà Nội",
+    "district": "Hai Bà Trưng",
+    "address": "số 265",
+    "phone": "0213456655"
+  },
+  "senderDetails": {
+    "name": "Chu Quyền",
+    "province": "Hà Nội",
+    "district": "Ba Đình",
+    "address": "số 16",
+    "phone": "0123456777"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T14:44:24.504Z"
+  },
+  "cost": 0,
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "axc14567888",
+    "type": "Bưu kiện",
+    "name": "ma",
+    "quantity": "2",
+    "weight": "60",
+    "price": "1.000.000",
+    "length": "100",
+    "width": "100",
+    "height": "100",
+    "specialFeatures": [
+      "HighValue"
+    ]
+  },
+  "status": "pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658edb5287e788b24f147c67"
+  },
+  "ID": "axc14567888",
+  "receiveAreaID": "hai_ba_trung",
+  "sendAreaID": "ba_dinh",
+  "receiverDetails": {
+    "name": "Tuấn Nghẹo",
+    "province": "Hà Nội",
+    "district": "Hai Bà Trưng",
+    "address": "số 265",
+    "phone": "0213456655"
+  },
+  "senderDetails": {
+    "name": "Chu Quyền",
+    "province": "Hà Nội",
+    "district": "Ba Đình",
+    "address": "số 16",
+    "phone": "0123456777"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T14:44:34.975Z"
+  },
+  "cost": 0,
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "axc14567888",
+    "type": "Bưu kiện",
+    "name": "ma",
+    "quantity": "2",
+    "weight": "60",
+    "price": "1.000.000",
+    "length": "100",
+    "width": "100",
+    "height": "100",
+    "specialFeatures": [
+      "HighValue"
+    ]
+  },
+  "status": "pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658edc3687e788b24f147c71"
+  },
+  "ID": "axc14567777",
+  "receiveAreaID": "sam_son",
+  "sendAreaID": "van_can",
+  "receiverDetails": {
+    "name": "Tuấn Nghẹo Mập",
+    "province": "Thanh Hoa",
+    "district": "Sầm Sơn",
+    "address": "số 265",
+    "phone": "0213456655"
+  },
+  "senderDetails": {
+    "name": "Chu Quyền Thái",
+    "province": "Hải Dương",
+    "district": "Văn Can",
+    "address": "số 18",
+    "phone": "0213654697"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T14:48:22.155Z"
+  },
+  "cost": 0,
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "axc14567777",
+    "type": "Tài liệu",
+    "name": "magaming",
+    "quantity": "2",
+    "weight": "70",
+    "price": "500.000",
+    "length": "100",
+    "width": "100",
+    "height": "100",
+    "specialFeatures": [
+      "HighValue",
+      "Fragile"
+    ]
+  },
+  "status": "pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658edce887e788b24f147c78"
+  },
+  "ID": "gsfasfasfa",
+  "receiveAreaID": "van_giang",
+  "sendAreaID": "sam_son",
+  "receiverDetails": {
+    "name": "Lý Văn Luyện",
+    "province": "Hưng Yên",
+    "district": "Văn Giang",
+    "address": "số 665",
+    "phone": "0456945961"
+  },
+  "senderDetails": {
+    "name": "Trần Văn Kha",
+    "province": "Thanh Hoa",
+    "district": "Sầm Sơn",
+    "address": "số 20",
+    "phone": "0215478693"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T14:51:20.203Z"
+  },
+  "cost": 0,
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "gsfasfasfa",
+    "type": "Bưu kiện",
+    "name": "cây",
+    "quantity": "3",
+    "weight": "10000",
+    "price": "5.000.000",
+    "length": "100",
+    "width": "100",
+    "height": "100",
+    "specialFeatures": [
+      "HighValue",
+      "Fragile"
+    ]
+  },
+  "status": "pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658eeeb040e3a09bb3db2c5d"
+  },
+  "ID": "a",
+  "receiveAreaID": "bac_tu_liem",
+  "sendAreaID": "nam_tu_liem",
+  "receiverDetails": {
+    "name": "Tuấn",
+    "province": "Hà Nội",
+    "district": "Bắc Từ Liêm",
+    "address": "53",
+    "phone": "0987654321"
+  },
+  "senderDetails": {
+    "name": "Tiến Tùng",
+    "province": "Hà Nội",
+    "district": "Nam Từ Liêm",
+    "address": "23",
+    "phone": "0123456789"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T16:07:12.707Z"
+  },
+  "cost": 0,
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "a",
+    "type": "Bưu kiện",
+    "name": "test",
+    "quantity": "1",
+    "weight": "1",
+    "price": "1",
+    "length": "1",
+    "width": "1",
+    "height": "1",
+    "specialFeatures": [
+      "HighValue"
+    ]
+  },
+  "status": "pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658eeed140e3a09bb3db2c62"
+  },
+  "ID": "b",
+  "receiveAreaID": "bac_tu_liem",
+  "sendAreaID": "nam_tu_liem",
+  "receiverDetails": {
+    "name": "Tuấn",
+    "province": "Hà Nội",
+    "district": "Bắc Từ Liêm",
+    "address": "53",
+    "phone": "0987654321"
+  },
+  "senderDetails": {
+    "name": "Tiến Tùng",
+    "province": "Hà Nội",
+    "district": "Nam Từ Liêm",
+    "address": "23",
+    "phone": "0123456789"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T16:07:45.388Z"
+  },
+  "cost": 0,
+  "currentPointID": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "details": {
+    "code": "b",
+    "type": "Bưu kiện",
+    "name": "test",
+    "quantity": "1",
+    "weight": "1",
+    "price": "1",
+    "length": "1",
+    "width": "1",
+    "height": "1",
+    "specialFeatures": [
+      "HighValue"
+    ]
+  },
+  "status": "shipping",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658ef09440e3a09bb3db2c75"
+  },
+  "ID": "dcs",
+  "receiveAreaID": "bac_tu_liem",
+  "sendAreaID": "nam_tu_liem",
+  "receiverDetails": {
+    "name": "afsd",
+    "province": "Hà Nội",
+    "district": "Bắc Từ Liêm",
+    "address": "sâf",
+    "phone": "0987654321"
+  },
+  "senderDetails": {
+    "name": "dsfg",
+    "province": "Hà Nội",
+    "district": "Nam Từ Liêm",
+    "address": "dsffsd",
+    "phone": "0123456789"
+  },
+  "receiveDate": {
+    "$date": "2023-12-29T16:20:28.613Z"
+  },
+  "cost": 0,
+  "currentPointID": {
+    "$oid": "658a56f2cb954fd8511ef8ca"
+  },
+  "details": {
+    "code": "dcs",
+    "type": "Bưu kiện",
+    "name": "ds",
+    "quantity": "1",
+    "weight": "1",
+    "price": "1",
+    "length": "1",
+    "width": "1",
+    "height": "1",
+    "specialFeatures": []
+  },
+  "status": "shipping",
+  "__v": 0
+}]

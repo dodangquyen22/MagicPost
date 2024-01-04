@@ -1,0 +1,123 @@
+[{
+  "_id": {
+    "$oid": "658e9d9c414959592241e2b8"
+  },
+  "packageID": "123456",
+  "type": "toWarehouse",
+  "receive_point_id": {
+    "$oid": "658a5655cb954fd8511ef8b8"
+  },
+  "send_point_id": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "sendDate": {
+    "$date": "2023-12-29T10:21:16.469Z"
+  },
+  "status": "confirmed",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658eef1740e3a09bb3db2c69"
+  },
+  "packageID": "b",
+  "type": "toWarehouse",
+  "receive_point_id": {
+    "$oid": "658a5655cb954fd8511ef8b8"
+  },
+  "send_point_id": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "sendDate": {
+    "$date": "2023-12-29T16:08:55.702Z"
+  },
+  "status": "shipping",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658eef4123ff1b3435114513"
+  },
+  "packageID": "123456",
+  "type": "toArea",
+  "receive_point_id": {
+    "$oid": "658a59abcb954fd8511ef912"
+  },
+  "send_point_id": {
+    "$oid": "658a5655cb954fd8511ef8b8"
+  },
+  "sendDate": {
+    "$date": "2023-12-29T16:09:37.608Z"
+  },
+  "status": "shipping",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658ef10f40e3a09bb3db2c7c"
+  },
+  "packageID": "dcs",
+  "type": "toWarehouse",
+  "receive_point_id": {
+    "$oid": "658a5655cb954fd8511ef8b8"
+  },
+  "send_point_id": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "sendDate": {
+    "$date": "2023-12-29T16:17:19.000Z"
+  },
+  "status": "confirmed",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658ef18c40e3a09bb3db2c88"
+  },
+  "packageID": "dcs",
+  "type": "toArea",
+  "receive_point_id": {
+    "$oid": "658a59abcb954fd8511ef912"
+  },
+  "send_point_id": {
+    "$oid": "658a5655cb954fd8511ef8b8"
+  },
+  "sendDate": {
+    "$date": "2023-12-29T16:19:24.018Z"
+  },
+  "status": "confirmed",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658ef1b540e3a09bb3db2c96"
+  },
+  "packageID": "dcs",
+  "type": "toTransactionPoint",
+  "receive_point_id": {
+    "$oid": "658a56f2cb954fd8511ef8ca"
+  },
+  "send_point_id": {
+    "$oid": "658a59abcb954fd8511ef912"
+  },
+  "sendDate": {
+    "$date": "2023-12-29T16:20:05.520Z"
+  },
+  "status": "confirmed",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658ef1d540e3a09bb3db2ca8"
+  },
+  "packageID": "dcs",
+  "type": "toCustomer",
+  "send_point_id": {
+    "$oid": "658a56f2cb954fd8511ef8ca"
+  },
+  "sendDate": {
+    "$date": "2023-12-29T16:20:37.430Z"
+  },
+  "status": "shipping",
+  "__v": 0
+}]

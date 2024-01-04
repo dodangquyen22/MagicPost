@@ -1,0 +1,171 @@
+[{
+  "_id": {
+    "$oid": "658a5655cb954fd8511ef8b7"
+  },
+  "warehouseID": "nam_tu_liem",
+  "province": "Hà Nội",
+  "district": "Nam Từ Liêm",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a56f2cb954fd8511ef8c9"
+  },
+  "transactionPointID": "bac_tu_liem",
+  "province": "Hà Nội",
+  "district": "Bắc Từ Liêm",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5717cb954fd8511ef8d0"
+  },
+  "transactionPointID": "ba_dinh",
+  "province": "Hà Nội",
+  "district": "Ba Đình",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5768cb954fd8511ef8d7"
+  },
+  "transactionPointID": "hai_ba_trung",
+  "province": "Hà Nội",
+  "district": "Hai Bà Trưng",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a57c9cb954fd8511ef8de"
+  },
+  "transactionPointID": "binh_giang",
+  "province": "Hải Dương",
+  "district": "Bình Giang",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a57fbcb954fd8511ef8e5"
+  },
+  "transactionPointID": "cam_giang",
+  "province": "Hải Dương",
+  "district": "Cẩm Giàng",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a584bcb954fd8511ef8ee"
+  },
+  "warehouseID": "cam_giang",
+  "province": "Hải Dương",
+  "district": "Cẩm Giàng",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a586fcb954fd8511ef8f5"
+  },
+  "warehouseID": "binh_giang",
+  "province": "Hải Dương",
+  "district": "Bình Giang",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5946cb954fd8511ef901"
+  },
+  "warehouseID": "hai_ba_trung",
+  "province": "Hà Nội",
+  "district": "Hai Bà Trưng",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5978cb954fd8511ef908"
+  },
+  "warehouseID": "ba_dinh",
+  "province": "Hà Nội",
+  "district": "Ba Đình",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a59abcb954fd8511ef911"
+  },
+  "warehouseID": "bac_tu_liem",
+  "province": "Hà Nội",
+  "district": "Bắc Từ Liêm",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658b247a53b2d40bc95806ca"
+  },
+  "transactionPointID": "thanh_xuan",
+  "province": "Hà Nội",
+  "district": "Thanh Xuân",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658d5cdb54c777c9aae67581"
+  },
+  "transactionPointID": "nga_son",
+  "province": "Thanh Hoa",
+  "district": "Nga Sơn",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658d5dd654c777c9aae67595"
+  },
+  "transactionPointID": "sam_son",
+  "province": "Thanh Hoa",
+  "district": "Sầm Sơn",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658d66200a09038e892fa898"
+  },
+  "warehouseID": "van_can",
+  "province": "Hải Dương",
+  "district": "Văn Can",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658d668c0a09038e892fa8af"
+  },
+  "transactionPointID": "van_can",
+  "province": "Hải Dương",
+  "district": "Văn Can",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658daeecc3425ed13f644f9e"
+  },
+  "warehouseID": "van_giang",
+  "province": "Hưng Yên",
+  "district": "Văn Giang",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658dd063c3425ed13f64514d"
+  },
+  "warehouseID": "cau_giay",
+  "province": "Hà Nội",
+  "district": "Cầu Giấy",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658dd07c373d3ae33ac5d47f"
+  },
+  "transactionPointID": "nam_tu_liem",
+  "province": "Hà Nội",
+  "district": "Nam Từ Liêm",
+  "__v": 0
+}]

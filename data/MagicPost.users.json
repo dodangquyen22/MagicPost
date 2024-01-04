@@ -1,0 +1,356 @@
+[{
+  "_id": {
+    "$oid": "658a53e39379ce7a77b2a35b"
+  },
+  "username": "admin",
+  "password": "$2b$10$Ybq1pziI6tSQIw356DMlz.Tytvp6CBPr1s2ZJUC7bkLkiV5MWtUO6",
+  "email": "admin@gmai.com",
+  "phone": 387464558,
+  "district": "Thanh Xuân",
+  "province": "Hà Nội",
+  "idArea": "thanh_xuan",
+  "role": "manager",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5655cb954fd8511ef8b6"
+  },
+  "username": "nam_tu_liem_warehouse",
+  "password": "$2b$10$tteDLBrQH5v4V483pGdDsey8TVrGAdiYHiRHGEB7G/XxJi7ZoQlui",
+  "name": "Nguyễn Văn Nam",
+  "district": "Nam Từ Liêm",
+  "province": "Hà Nội",
+  "idArea": "nam_tu_liem",
+  "role": "warehouse leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a56f2cb954fd8511ef8c8"
+  },
+  "username": "bac_tu_liem_point",
+  "password": "$2b$10$6IjSUY5cqAcxHLclsTe0YOf3xfQyYombhq6wZCPqnhd4wRbGjR7Di",
+  "name": "Nguyễn Minh Tuấn",
+  "district": "Bắc Từ Liêm",
+  "province": "Hà Nội",
+  "idArea": "bac_tu_liem",
+  "role": "transaction leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5717cb954fd8511ef8cf"
+  },
+  "username": "ba_dinh_point",
+  "password": "$2b$10$ND7Q3um4ohzNlLHUOP6IGeln9105e7sN5yhxp0uMoz/G8bqhpH9lS",
+  "name": "Nguyễn Duy Tân",
+  "district": "Ba Đình",
+  "province": "Hà Nội",
+  "idArea": "ba_dinh",
+  "role": "transaction leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5768cb954fd8511ef8d6"
+  },
+  "username": "hai_ba_trung_point",
+  "password": "$2b$10$yHXsVogEwIS7xfclVbAAQ.i6G.nAdYkTkxO/lXqooJTnFdAr1fQiG",
+  "name": "Mai Thị Tú",
+  "district": "Hai Bà Trưng",
+  "province": "Hà Nội",
+  "idArea": "hai_ba_trung",
+  "role": "transaction leader",
+  "gender": "Nữ",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a57c9cb954fd8511ef8dd"
+  },
+  "username": "binh_giang_point",
+  "password": "$2b$10$tZGrQVCci2aqwAPdtFyCCeyTeLiDA3/AWUyJUUtAJ4kiTHcZ86Rnm",
+  "name": "Mai Văn Khởi",
+  "district": "Bình Giang",
+  "province": "Hải Dương",
+  "idArea": "binh_giang",
+  "role": "transaction leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a57fbcb954fd8511ef8e4"
+  },
+  "username": "cam_giang_point",
+  "password": "$2b$10$Ilj4JguPCdysq9QwPWjvI.2JwmtOHyqxp730oGZxMMcTf5GMQkrM.",
+  "name": "Nguyễn Văn Mười",
+  "district": "Cẩm Giàng",
+  "province": "Hải Dương",
+  "idArea": "cam_giang",
+  "role": "transaction leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a584bcb954fd8511ef8ed"
+  },
+  "username": "cam_giang_warehouse",
+  "password": "$2b$10$I/pH4ls1ng9UEQksIwfo6.gw5JO0QMUT51yoSX0LqsfcO3fXpRmZy",
+  "name": "Nguyễn Văn Mười",
+  "district": "Cẩm Giàng",
+  "province": "Hải Dương",
+  "idArea": "cam_giang",
+  "role": "warehouse leader",
+  "gender": "Nữ",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a586fcb954fd8511ef8f4"
+  },
+  "username": "binh_giang_warehouse",
+  "password": "$2b$10$MImLZB3pJYQTtjIWXascyOtpONJQv73CPmEJuwboTMhp382M/Vthi",
+  "name": "Tống Duy Tân",
+  "district": "Bình Giang",
+  "province": "Hải Dương",
+  "idArea": "binh_giang",
+  "role": "warehouse leader",
+  "gender": "Nữ",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5946cb954fd8511ef900"
+  },
+  "username": "hai_ba_trung_warehouse",
+  "password": "$2b$10$OD1//nPxE2U9taFX1s8hreVrgfDdbAVhynG82O97cEpFTWbRbkJ6a",
+  "name": "Chu Quang Tú",
+  "district": "Hai Bà Trưng",
+  "province": "Hà Nội",
+  "idArea": "hai_ba_trung",
+  "role": "warehouse leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5978cb954fd8511ef907"
+  },
+  "username": "ba_dinh_warehouse",
+  "password": "$2b$10$yAIzL4DgMBqzri5aLyr1j.OSdz4yQrS0mMYVcesr3qtphN4g5JLSG",
+  "name": "Lê Ngọc Anh",
+  "district": "Ba Đình",
+  "province": "Hà Nội",
+  "idArea": "ba_dinh",
+  "role": "warehouse leader",
+  "gender": "Nữ",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a59abcb954fd8511ef910"
+  },
+  "username": "bac_tu_liem_warehouse",
+  "password": "$2b$10$ooHShehG9CY3bhhG7npxGue3/nOUgfDgcCN.cbRSP5FslvKDZ0hB2",
+  "name": "Lê Văn Đạt",
+  "district": "Bắc Từ Liêm",
+  "province": "Hà Nội",
+  "idArea": "bac_tu_liem",
+  "role": "warehouse leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658acaaa737d33163544e501"
+  },
+  "username": "employeeTransaction",
+  "password": "$2b$10$dkMNAcXVA9qNyLVo0H1aB.YsI1nreQumuRwg3HMRAHQCYdfFh4TyW",
+  "email": "employeeTransaction@12.gmail.com",
+  "phone": 387464558,
+  "district": "Nam Từ Liêm",
+  "province": "Hà Nội",
+  "idArea": "nam_tu_liem",
+  "role": "transaction staff",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658acaf5737d33163544e504"
+  },
+  "username": "employeeWarehouse",
+  "password": "$2b$10$zZqnSkJK2uuxOjmwEaFODeWfqXiJFpwAk0yyCjVXU9KT083GFm2hG",
+  "email": "employeeTransaction@12.gmail.com",
+  "phone": 387464558,
+  "district": "Nam Từ Liêm",
+  "province": "Hà Nội",
+  "idArea": "nam_tu_liem",
+  "role": "warehouse staff",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658d5cdb54c777c9aae67580"
+  },
+  "username": "nga_son_point",
+  "password": "$2b$10$wlNAzqYYSFU0e4UtHW1MfeNGyX/T8uddEJ8/fiaNERXdWsFeOEsLW",
+  "name": "Đỗ Đăng Quyền",
+  "district": "Nga Sơn",
+  "province": "Thanh Hoa",
+  "idArea": "nga_son",
+  "role": "transaction leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658d5dd654c777c9aae67594"
+  },
+  "username": "sam_son_point",
+  "password": "$2b$10$HNSFpjJedR1klxh822WWUuLNF5conQ2x4bl8nZ5kwfh5MD7xXJF5O",
+  "name": "Lương Văn Bằng",
+  "district": "Sầm Sơn",
+  "province": "Thanh Hoa",
+  "idArea": "sam_son",
+  "role": "transaction leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658d66200a09038e892fa897"
+  },
+  "username": "van_can_warehouse",
+  "password": "$2b$10$D7Zky0.4slpEXcGyII9tyO97SAqUeSWNmgvui0jjjIHzfd4IlXG2W",
+  "name": "Nguyễn Văn Tuấn",
+  "district": "Văn Can",
+  "province": "Hải Dương",
+  "idArea": "van_can",
+  "role": "warehouse leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658d668c0a09038e892fa8ae"
+  },
+  "username": "van_can_point",
+  "password": "$2b$10$E9kv9ktHzc/8V9ZQAp3Fvucj/xNnQKA1cq0.Aysq4.5Jej3eCs4bG",
+  "name": "Nguyễn Văn Tuấn",
+  "district": "Văn Can",
+  "province": "Hải Dương",
+  "idArea": "van_can",
+  "role": "transaction leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658d67660a09038e892fa8cb"
+  },
+  "username": "ha_trung_warehouse",
+  "password": "$2b$10$LDziharl.gWQTxCRis103OwR6zfcewxZ8pdDZUseACRbrE.D8A9pO",
+  "name": "Mai Thế Hải",
+  "district": "Hà Trung",
+  "province": "Thanh Hóa",
+  "idArea": "ha_trung",
+  "role": "warehouse leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658daeecc3425ed13f644f9d"
+  },
+  "username": "van_giang_warehouse",
+  "password": "$2b$10$Ug4gny9OY0b/qE6TZRVOveFPdNasIFLqiTLl5F.GlCpWY3LiU7xMS",
+  "name": "Chu Quang Tú",
+  "district": "Văn Giang",
+  "province": "Hưng Yên",
+  "idArea": "van_giang",
+  "role": "warehouse leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658dd063c3425ed13f64514c"
+  },
+  "username": "cau_giay_warehouse",
+  "password": "$2b$10$nFbLBzUzs4NLOflK2K5qmuTLR3fDeYixwy6nKMSr6m5hD03LcZ8sW",
+  "name": "Tuấn Nghẹo",
+  "district": "Cầu Giấy",
+  "province": "Hà Nội",
+  "idArea": "cau_giay",
+  "role": "warehouse leader",
+  "gender": "other",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658dd07c373d3ae33ac5d47e"
+  },
+  "username": "nam_tu_liem_point",
+  "password": "$2b$10$HpNGQJhN5D0AyuBd4ovonejai5tpAmHQ7zzk3CriZQYjQHQHrNroy",
+  "name": "Nguyễn Văn Tuấn ",
+  "district": "Nam Từ Liêm",
+  "province": "Hà Nội",
+  "idArea": "nam_tu_liem",
+  "role": "transaction leader",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658ddb36f648ab52eada8f1c"
+  },
+  "username": "tan124",
+  "password": "$2b$10$oXyx3vN0rFPR1COanECieuI31cagJ4LF0ViQhRTR0kru6YlBc2X4O",
+  "name": "Nguyễn Duy Tân",
+  "email": "21020387@vnu.edu.vn",
+  "phone": 387464558,
+  "district": "Bắc Từ Liêm",
+  "province": "Hà Nội",
+  "idArea": "bac_tu_liem",
+  "role": "transaction staff",
+  "gender": "Nam",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658e5900ecd8acf5f26f3a5f"
+  },
+  "username": "huan",
+  "password": "$2b$10$IIZxa9.vH5eXr6zRYEB0suDCiIYJ86DeDfknUSdMCTXc0jctlMguC",
+  "name": "Nguyễn Xuân Huấn",
+  "email": "mchuan@gmail.com",
+  "phone": 846125489,
+  "district": "Bắc Từ Liêm",
+  "province": "Hà Nội",
+  "idArea": "bac_tu_liem",
+  "role": "transaction staff",
+  "gender": "male",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658e898bccf391086e8f7f3a"
+  },
+  "username": "tus",
+  "password": "$2b$10$uXQ0qUND48S6AHlN7wSrP.bx53RLsN0XD/uzjHdMCKZvCtr36Gzru",
+  "name": "Tus",
+  "email": "tus@gmail.com",
+  "phone": 123456789,
+  "district": "Bắc Từ Liêm",
+  "province": "Hà Nội",
+  "idArea": "bac_tu_liem",
+  "role": "warehouse staff",
+  "gender": "Nam",
+  "__v": 0
+}]

@@ -1,0 +1,144 @@
+[{
+  "_id": {
+    "$oid": "658a5655cb954fd8511ef8b8"
+  },
+  "address": "20 Mỹ Đình",
+  "idArea": "nam_tu_liem",
+  "type": "warehouse",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a56f2cb954fd8511ef8ca"
+  },
+  "address": "15 Hồ Tùng Mậu",
+  "idArea": "bac_tu_liem",
+  "type": "transaction",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5717cb954fd8511ef8d1"
+  },
+  "address": "20 Hoàng Hoa Thám",
+  "idArea": "ba_dinh",
+  "type": "transaction",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5768cb954fd8511ef8d8"
+  },
+  "address": "20 Gia Phong",
+  "idArea": "hai_ba_trung",
+  "type": "transaction",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a57c9cb954fd8511ef8df"
+  },
+  "address": "Thái Học",
+  "idArea": "binh_giang",
+  "type": "transaction",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a57fbcb954fd8511ef8e6"
+  },
+  "address": "Cẩm Điền",
+  "idArea": "cam_giang",
+  "type": "transaction",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a584bcb954fd8511ef8ef"
+  },
+  "address": "Cẩm Nếp",
+  "idArea": "cam_giang",
+  "type": "warehouse",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a586fcb954fd8511ef8f6"
+  },
+  "address": "Gian Sơn",
+  "idArea": "binh_giang",
+  "type": "warehouse",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5946cb954fd8511ef902"
+  },
+  "address": "20 Nguyễn Trãi",
+  "idArea": "hai_ba_trung",
+  "type": "warehouse",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a5978cb954fd8511ef909"
+  },
+  "address": "20 Hàng Khoai",
+  "idArea": "ba_dinh",
+  "type": "warehouse",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658a59abcb954fd8511ef912"
+  },
+  "address": "29 Cầu Diễn",
+  "idArea": "bac_tu_liem",
+  "type": "warehouse",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658d66200a09038e892fa899"
+  },
+  "address": "20 Giai Phóng",
+  "idArea": "van_can",
+  "type": "warehouse",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658d668c0a09038e892fa8b0"
+  },
+  "address": "20 Giai Phóng",
+  "idArea": "van_can",
+  "type": "transaction",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658daeecc3425ed13f644f9f"
+  },
+  "address": "Văn Giang",
+  "idArea": "van_giang",
+  "type": "warehouse",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658dd063c3425ed13f64514e"
+  },
+  "address": "30 Quan Hoa",
+  "idArea": "cau_giay",
+  "type": "warehouse",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658dd07c373d3ae33ac5d480"
+  },
+  "address": "20 Tây Mỗ",
+  "idArea": "nam_tu_liem",
+  "type": "transaction",
+  "__v": 0
+}]
